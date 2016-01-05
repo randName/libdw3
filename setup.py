@@ -8,6 +8,7 @@ setup(name='eBotPackage',
       author='-',
       author_email='-',
       # url='https://www.python.org/sigs/distutils-sig/',
+      py_modules = ['firebase'],
       packages = ['libdw','form','soar','soar.io','soar.graphics',\
                   'soar.serial','soar.controls','soar.outputs',\
                   'eBot','eBot.serial'],
