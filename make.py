@@ -5,7 +5,7 @@ import py_compile
 
 for dir in ["libdw", "form", "soar", "soar/controls",\
             "soar/graphics", "soar/io", "soar/outputs",\
-            "soar/serial"]:
+            "soar/serial","eBot","firebase"]:
 
   pyfiles = [file for file in os.listdir(dir) if file.endswith(".py")]
 
