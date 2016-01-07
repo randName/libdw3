@@ -42,8 +42,8 @@ cp firebase/__init__.py  $DESTDIR/firebase/
 
 echo
 #perform the setup
-echo ">> python setup.py sdist"
+echo ">> python setup.py sdist --formats=gztar,zip"
 cd $DESTDIR
-python setup.py sdist
+python setup.py sdist --formats=gztar,zip
 rm -f MANIFEST
 
