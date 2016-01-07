@@ -6,8 +6,8 @@ SET DESTDIR=makedist
 
 REM #clean up destination directory
 REM ECHO ">> rm -fr %DESTDIR%\dist\*" 
-REM DEL -fr %DESTDIR%\libdw\* %DESTDIR%\soar\* %DESTDIR%\form\* #DESTDIR\dist\*
-REM DEL /F /S /Q %DESTDIR%\libdw\*.* %DESTDIR%\soar\*.* %DESTDIR%\form\*.* 
+REM DEL -fr %DESTDIR%\libdw\* %DESTDIR%\soar\* %DESTDIR%\form\* %DESTDIR%\firebase\*
+REM DEL /F /S /Q %DESTDIR%\libdw\*.* %DESTDIR%\soar\*.* %DESTDIR%\form\*.* %DESTDIR%\firebase\*.*
 RMDIR /S /Q %DESTDIR%\libdw\ %DESTDIR%\soar\ %DESTDIR%\form\
 MKDIR %DESTDIR%\libdw\ %DESTDIR%\soar\ %DESTDIR%\form\
 MKDIR %DESTDIR%\soar\io %DESTDIR%\soar\graphics\ %DESTDIR%\soar\serial %DESTDIR%\soar\controls %DESTDIR%\soar\outputs %DESTDIR%\soar\worlds %DESTDIR%\soar\media
@@ -18,6 +18,8 @@ REM ECHO ">> python make.py"
 C:\Python27\python make.py
 
 REM ECHO "Moving files to %DESTDIR%\"
+MOVE eBot\*.pyc           %DESTDIR%\eBot
+MOVE firebase\*.pyc       %DESTDIR%\firebase
 MOVE libdw\*.pyc          %DESTDIR%\libdw
 MOVE form\*.pyc           %DESTDIR%\form
 MOVE soar\*.pyc           %DESTDIR%\soar
@@ -36,6 +38,8 @@ REM #copy the __init__.py files to avoid python setup.py from complaining
 COPY libdw\__init__.py %DESTDIR%\libdw\
 COPY form\__init__.py  %DESTDIR%\form\
 COPY soar\__init__.py  %DESTDIR%\soar\
+COPY eBot\__init__.py  %DESTDIR%\eBot\
+COPY firebase\__init__.py      %DESTDIR%\firebase\
 COPY soar\io\__init__.py       %DESTDIR%\soar\io\
 COPY soar\graphics\__init__.py %DESTDIR%\soar\graphics\
 COPY soar\serial\__init__.py   %DESTDIR%\soar\serial\
@@ -43,9 +47,9 @@ COPY soar\controls\__init__.py %DESTDIR%\soar\controls\
 COPY soar\outputs\__init__.py  %DESTDIR%\soar\outputs\
 
 REM #perform the setup
-REM ECHO ">> python setup.py sdist"
+REM ECHO ">> python setup.py sdist --formats=zip"
 CD %DESTDIR%
-C:\Python27\python setup.py sdist
+C:\Python27\python setup.py sdist --formats=zip
 DEL /F /S /Q MANIFEST
 
 pause 
