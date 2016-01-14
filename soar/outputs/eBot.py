@@ -726,7 +726,7 @@ class eBot:
         # parse all data
         stall = 0
         bump = 0
-        sonars = [-1, -1, -1, -1, -1, -1]
+        sonars = [-1, -1, -1, -1, -1, -1, -1, -1]
 
         #Right Sonar
 
@@ -775,6 +775,8 @@ class eBot:
                 self.sonarsChanged[i] = 1
             else:
                 self.sonarsChanged[i] = 0
+                storedsonars[6] = int(self.tempreture_sensor)
+                storedsonars[7] = float(self.LDR_top)
                 self.storedsonars.set(storedsonars)
 
     # Send a packet and receive a SIP response from the robot

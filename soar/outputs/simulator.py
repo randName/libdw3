@@ -520,6 +520,8 @@ class Simulator(object):
       form.main.tk_enqueue(tk_update_sonars)
     self.reallyoldsonars.set(self.oldsonars.get())
     self.oldsonars.set(self.storedsonars.get())
+    sonars.append(0) # dummy value for temperature reading
+    sonars.append(0) # dummy value for top LDR reading
     self.storedsonars.set(sonars)
 
   # First part of dealing with collisions cleanishly
