@@ -197,6 +197,8 @@ class eBot:
         self.storedsonars = SharedVar([0, 0, 0, 0, 0, 0, 0, 0])  #Change to 6 after
         self.trans, self.rot = SharedVar(0), SharedVar(0)
         self.odpose = SharedVar((0, 0, 0))
+        self.temperature = SharedVar(0)
+        self.ldr = SharedVar([0, 0])
         self.stalled = SharedVar(False)
         self.analogInputs = SharedVar([0, 0, 0, 0])
         self.analogOut = SharedVar(0)
@@ -726,7 +728,7 @@ class eBot:
         # parse all data
         stall = 0
         bump = 0
-        sonars = [-1, -1, -1, -1, -1, -1]
+        sonars = [-1, -1, -1, -1, -1, -1, -1, -1]
 
         #Right Sonar
 
@@ -776,6 +778,9 @@ class eBot:
             else:
                 self.sonarsChanged[i] = 0
                 self.storedsonars.set(storedsonars)
+
+        self.temperature.set(self.tempreture_sensor)
+        self.ldr.set([self.LDR_top, self.LDR_front])
 
     # Send a packet and receive a SIP response from the robot
     def sipSendReceive(self, data):

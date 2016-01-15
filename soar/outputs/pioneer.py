@@ -196,6 +196,8 @@ class Pioneer:
     self.port = None
     self.lastxpos, self.lastypos = 0,0
     self.storedsonars = SharedVar([0,0,0,0,0,0,0,0])
+    self.temperature = SharedVar(0)
+    self.ldr = SharedVar([0, 0])
     self.trans, self.rot = SharedVar(0),SharedVar(0)
     self.odpose = SharedVar((0,0,0))
     self.stalled = SharedVar(False)
