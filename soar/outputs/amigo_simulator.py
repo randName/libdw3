@@ -237,6 +237,8 @@ class amigo_simulator(object):
     self.win.destroy()
 
   def initGlobals(self, reset=False):
+    self.temperature = SharedVar(0)
+    self.ldr = SharedVar([0, 0])
     self.storedsonars = SharedVar()
     self.oldsonars = SharedVar()
     self.reallyoldsonars = SharedVar()

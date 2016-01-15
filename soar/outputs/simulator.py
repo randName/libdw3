@@ -257,6 +257,8 @@ class Simulator(object):
     self.win.destroy()
 
   def initGlobals(self, reset=False):
+    self.ldr = SharedVar([0, 0])
+    self.temperature = SharedVar(0)
     self.storedsonars = SharedVar()
     self.oldsonars = SharedVar()
     self.reallyoldsonars = SharedVar()
@@ -469,6 +471,12 @@ class Simulator(object):
   def cmdSay(self, freq, dur):
     pass
 
+  def updateTemperature(self):
+      return self.temperature.set(0) # dummy value for simulator
+
+  def updateLDR(self):
+      return self.ldr.set([0, 0]) # dummy value for simulator
+
   # Calculate new sonar values
   def updateSonars(self):
     sonars = []
@@ -520,8 +528,6 @@ class Simulator(object):
       form.main.tk_enqueue(tk_update_sonars)
     self.reallyoldsonars.set(self.oldsonars.get())
     self.oldsonars.set(self.storedsonars.get())
-    sonars.append(0) # dummy value for temperature reading
-    sonars.append(0) # dummy value for top LDR reading
     self.storedsonars.set(sonars)
 
   # First part of dealing with collisions cleanishly
@@ -556,6 +562,8 @@ class Simulator(object):
     self.drawObstacles(dt)
     self.drawRobot()
     self.updateSonars() 
+    self.updateTemperature()
+    self.updateLDR()
 
   def perp(self, ((x0, y0),(x1, y1))):
     x,y = self.abspose.get()[:2]
@@ -621,6 +629,8 @@ class Simulator(object):
         self.odpose.set((x, y, self.odpose.get()[2]))
       self.drawRobot()
       self.updateSonars()
+      self.updateTemperature()
+      self.updateLDR()
 
   # Respond to releasing left mouse button
   def left_click_up(self, event):
@@ -650,5 +660,7 @@ class Simulator(object):
         self.odpose.set((odx, ody, odth+(dy+dx)*DRAG_ROT_SPEED))
       self.drawRobot()
       self.updateSonars()
+      self.updateTemperature()
+      self.updateLDR()
       self.lasteventx, self.lasteventy = event.x, event.y 
 
