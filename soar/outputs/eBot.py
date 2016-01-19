@@ -188,6 +188,9 @@ class eBot:
         self.Ultrasonic_left = 0
         self.Ultrasonic_rear_left = 0
         self.Ultrasonic_back = 0
+        self.tempreture_sensor = 0
+        self.LDR_top = 0
+        self.LDR_front = 0
         self.portName = -1
         self.sonarsChanged = [0, 0, 0, 0, 0, 0, 0, 0]  #Change to 6 after
         self.from_update = 0
@@ -780,7 +783,7 @@ class eBot:
                 self.storedsonars.set(storedsonars)
 
         self.temperature.set(self.tempreture_sensor)
-        self.ldr.set([self.LDR_top, self.LDR_front])
+        self.ldr.set([self.LDR_front, self.LDR_top])
 
     # Send a packet and receive a SIP response from the robot
     def sipSendReceive(self, data):

@@ -41,14 +41,14 @@ class SensorInput:
 
         self.temperature = app.soar.output.temperature.get()
 
-        self.ldr = app.soar.output.ldr.get()[:]
+        self.light = app.soar.output.ldr.get()[:]
 
     def __str__(self):
         return 'Sonar: ' + util.prettyString(self.sonars) + \
                "; Odo: " + util.prettyString(self.odometry) + \
                "; Analog: " + util.prettyString(self.analogInputs) + \
                "; Temperature: " + util.prettyString(self.temperature) + \
-               "; LDR: " + util.prettyString(self.ldr)
+               "; LDR: " + util.prettyString(self.light)
 
 referenceVoltage = 5.0
 class Action:
