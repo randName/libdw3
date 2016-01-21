@@ -9,6 +9,7 @@ import tkMessageBox
 import Tkinter
 from threading import Thread
 from Locator_EKF import Locator_EKF
+import util
 
 
 if os.name == 'nt':
@@ -256,12 +257,12 @@ class eBot():
                     self.heading_scaled = self.heading/130.5 #128.7
                     self.pos_values[0],self.pos_values[1],self.pos_values[2] = \
                         self.EKF.update_state([self.heading_scaled*pi/180.,self.encoder_right/1000.,self.encoder_left/1000.],sampling_time)
-                    self.pos_values[2] = degrees(self.pos_values[2])
-                    self.pos_values[2] = self.pos_values[2] % 360
-                    if self.pos_values[2]>180:
-                        self.pos_values[2]-=360
-                    elif self.pos_values[2]<-180:
-                        self.pos_values[2]+=360
+##                    self.pos_values[2] = degrees(self.pos_values[2])
+##                    self.pos_values[2] = self.pos_values[2] % 360
+##                    if self.pos_values[2]>180:
+##                        self.pos_values[2]-=360
+##                    elif self.pos_values[2]<-180:
+##                        self.pos_values[2]+=360
         return self.incoming
 
 
@@ -295,7 +296,7 @@ class eBot():
             except:
                 self.lostConnection()
 
-    def robot_uS(self):
+    def sonars(self):
         """
         Retrieves and returns all six ultrasonic sensor values from the eBot in meters.
 
@@ -433,17 +434,26 @@ class eBot():
         self.acc_values[5] = float(self.Gz-self.Gz_offset)
         return self.acc_values
 
-    def position(self):
+    def odometry(self):
         """
-        Retrieves and returns position values of the eBot.
+        Retrieves and returns the odometry values of the eBot as a Pose object. 
+        Pose.x: x coordinate in meters
+        Pose.y: y coordinate in meters
+        Pose.theta: rotation in radians
 
-        :rtype: list
-        :return: pos_values: X,Y,Z position values
+        :rtype: Pose object
+        :return: Pose: Represent the x, y, theta pose of an object in 2D space
         """
-        #self.pos_values[0] , self.pos_values[1] = self.EKF.get_position()
-        #self.pos_values[2] = self.EKF.get_heading()
-        #self.pos_values[2] = 0
-        return self.pos_values[0],self.pos_values[1],self.pos_values[2]
+
+        self.pos_values[0] , self.pos_values[1] = self.EKF.get_position()
+        self.pos_values[2] = self.EKF.get_heading()
+        self.pos_values[2] =self.pos_values[2] % (2*pi)
+        if self.pos_values[2]>2*pi:
+            self.pos_values[2]-=2*pi
+        elif self.pos_values[2]<0:
+            self.pos_values[2]+=2*pi
+        pose = (self.pos_values[0],self.pos_values[1],self.pos_values[2])
+        return util.valueListToPose(pose)
 
     #TODO: implement temperature feedback from MPU6050 IC
     def temperature(self):
