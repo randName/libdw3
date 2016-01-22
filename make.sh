@@ -22,7 +22,7 @@ mv soar/serial/*.pyc    $DESTDIR/soar/serial/
 mv soar/controls/*.pyc  $DESTDIR/soar/controls/
 mv soar/outputs/*.pyc   $DESTDIR/soar/outputs/
 mv eBot/*.pyc           $DESTDIR/eBot/
-mv firebase/*.pyc       $DESTDIR/firebase/
+mv firebase/*.pyc       $DESTDIR/
 cp    soar/soar         $DESTDIR/soar/
 cp -r soar/worlds       $DESTDIR/soar/
 cp -r soar/media        $DESTDIR/soar/
@@ -38,7 +38,7 @@ cp soar/serial/__init__.py   $DESTDIR/soar/serial/
 cp soar/controls/__init__.py $DESTDIR/soar/controls/
 cp soar/outputs/__init__.py  $DESTDIR/soar/outputs/
 cp eBot/__init__.py  $DESTDIR/eBot/
-cp firebase/__init__.py  $DESTDIR/firebase/
+rm -fr $DESTDIR/firebase
 
 echo
 #perform the setup

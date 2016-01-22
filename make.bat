@@ -19,7 +19,7 @@ C:\Python27\python make.py
 
 REM ECHO "Moving files to %DESTDIR%\"
 MOVE eBot\*.pyc           %DESTDIR%\eBot
-MOVE firebase\*.pyc       %DESTDIR%\firebase
+MOVE firebase\*.pyc       %DESTDIR%\
 MOVE libdw\*.pyc          %DESTDIR%\libdw
 MOVE form\*.pyc           %DESTDIR%\form
 MOVE soar\*.pyc           %DESTDIR%\soar
@@ -39,7 +39,7 @@ COPY libdw\__init__.py %DESTDIR%\libdw\
 COPY form\__init__.py  %DESTDIR%\form\
 COPY soar\__init__.py  %DESTDIR%\soar\
 COPY eBot\__init__.py  %DESTDIR%\eBot\
-COPY firebase\__init__.py      %DESTDIR%\firebase\
+RMDIR /S /Q %DESTDIR%\firebase\
 COPY soar\io\__init__.py       %DESTDIR%\soar\io\
 COPY soar\graphics\__init__.py %DESTDIR%\soar\graphics\
 COPY soar\serial\__init__.py   %DESTDIR%\soar\serial\
