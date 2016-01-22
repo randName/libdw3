@@ -62,6 +62,7 @@ def getDistanceRightAndAngle(sonarValues):
                          spose.y + d*math.sin(spose.theta)))
         else:
             hits.append(None)
+    #return distAndAngle(hits[4], hits[5])
     return distAndAngle(hits[4], hits[5])
 
 def sonarHit(distance, sonarPose, robotPose):
