@@ -436,7 +436,7 @@ class eBot():
 
     def odometry(self):
         """
-        Retrieves and returns the odometry values of the eBot as a Pose object. 
+        Retrieves and returns the odometry values of the eBot as a Pose object with respect to the robot initial position. 
         Pose.x: x coordinate in meters
         Pose.y: y coordinate in meters
         Pose.theta: rotation in radians
