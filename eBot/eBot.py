@@ -303,8 +303,8 @@ class eBot():
         :rtype: list
         :return: sonarValues
         """
-        self.sonarValues[4] = float(self.Ultrasonic_rear_right) / 1000
-        self.sonarValues[3] = float(self.Ultrasonic_right) / 1000
+        self.sonarValues[3] = float(self.Ultrasonic_rear_right) / 1000
+        self.sonarValues[4] = float(self.Ultrasonic_right) / 1000
         self.sonarValues[2] = float(self.Ultrasonic_front) / 1000
         self.sonarValues[1] = float(self.Ultrasonic_left) / 1000
         self.sonarValues[0] = float(self.Ultrasonic_rear_left) / 1000
