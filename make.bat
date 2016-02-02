@@ -6,10 +6,10 @@ SET DESTDIR=makedist
 
 REM #clean up destination directory
 REM ECHO ">> rm -fr %DESTDIR%\dist\*" 
-REM DEL -fr %DESTDIR%\libdw\* %DESTDIR%\soar\* %DESTDIR%\form\* %DESTDIR%\firebase\*
+REM DEL -fr %DESTDIR%\libdw\* %DESTDIR%\soar\* %DESTDIR%\form\* %DESTDIR%\eBot\serial\* %DESTDIR%\eBot\* %DESTDIR%\firebase\*
 REM DEL /F /S /Q %DESTDIR%\libdw\*.* %DESTDIR%\soar\*.* %DESTDIR%\form\*.* %DESTDIR%\firebase\*.*
 RMDIR /S /Q %DESTDIR%\libdw\ %DESTDIR%\soar\ %DESTDIR%\form\
-MKDIR %DESTDIR%\libdw\ %DESTDIR%\soar\ %DESTDIR%\form\
+MKDIR %DESTDIR%\libdw\ %DESTDIR%\soar\ %DESTDIR%\form\ %DESTDIR%\eBot\ %DESTDIR%\eBot\serial
 MKDIR %DESTDIR%\soar\io %DESTDIR%\soar\graphics\ %DESTDIR%\soar\serial %DESTDIR%\soar\controls %DESTDIR%\soar\outputs %DESTDIR%\soar\worlds %DESTDIR%\soar\media
 
 REM #create all the .pyc files, and move them to the appropriate dirs
@@ -19,6 +19,7 @@ C:\Python27\python make.py
 
 REM ECHO "Moving files to %DESTDIR%\"
 MOVE eBot\*.pyc           %DESTDIR%\eBot
+MOVE eBot\serial\*.pyc    %DESTDIR%\eBot\serial
 MOVE firebase\*.pyc       %DESTDIR%\
 MOVE libdw\*.pyc          %DESTDIR%\libdw
 MOVE form\*.pyc           %DESTDIR%\form
@@ -39,6 +40,7 @@ COPY libdw\__init__.py %DESTDIR%\libdw\
 COPY form\__init__.py  %DESTDIR%\form\
 COPY soar\__init__.py  %DESTDIR%\soar\
 COPY eBot\__init__.py  %DESTDIR%\eBot\
+COPY eBot\serial\__init__.py  %DESTDIR%\eBot\serial\
 RMDIR /S /Q %DESTDIR%\firebase\
 COPY soar\io\__init__.py       %DESTDIR%\soar\io\
 COPY soar\graphics\__init__.py %DESTDIR%\soar\graphics\

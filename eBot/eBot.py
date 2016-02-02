@@ -222,8 +222,9 @@ class eBot():
                 self.voltage = float(self.voltage)
                 self.current = float(self.current)
             except:
-                print "eBot.read(): bad formatted data received"
-                print self.incoming
+                #print "eBot.read(): bad formatted data received"
+                #print self.incoming
+                pass
             if self.offset_counter == 2:
                 self.Ax_offset = self.Ax
                 self.Ay_offset = self.Ay

@@ -532,8 +532,10 @@ class eBot:
                 self.Gx = float(self.Gx)
                 self.Gy = float(self.Gy)
                 self.Gz = float(self.Gz)
-                self.Ultrasonic_rear_right = float(self.Ultrasonic_rear_right)
-                self.Ultrasonic_right = float(self.Ultrasonic_right)
+                #self.Ultrasonic_rear_right = float(self.Ultrasonic_rear_right)
+                self.Ultrasonic_rear_right = float(self.Ultrasonic_right)
+                #self.Ultrasonic_right = float(self.Ultrasonic_right)
+                self.Ultrasonic_right = float(self.Ultrasonic_rear_right)
                 self.Ultrasonic_front = float(self.Ultrasonic_front)
                 self.Ultrasonic_left = float(self.Ultrasonic_left)
                 self.Ultrasonic_rear_left = float(self.Ultrasonic_rear_left)
@@ -546,8 +548,9 @@ class eBot:
                 self.voltage = float(self.voltage)
                 self.current = float(self.current)
             except:
-                print "eBot.read(): bad formatted data received"
-                print self.incoming
+                #print "eBot.read(): bad formatted data received"
+                #print self.incoming
+                pass
             if self.offset_counter == 2:
                 self.Ax_offset = self.Ax
                 self.Ay_offset = self.Ay

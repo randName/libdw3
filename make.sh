@@ -4,8 +4,8 @@ DESTDIR=makedist
 
 #clean up destination directory
 echo ">> rm -fr $DESTDIR/dist/*" 
-rm -fr $DESTDIR/libdw/* $DESTDIR/soar/* $DESTDIR/form/* $DESTDIR/eBot/* $DESTDIR/firebase/* #DESTDIR/dist/* 
-mkdir $DESTDIR/soar/io $DESTDIR/soar/graphics/ $DESTDIR/soar/serial $DESTDIR/soar/controls $DESTDIR/soar/outputs
+rm -fr $DESTDIR/libdw/* $DESTDIR/soar/* $DESTDIR/form/* $DESTDIR/eBot/serial/* $DESTDIR/eBot/* $DESTDIR/firebase/* #DESTDIR/dist/* 
+mkdir $DESTDIR/soar/io $DESTDIR/soar/graphics/ $DESTDIR/soar/serial $DESTDIR/soar/controls $DESTDIR/soar/outputs $DESTDIR/eBot $DESTDIR/eBot/serial
 
 #create all the .pyc files, and move them to the appropriate dirs
 #*code/ contains .py files. libdw/ soar/ & form/ are used to hold .pyc files
@@ -22,6 +22,7 @@ mv soar/serial/*.pyc    $DESTDIR/soar/serial/
 mv soar/controls/*.pyc  $DESTDIR/soar/controls/
 mv soar/outputs/*.pyc   $DESTDIR/soar/outputs/
 mv eBot/*.pyc           $DESTDIR/eBot/
+mv eBot/serial/*.pyc    $DESTDIR/eBot/serial/
 mv firebase/*.pyc       $DESTDIR/
 cp    soar/soar         $DESTDIR/soar/
 cp -r soar/worlds       $DESTDIR/soar/
@@ -38,6 +39,7 @@ cp soar/serial/__init__.py   $DESTDIR/soar/serial/
 cp soar/controls/__init__.py $DESTDIR/soar/controls/
 cp soar/outputs/__init__.py  $DESTDIR/soar/outputs/
 cp eBot/__init__.py  $DESTDIR/eBot/
+cp eBot/serial/__init__.py  $DESTDIR/eBot/serial/
 rm -fr $DESTDIR/firebase
 
 echo
