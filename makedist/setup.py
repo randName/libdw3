@@ -12,10 +12,10 @@ setup(name='libdw',
       py_modules = ['firebase'],
       packages = ['libdw','form','soar','soar.io','soar.graphics',\
                   'soar.serial','soar.controls','soar.outputs', \
-                  'eBot'],
+                  'eBot','eBot.serial'],
       package_data={'libdw': ['*.pyc'], 'form': ['*.pyc'],\
                     'soar': ['*.pyc', 'io/*.pyc', 'graphics/*.pyc',\
                              'serial/*.pyc', 'controls/*.pyc', 'outputs/*.pyc',\
                              'media/*','worlds/*'],\
-                    'eBot': ['*.pyc']},
+                    'eBot': ['*.pyc','serial/*.pyc']},
       scripts=['setupsoar.py', 'soar/soar'])
