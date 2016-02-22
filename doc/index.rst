@@ -11,16 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: eBot
-    :members:
-    :undoc-members:
-    :inherited-members:
-    :show-inheritance:
+   gettingstarted
+   ebot_api_common
+   ebot_api_all
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
