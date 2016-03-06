@@ -15,10 +15,10 @@ def HSVtoRGB(h, s, v):
     """
     Convert a color represented in hue, saturation, value space into
     RGB space.
-    @param h: hue, in range (0, 360)
-    @param s: saturation, in range (0, 1)
-    @param v: value, in range (0, 1)
-    @returns: (r, g, b) with each value in the range (0, 1)
+    :param h: hue, in range (0, 360)
+    :param s: saturation, in range (0, 1)
+    :param v: value, in range (0, 1)
+    :returns: (r, g, b) with each value in the range (0, 1)
     """
     if s == 0:
         # achromatic (grey)
@@ -53,13 +53,13 @@ def probToPyColor(p, uniformP = 0.5, upperVal = None):
     Converts a probability to a Python color.  Probability equal to
     uniform converts to black.  Closer to 1 is brighter blue; closer
     to 0 is brighter red.
-    @param p: probability value in range (0, 1)
-    @param uniformP: probability value that will be colored black
-    @param upperVal: in situations when there are lots of choices and
+    :param p: probability value in range (0, 1)
+    :param uniformP: probability value that will be colored black
+    :param upperVal: in situations when there are lots of choices and
     so the highest reasonable value to occur is nowhere near 1, it can
     be useful to set this to the highest probability value you expect,
     in order to get some useful visual dynamic range.
-    @returns: A Python color
+    :returns: A Python color
     """
 
     if upperVal == None:
@@ -77,8 +77,8 @@ def probToPyColor(p, uniformP = 0.5, upperVal = None):
 # Want 0, 1 when p = 0
 def probToMapColor(p, hue = yellowHue):
     """
-    @param p: probability value
-    @returns: a  Python color that's good for mapmaking.  It's yellow
+    :param p: probability value
+    :returns: a  Python color that's good for mapmaking.  It's yellow
     when p = 0.5, black when p = 1, white when p = 1.
     """
     m = 0.51
@@ -104,9 +104,9 @@ def rootToPyColor(p, minV, maxV):
 
 def RGBToPyColor(colorVals):
     """
-    @param colorVals: tuple (r, g, b) of values in (0, 1) representing
+    :param colorVals: tuple (r, g, b) of values in (0, 1) representing
     a color in rgb space
-    @returns: a python color string
+    :returns: a python color string
     """
     (r, g, b) = [floor(c*255.99) for c in colorVals]
     return '#%02x%02x%02x' % (r, g, b)

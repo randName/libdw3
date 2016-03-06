@@ -16,7 +16,7 @@ class StateEstimator(sm.SM):
 
     def __init__(self, model):
         """
-        @param model: a C{ssm.StochasticStateMachine} object,
+        :param model: a C{ssm.StochasticStateMachine} object,
         specifying the transition and observation models
         """
         self.model = model
@@ -30,11 +30,11 @@ class StateEstimator(sm.SM):
 
     def getNextValues(self, state, inp):
         """
-        @param state: Distribution over states of the subject machine,
+        :param state: Distribution over states of the subject machine,
         represented as a C{dist.Dist} object
-        @param inp: A pair C{(o, a)} of the input and output of the
+        :param inp: A pair C{(o, a)} of the input and output of the
         subject machine on this time step.  If this parameter is
-        C{None}, then no update occurs and the state is returned,
+        ``None``, then no update occurs and the state is returned,
         unchanged. 
         """
         if inp == None:

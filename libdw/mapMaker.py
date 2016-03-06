@@ -35,8 +35,8 @@ class MapMaker(sm.SM):
     def getNextValues(self, state, inp):
 #!        pass        
         """
-        @param inp: instance of C{SensorInput}
-        @param state: is C{grid}
+        :param inp: instance of C{SensorInput}
+        :param state: is C{grid}
         Modifies grid
         """
         grid = state

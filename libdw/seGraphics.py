@@ -5,12 +5,12 @@ reload(seFast)
 
 observationHook = None
 """Procedure that takes two arguments, an observation and an
-observation model, and does some useful display.  If C{None}, then
+observation model, and does some useful display.  If ``None``, then
 no display is done."""
 
 beliefHook = None
 """Procedure that takes one argument, a belief distribution, and
-does some useful display.  If C{None}, then no display is done.""" 
+does some useful display.  If ``None``, then no display is done.""" 
 
 class StateEstimator(seFast.StateEstimator):
     """By default, this is the same as C{seFast.StateEstimator}.  If

@@ -6,7 +6,7 @@ import operator
 
 def floatRange(lo, hi, stepsize):
     """
-    @returns: a list of numbers, starting with C{lo}, and increasing
+    :returns: a list of numbers, starting with C{lo}, and increasing
     by C{stepsize} each time, until C{hi} is equaled or exceeded.
 
     C{lo} must be less than C{hi}; C{stepsize} must be greater than 0.
@@ -23,13 +23,13 @@ def floatRange(lo, hi, stepsize):
 
 def argopt(f, stuff, comp):
     """
-    @param f: a function that takes a single argument of some type
+    :param f: a function that takes a single argument of some type
     C{x} and returns a value of some type C{y}
-    @param stuff: a list of elements of type C{x}
-    @param comp: a function that takes two arguments of type C{y} and
+    :param stuff: a list of elements of type C{x}
+    :param comp: a function that takes two arguments of type C{y} and
     returns a Boolean;  it is intended to return C{True} if the first
     argument is 'better' than the second.
-    @returns: a pair C{(bestVal, bestArg)}, where C{bestArg} is the
+    :returns: a pair C{(bestVal, bestArg)}, where C{bestArg} is the
     element of C{stuff} such that C{f(bestArg)} is better, according
     to C{comp} than C{f} applied to any other element of C{stuff}, and
     C{bestVal} is C{f(bestArg)}.
@@ -58,12 +58,12 @@ def argopt(f, stuff, comp):
 def optOverLine(objective, xmin, xmax, numXsteps, 
                compare = operator.lt):
     """
-    @param objective: a function that takes a single number as an
+    :param objective: a function that takes a single number as an
                argument and returns a value
-    @param compare: a function from two values (of the type returned
+    :param compare: a function from two values (of the type returned
                by C{objective}) to a Boolean;  should return C{True}
                if we like the first argument better.
-    @returns: a pair, C{(objective(x), x)}.  C{x} one of the numeric
+    :returns: a pair, C{(objective(x), x)}.  C{x} one of the numeric
                values achieved by starting at C{xmin} and taking
                C{numXsteps} equal-sized steps up to C{xmax};  the
                particular value of C{x} returned is the one for which

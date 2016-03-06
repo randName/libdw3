@@ -12,7 +12,7 @@ class Polynomial:
     """
     def __init__(self, coeffs):
         """
-        @param coeffs: a list of numbers, starting with highest
+        :param coeffs: a list of numbers, starting with highest
         order coefficient.  
         """
         self.coeffs = [fixType(c) for c in coeffs]
@@ -29,12 +29,12 @@ class Polynomial:
 
     def add(p1, p2):
         """
-        @param p1, p2: polynomials
-        @return: a new polynomial, which is their sum.
+        :param p1, p2: polynomials
+        :return: a new polynomial, which is their sum.
         Does not affect either input.
         """
         def extend(coeffs, length):
-            """@return: list of coeffs, extended to length by adding zeros
+            """:return: list of coeffs, extended to length by adding zeros
             to the front."""
             return  [0.0]*(length - len(coeffs)) + coeffs
         resultLength = max(p1.order, p2.order) + 1
@@ -48,15 +48,15 @@ class Polynomial:
 
     def scalarMult(self, s):
         """
-        @param s: a scalar
-        @return: a new polynomial with all coefficients of self, multiplied by s
+        :param s: a scalar
+        :return: a new polynomial with all coefficients of self, multiplied by s
         """
         return Polynomial([c*s for c in self.coeffs])
 
     def mul(p1, p2):
         """
-        @param p1, p2: polynomials
-        @return: a new polynomial, which is their product.
+        :param p1, p2: polynomials
+        :return: a new polynomial, which is their product.
         
         Does not affect either input.
         """
@@ -67,8 +67,8 @@ class Polynomial:
 
     def shift(p, a):
         """
-        @param a: integer
-        @return: a new polynomial, multiplied by x**a.
+        :param a: integer
+        :return: a new polynomial, multiplied by x**a.
 
         Just adds zeros for new low-order coefficients.
         """
@@ -91,8 +91,8 @@ class Polynomial:
 
     def val(self, x):
         """
-        @param x: number
-        @return: the value of the polynomial with the variable assigned to x. 
+        :param x: number
+        :return: the value of the polynomial with the variable assigned to x. 
         """
         # This implementation uses Horner's rule
         v = self.coeffs[0]
@@ -105,7 +105,7 @@ class Polynomial:
 
     def roots(self):
         """
-        @return: list of the roots, found by numpy
+        :return: list of the roots, found by numpy
         """
         import numpy
         # Make a copy of the numpy array into a list
@@ -135,8 +135,8 @@ def assertSameLength(a,b):
 
 def vectorAdd(a, b):
     """
-    @param a, b: lists of numbers of the same length
-    @return: (a[1]+b[1], ..., a[n]+b[n])
+    :param a, b: lists of numbers of the same length
+    :return: (a[1]+b[1], ..., a[n]+b[n])
     """
     assertSameLength(a,b)
     return [ai+bi for (ai,bi) in zip(a,b)]

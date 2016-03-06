@@ -21,17 +21,17 @@ class DDist:
 
     def dictCopy(self):
         """
-        @returns: A copy of the dictionary for this distribution.
+        :returns: A copy of the dictionary for this distribution.
         """
         return self.d.copy()
 
     def prob(self, elt):
         """
-        @param elt: an element of the domain of this distribution
+        :param elt: an element of the domain of this distribution
         (does not need to be explicitly represented in the dictionary;
         in fact, for any element not in the dictionary, we return
         probability 0 without error.)
-        @returns: the probability associated with C{elt}
+        :returns: the probability associated with C{elt}
         """
         if self.d.has_key(elt):
             return self.d[elt]
@@ -40,7 +40,7 @@ class DDist:
 
     def support(self):
         """
-        @returns: A list (in arbitrary order) of the elements of this
+        :returns: A list (in arbitrary order) of the elements of this
         distribution with non-zero probabability.
         """
         return [k for k in self.d.keys() if self.prob(k) > 0]
@@ -58,7 +58,7 @@ class DDist:
 #!
     def draw(self):
         """
-        @returns: a randomly drawn element from the distribution
+        :returns: a randomly drawn element from the distribution
         """
         r = random.random()
         sum = 0.0
@@ -69,15 +69,15 @@ class DDist:
 
     def maxProbElt(self):
         """
-        @returns: The element in this domain with maximum probability
+        :returns: The element in this domain with maximum probability
         """
         return util.argmax(self.support(), self.prob)
 
     def marginalizeOut(self, index):
         """
-        @param index: index of a random variable to sum out of the
+        :param index: index of a random variable to sum out of the
         distribution
-        @returns: DDist on all the rest of the variables
+        :returns: DDist on all the rest of the variables
         """
         result = {}
         for e in self.support():
@@ -86,10 +86,10 @@ class DDist:
 
     def conditionOnVar(self, index, value):
         """
-        @param index: index of a variable in the joint distribution
-        @param value: value of that variable
+        :param index: index of a variable in the joint distribution
+        :param value: value of that variable
 
-        @returns: new distribution, conditioned on variable C{i}
+        :returns: new distribution, conditioned on variable C{i}
         having value C{value}, and with variable C{i} removed from all
         of the elements (it's redundant at this point).
         """
@@ -104,8 +104,8 @@ def JDist(PA, PBgA):
     Create a joint distribution on P(A, B) (in that order),
     represented as a C{DDist}
         
-    @param PA: a C{DDist} on some random var A
-    @param PBgA: a conditional probability distribution specifying
+    :param PA: a C{DDist} on some random var A
+    :param PBgA: a conditional probability distribution specifying
     P(B | A) (that is, a function from elements of A to C{DDist}
     on B)
     """
@@ -117,21 +117,21 @@ def JDist(PA, PBgA):
 
 def bayesEvidence(PA, PBgA, b):
     """
-    @param PBgA: conditional distribution over B given A (function
+    :param PBgA: conditional distribution over B given A (function
     from values of a to C{DDist} over B)
-    @param PA: prior on A
-    @param b: evidence value for B = b 
-    @returns: P(A | b)
+    :param PA: prior on A
+    :param b: evidence value for B = b 
+    :returns: P(A | b)
     """
     # Remember that the order of the variables will be A, B
     return JDist(PA, PBgA).conditionOnVar(1, b)
 
 def totalProbability(PA, PBgA):
     """
-    @param PBgA: conditional distribution over B given A (function
+    :param PBgA: conditional distribution over B given A (function
     from values of a to C{DDist} over B)
-    @param PA: distribution over A (object of type C{DiscreteDist})
-    @returns: P(B) using the law of total probability.
+    :param PA: distribution over A (object of type C{DiscreteDist})
+    :returns: P(B) using the law of total probability.
     C{self} represents P(B | A);  P(A) is the argument to the
     method; we compute and return P(B) as sum_a P(B | a) P(a)
     """
@@ -150,7 +150,7 @@ def DeltaDist(v):
 def UniformDist(elts):
     """
     Uniform distribution over a given finite set of C{elts}
-    @param elts: list of any kind of item
+    :param elts: list of any kind of item
     """
     p = 1.0 / len(elts)
     return DDist(dict([(e, p) for e in elts]))
@@ -263,9 +263,9 @@ def incrDictEntry(d, k, v):
     If dictionary C{d} has key C{k}, then increment C{d[k]} by C{v}.
     Else set C{d[k] = v}.
     
-    @param d: dictionary
-    @param k: legal dictionary key (doesn't have to be in C{d})
-    @param v: numeric value
+    :param d: dictionary
+    :param k: legal dictionary key (doesn't have to be in C{d})
+    :param v: numeric value
     """
     if d.has_key(k):
         d[k] += v

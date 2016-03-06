@@ -14,19 +14,19 @@ class StochasticSM(sm.SM):
                  beliefDisplayFun = None,
                  sensorDisplayFun = None):
         """
-        @param transitionDistribution: P(S_t+1 | S_t, A_t) represented
+        :param transitionDistribution: P(S_t+1 | S_t, A_t) represented
         as a procedure that takes an action and returns a procedure.
         The returned procedure takes an old state and returns a
         distribution over new states.
-        @param observationDistribution: P(O_t | S_t) represented as a
+        :param observationDistribution: P(O_t | S_t) represented as a
         procedure that takes a state and returns a distribution
         over observations.
-        @param startDistribution: distribution on states, represented
+        :param startDistribution: distribution on states, represented
         as a C{dist.DDist}
-        @param beliefDisplayFun: optional function that is not used
+        :param beliefDisplayFun: optional function that is not used
         here, but that state estimator, for example, might call to
         display a belief state. Takes a belief state {dist.DDist} as input.
-        @param sensorDisplayFun: optional function that is not used
+        :param sensorDisplayFun: optional function that is not used
         here, but that state estimator, for example, might call to
         display a sensor likelihoods. Takes an observation as input."""
 

@@ -48,12 +48,12 @@ class Action:
                  voltage = referenceVoltage,
                  discreteStepLength = None):
         """
-        @param fvel: signed number indicating forward velocity in m/s
-        @param rvel: signed number indicating rotational velocity in
+        :param fvel: signed number indicating forward velocity in m/s
+        :param rvel: signed number indicating rotational velocity in
         rad/sec (?)  positive is left, negative is right
-        @param voltage: voltage to send to analog input port of
+        :param voltage: voltage to send to analog input port of
         control board;  should be between 0 and 10v ??
-        @param discreteStepLength: if C{None}, then the robot
+        :param discreteStepLength: if ``None``, then the robot
         continues driving at the last commanded velocity until a new
         action command is received;  if set to a positive value, the
         robot will drive at the last commanded velocity until

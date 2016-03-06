@@ -35,7 +35,7 @@ class Pose:
     def transformPoint(self, point):
         """
         Applies the pose.transform to point and returns new point.
-        @param point: an instance of C{util.Point}
+        :param point: an instance of C{util.Point}
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -47,8 +47,8 @@ class Pose:
         Does the rotation by theta of the pose but does not add the
         x,y offset. This is useful in transforming the difference(delta)
         between two points.
-        @param point: an instance of C{util.Point}
-        @returns: a C{util.Point}.
+        :param point: an instance of C{util.Point}
+        :returns: a C{util.Point}.
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -58,21 +58,21 @@ class Pose:
     def transformPose(self, pose):
         """
         Make self into a transformation matrix and apply it to pose.
-        @returns: Af new C{util.pose}.
+        :returns: Af new C{util.pose}.
         """
         return self.transform().applyToPose(pose)
 
     def near(self, pose, distEps, angleEps):
         """
-        @returns: True if pose is within distEps and angleEps of self
+        :returns: True if pose is within distEps and angleEps of self
         """
         return self.point().isNear(pose.point(), distEps) and \
                nearAngle(self.theta, pose.theta, angleEps)
 
     def diff(self, pose):
         """
-        @param pose: an instance of C{util.Pose}
-        @returns: a pose that is the difference between self and pose (in
+        :param pose: an instance of C{util.Pose}
+        :returns: a pose that is the difference between self and pose (in
         x, y, and theta)
         """
         return Pose(self.x-pose.x,
@@ -81,8 +81,8 @@ class Pose:
 
     def distance(self, pose):
         """
-        @param pose: an instance of C{util.Pose}
-        @returns: the distance between the x,y part of self and the x,y
+        :param pose: an instance of C{util.Pose}
+        :returns: the distance between the x,y part of self and the x,y
         part of pose.
         """
         return self.point().distance(pose.point())
@@ -98,7 +98,7 @@ class Pose:
 
     def xytTuple(self):
         """
-        @returns: a representation of this pose as a tuple of x, y,
+        :returns: a representation of this pose as a tuple of x, y,
         theta values  
         """
         return (self.x, self.y, self.theta)
@@ -108,8 +108,8 @@ class Pose:
 
 def valueListToPose(values):
     """
-    @param values: a list or tuple of three values: x, y, theta
-    @returns: a corresponding C{util.Pose}
+    :param values: a list or tuple of three values: x, y, theta
+    :returns: a corresponding C{util.Pose}
     """
     return apply(Pose, values)
 
@@ -127,31 +127,31 @@ class Point:
 
     def isNear(self, point, distEps):
         """
-        @param point: instance of C{util.Point}
-        @param distEps: positive real number
-        @returns: true if the distance between C{self} and C{util.Point} is less
+        :param point: instance of C{util.Point}
+        :param distEps: positive real number
+        :returns: true if the distance between C{self} and C{util.Point} is less
         than distEps
         """
         return self.distance(point) < distEps
 
     def distance(self, point):
         """
-        @param point: instance of C{util.Point}
-        @returns: Euclidean distance between C{self} and C{util.Point}
+        :param point: instance of C{util.Point}
+        :returns: Euclidean distance between C{self} and C{util.Point}
         than distEps
         """
         return math.sqrt((self.x - point.x)**2 + (self.y - point.y)**2)
 
     def magnitude(self):
         """
-        @returns: Magnitude of this point, interpreted as a vector in
+        :returns: Magnitude of this point, interpreted as a vector in
         2-space 
         """
         return math.sqrt(self.x**2 + self.y**2)
 
     def xyTuple(self):
         """
-        @returns: pair of x, y values
+        :returns: pair of x, y values
         """
         return (self.x, self.y)
 
@@ -160,8 +160,8 @@ class Point:
 
     def angleTo(self, p):
         """
-        @param p: instance of C{util.Point} or C{util.Pose}
-        @returns: angle in radians of vector from self to p
+        :param p: instance of C{util.Point} or C{util.Pose}
+        :returns: angle in radians of vector from self to p
         """
         dx = p.x - self.x
         dy = p.y - self.y
@@ -245,10 +245,10 @@ class Transform:
 
 def nearAngle(a1, a2, eps):
     """
-    @param a1: number representing angle; no restriction on range
-    @param a2: number representing angle; no restriction on range
-    @param eps: positive number
-    @returns: C{True} if C{a1} is within C{eps} of C{a2}.  Don't use
+    :param a1: number representing angle; no restriction on range
+    :param a2: number representing angle; no restriction on range
+    :param eps: positive number
+    :returns: C{True} if C{a1} is within C{eps} of C{a2}.  Don't use
     within for this, because angles wrap around!
     """
     return abs(fixAnglePlusMinusPi(a1-a2)) < eps

@@ -38,10 +38,10 @@ class RobotGraphics():
     connectPointsDef = False
     def __init__(self, drawSlimeTrail=False, sonarMonitor=False):
         """
-        @param drawSlimeTrail: whether or not to draw slime trail when
+        :param drawSlimeTrail: whether or not to draw slime trail when
         robot is stopped.  Setting drawSlimeTrail='Cheat' will use
         actual rather than sensed pose in the simulator.  Default is
-        False.  @param sonarMonitor: whether or not to enable the
+        False.  :param sonarMonitor: whether or not to enable the
         sonar monitor.  Default is False.
         """
         self.tick = 0
@@ -90,9 +90,9 @@ class RobotGraphics():
     def addStaticPlotFunction(self, x=('step', None), y=('step', None),
                               connectPoints = connectPointsDef):
         """
-        @param x: function to call for x-axis of static plot 
-        @param y: function to call for y-axis of static plot 
-        @param connectPoints: Boolean, whether or not to draw lines
+        :param x: function to call for x-axis of static plot 
+        :param y: function to call for y-axis of static plot 
+        :param connectPoints: Boolean, whether or not to draw lines
         between the points.  Default is False.
         """
         (xname, xfunc)= x
@@ -108,7 +108,7 @@ class RobotGraphics():
 
     def addDynamicPlotFunction(self, y=('step', None)):
         """
-        @param y: function to call for y-axis of dynamic plot
+        :param y: function to call for y-axis of dynamic plot
         """
         (name, func) = y
         io.addScopeProbeFunction(name, func)
@@ -117,9 +117,9 @@ class RobotGraphics():
                              y=('step', None, None, None), 
                              connectPoints = connectPointsDef):
         """
-        @param x: probe for x-axis of static plot
-        @param y: probe for y-axis of static plot
-        @param connectPoints: Boolean; whether or not to draw lines
+        :param x: probe for x-axis of static plot
+        :param y: probe for y-axis of static plot
+        :param connectPoints: Boolean; whether or not to draw lines
         between the points.  Default is False.
         """
         (yname, ymachine, ymode, yvaluefun) = y
@@ -131,7 +131,7 @@ class RobotGraphics():
     def addDynamicPlotSMProbe(self, y=('step', None, None, None),
                               connectPoints = connectPointsDef):
         """
-        @param y: probe for y-axis of dynamic plot
+        :param y: probe for y-axis of dynamic plot
         """
         (yname, ymachine, ymode, yvaluefun) = y
         if ymachine: self.addProbe(y)

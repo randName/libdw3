@@ -18,8 +18,8 @@ class StateEstimator(sm.SM):
 
     def __init__(self, model, verbose = False):
         """
-        @param model: a C{ssm.StochasticStateMachine} object
-        @param verbose: if C{True}, prints out intermediate values
+        :param model: a C{ssm.StochasticStateMachine} object
+        :param verbose: if C{True}, prints out intermediate values
         """
         self.model = model
         self.verbose = verbose
@@ -33,9 +33,9 @@ class StateEstimator(sm.SM):
 
     def getNextValues(self, state, inp):
         """
-        @param state: Distribution over states of the subject machine,
+        :param state: Distribution over states of the subject machine,
         represented as a C{dist.Dist} object
-        @param inp: A pair C{(o, i)} of the observation (output) and input 
+        :param inp: A pair C{(o, i)} of the observation (output) and input 
         of the subject machine on this time step.
         """
         (o, i) = inp
@@ -81,8 +81,8 @@ def makeStateEstimationSimulation(worldSM, verbose = False):
     model.  The output of the state estimator is a belief state, b.
     The output of this entire composite machine is (b, (o, i)).
 
-    @param worldSM: an instance of C{ssm.StochasticSM}
-    @returns: a state machine that simulates the world and executes
+    :param worldSM: an instance of C{ssm.StochasticSM}
+    :returns: a state machine that simulates the world and executes
     the state estimation process.
     """
     return sm.Cascade(sm.Parallel(worldSM, sm.Wire()),

@@ -68,15 +68,15 @@ class SM:
         """
         Call before providing inp to a machine, or to reset it.
         Sets self.state and arranges things for tracing and debugging.
-        @param traceTasks: list of trace tasks.  See documentation for
+        :param traceTasks: list of trace tasks.  See documentation for
               C{doTraceTasks} for details
-        @param verbose: If C{True}, print a description of each step
+        :param verbose: If C{True}, print a description of each step
               of the machine
-        @param compact: If C{True}, then if C{verbose = True}, print a
+        :param compact: If C{True}, then if C{verbose = True}, print a
               one-line description of the step;  if C{False}, print
               out the recursive substructure of the state update at
               each step
-        @param printInput: If C{True}, then if C{verbose = True},
+        :param printInput: If C{True}, then if C{verbose = True},
               print the whole input in each step, otherwise don't.
               Useful to set to C{False} when the input is large and
               you don't want to see it all.
@@ -92,7 +92,7 @@ class SM:
         Execute one 'step' of the machine, by propagating C{inp} through
         to get a result, then updating C{self.state}.
         Error to call C{step} if C{done} is true.
-        @param inp: next input to the machine
+        :param inp: next input to the machine
         """
         (s, o) = self.getNextValues(self.state, inp)
 
@@ -125,8 +125,8 @@ class SM:
         See documentation for the C{start} method for description of
         the rest of the parameters.
         
-        @param inps: list of inputs appropriate for this state machine
-        @return: list of outputs
+        :param inps: list of inputs appropriate for this state machine
+        :return: list of outputs
         """
         if check:
             self.check(inps)
@@ -155,8 +155,8 @@ class SM:
         See documentation for the C{start} method for description of
         the rest of the parameters.
         
-        @param n: number of steps to run
-        @return: list of outputs
+        :param n: number of steps to run
+        :return: list of outputs
         """
         return self.transduce([None]*n, verbose = verbose,
                               traceTasks = traceTasks, compact = compact,
@@ -238,9 +238,9 @@ class SM:
 	
 	Raises exception 'InvalidSM' if a problem is found.
     
-        @param thesm: the state machine instance to check
-        @param inps: list of inputs to test the state machine on (default None)
-        @return: none
+        :param thesm: the state machine instance to check
+        :param inps: list of inputs to test the state machine on (default None)
+        :return: none
 
         """
         # see if getNextValues is defined and is not the default version
@@ -324,8 +324,8 @@ class Cascade (SM):
     """
     def __init__(self, m1, m2, name = None):
         """
-        @param m1: C{SM}
-        @param m2: C{SM}
+        :param m1: C{SM}
+        :param m2: C{SM}
         """
         self.m1 = m1
         self.m2 = m2
@@ -446,9 +446,9 @@ class Feedback (SM):
 def coupledMachine(m1, m2):
     """
     Couple two machines together.
-    @param m1: C{SM}
-    @param m2: C{SM}
-    @returns: New machine with no input, in which the output of C{m1}
+    :param m1: C{SM}
+    :param m2: C{SM}
+    :returns: New machine with no input, in which the output of C{m1}
     is the input to C{m2} and vice versa.
     """
     return Feedback(Cascade(m1, m2))
@@ -643,9 +643,9 @@ class If (SM):
     
     def __init__(self, condition, sm1, sm2, name = None):
         """
-        @param condition: C{Procedure} mapping C{inp} -> C{Boolean}
-        @param sm1: C{SM}
-        @param sm2: C{SM}
+        :param condition: C{Procedure} mapping C{inp} -> C{Boolean}
+        :param sm1: C{SM}
+        :param sm2: C{SM}
         """
         self.sm1 = sm1
         self.sm2 = sm2
@@ -708,9 +708,9 @@ class Switch (SM):
     """
     def __init__(self, condition, sm1, sm2, name = None):
         """
-        @param condition: C{Procedure} mapping C{inp} -> C{Boolean}
-        @param sm1: C{SM}
-        @param sm2: C{SM}
+        :param condition: C{Procedure} mapping C{inp} -> C{Boolean}
+        :param sm1: C{SM}
+        :param sm2: C{SM}
         """
         self.m1 = sm1
         self.m2 = sm2
@@ -783,7 +783,7 @@ class Sequence (SM):
     """
     def __init__(self, smList, name = None):
         """
-        @param smList: C{List} of terminating C{SM}
+        :param smList: C{List} of terminating C{SM}
         """
         self.smList = smList
         if not (name is None or isinstance(name, str)) or not isinstance(smList, (tuple, list)):
@@ -840,8 +840,8 @@ class Repeat (SM):
     """
     def __init__(self, sm, n = None, name = None):
         """
-        @param sm: terminating C{SM}
-        @param n: positive integer
+        :param sm: terminating C{SM}
+        :param n: positive integer
         """
         self.sm = sm
         self.n = n
@@ -891,8 +891,8 @@ class RepeatUntil (SM):
     """
     def __init__(self, condition, sm, name = None):
         """
-        @param condition: C{Procedure} mappin C{input} to C{Boolean}
-        @param sm: terminating C{SM}
+        :param condition: C{Procedure} mappin C{input} to C{Boolean}
+        :param sm: terminating C{SM}
         """
         self.sm = sm
         self.condition = condition
@@ -940,8 +940,8 @@ class Until (SM):
     """
     def __init__(self, condition, sm, name = None):
         """
-        @param condition: C{Procedure} mappin C{input} to C{Boolean}
-        @param sm: terminating C{SM}
+        :param condition: C{Procedure} mappin C{input} to C{Boolean}
+        :param sm: terminating C{SM}
         """
         self.sm = sm
         self.condition = condition
@@ -1019,7 +1019,7 @@ class Constant(SM):
     """
     def __init__(self, c):
         """
-        @param c: constant value
+        :param c: constant value
         """
         self.c = c
     def getNextState(self, state, inp):
@@ -1032,7 +1032,7 @@ class R(SM):
     """
     def __init__(self, v0 = 0):
         """
-        @param v0: initial output value
+        :param v0: initial output value
         """
         self.startState = v0
         """State is the previous input"""
@@ -1050,7 +1050,7 @@ class Gain(SM):
     """
     def __init__(self, k):
         """
-        @param k: gain
+        :param k: gain
         """
         self.k = k
     def getNextValues(self, state, inp):
@@ -1069,7 +1069,7 @@ class Select (SM):
     """
     def __init__(self, k):
         """
-        @param k: positive integer describing which element of input
+        :param k: positive integer describing which element of input
         structure to select
         """
         self.k = k
@@ -1083,7 +1083,7 @@ class PureFunction(SM):
     """
     def __init__(self, f):
         """
-        @param f: a function of one argument
+        :param f: a function of one argument
         """
         self.f = f
     def getNextValues(self, state, inp):

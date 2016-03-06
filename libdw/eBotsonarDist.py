@@ -40,8 +40,8 @@ sonarMax = 1.5
 def getDistanceRight(sonarValues):
     #CHANGED: 8 to 6 sonar readings
     """
-    @param sonarValues: list of 6 sonar readings
-    @return: the perpendicular distance to a surface on the right of
+    :param sonarValues: list of 6 sonar readings
+    :return: the perpendicular distance to a surface on the right of
     the robot, assuming there is a linear surface.
     """
     return getDistanceRightAndAngle(sonarValues)[0]
@@ -49,8 +49,8 @@ def getDistanceRight(sonarValues):
 def getDistanceRightAndAngle(sonarValues):
     #CHANGED: 8 to 6 sonar readings
     """
-    @param sonarValues: list of 6 sonar readings
-    @return: (d, a) where, d is the perpendicular distance to a
+    :param sonarValues: list of 6 sonar readings
+    :return: (d, a) where, d is the perpendicular distance to a
     surface on the right of the robot, assuming there is a linear
     surface;  and a is the angle to that surface.
 
@@ -67,10 +67,10 @@ def getDistanceRightAndAngle(sonarValues):
 
 def sonarHit(distance, sonarPose, robotPose):
     """
-    @param distance: distance along ray that the sonar hit something
-    @param sonarPose: C{util.Pose} of the sonar on the robot
-    @param robotPose: C{util.Pose} of the robot in the global frame
-    @return: C{util.Point} representing position of the sonar hit in the
+    :param distance: distance along ray that the sonar hit something
+    :param sonarPose: C{util.Pose} of the sonar on the robot
+    :param robotPose: C{util.Pose} of the robot in the global frame
+    :return: C{util.Point} representing position of the sonar hit in the
     global frame.  
     """
     return robotPose.transformPoint(sonarPose.transformPoint(\

@@ -16,7 +16,7 @@ class SearchNode:
         self.parent = parent
         
     def path(self):
-        """@returns: list of C{(action, state)} pairs from root to this node"""
+        """:returns: list of C{(action, state)} pairs from root to this node"""
         if self.parent == None:
             return [(self.action, self.state)]
         else:
@@ -24,7 +24,7 @@ class SearchNode:
 
     def inPath(self, s):
         """
-        @returns: C{True} if state C{s} is in the path from here to the root
+        :returns: C{True} if state C{s} is in the path from here to the root
         """
         if s == self.state:
             return True
@@ -85,15 +85,15 @@ class Queue:
 def search(initialState, goalTest, actions, successor,
            depthFirst = False, DP = True, maxNodes = 10000):
     """
-    @param initialState: root of the search
-    @param goalTest: function from state to Boolean
-    @param actions: a list of possible actions
-    @param successor: function from state and action to next state
-    @param depthFirst: do depth-first search if C{True}, otherwise do
+    :param initialState: root of the search
+    :param goalTest: function from state to Boolean
+    :param actions: a list of possible actions
+    :param successor: function from state and action to next state
+    :param depthFirst: do depth-first search if C{True}, otherwise do
            breadth-first
-    @param DP: do dynamic programming if C{True}, otherwise not
-    @param maxNodes: kill the search after it expands this many nodes
-    @returns: path from initial state to a goal state as a list of
+    :param DP: do dynamic programming if C{True}, otherwise not
+    :param maxNodes: kill the search after it expands this many nodes
+    :returns: path from initial state to a goal state as a list of
            (action, state) tuples
     """
     if depthFirst:
@@ -161,23 +161,23 @@ def breadthFirstDP (initialState, goalTest, actions, successor):
 def smSearch(smToSearch, initialState = None, goalTest = None, maxNodes = 10000,
              depthFirst = False, DP = True):
    """
-   @param smToSearch: instance of C{sm.SM} defining a search domain;
+   :param smToSearch: instance of C{sm.SM} defining a search domain;
              C{getNextValues} is used to determine the successor of a
              state given an action
-   @param initialState: initial state for the search;  if not
+   :param initialState: initial state for the search;  if not
              provided, will use C{smToSearch.startState}
-   @param goalTest: function that takes a state as an argument and
+   :param goalTest: function that takes a state as an argument and
              returns C{True} if it is a goal state, and C{False} otherwise
-   @param maxNodes: maximum number of nodes to be searched;  prevents
+   :param maxNodes: maximum number of nodes to be searched;  prevents
              runaway searches
-   @param depthFirst: if C{True}, use depth first search;  usually not
+   :param depthFirst: if C{True}, use depth first search;  usually not
              a good idea
-   @param DP: if C{True}, use dynamic programming; usually a good idea
-   @returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
+   :param DP: if C{True}, use dynamic programming; usually a good idea
+   :returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
     where the a's  are legal actions of c{smToSearch} and s's are
     states of that  machine.  C{s0} is the start state;  the last
     state is a state that satisfies the goal test.  If the
-    goal is unreachable (within the search limit), it returns C{None}. 
+    goal is unreachable (within the search limit), it returns ``None``. 
    """
    if initialState == None:
        initialState = smToSearch.getStartState()
@@ -191,11 +191,11 @@ def smSearch(smToSearch, initialState = None, goalTest = None, maxNodes = 10000,
 
 def pathValid(smToSearch, path):
     """
-    @param smToSearch: instance of C{sm.SM} defining a search domain
-    @param path: list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
+    :param smToSearch: instance of C{sm.SM} defining a search domain
+    :param path: list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
     where the C{a}'s  are legal actions of c{smToSearch} and C{s}'s are
     states of that  machine.
-    @returns: C{True} if taking action a1 in state s0 results in state
+    :returns: C{True} if taking action a1 in state s0 results in state
     s1, taking action a2 in state s1 results in state s2, etc.  That
     is, if this path through the state space is executable in this
     state machine.

@@ -90,7 +90,7 @@ class MoveToFixedPose(sm.SM):
   
     def __init__(self, goalPose, maxVel = maxVel):
         """
-        @param goalPose: instance of C{util.Pose} specifying goal for
+        :param goalPose: instance of C{util.Pose} specifying goal for
         robot in odometry coordinates
         """
         self.goalPose = goalPose

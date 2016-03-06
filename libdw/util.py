@@ -39,7 +39,7 @@ class Pose:
     def transformPoint(self, point):
         """
         Applies the pose.transform to point and returns new point.
-        @param point: an instance of C{util.Point}
+        :param point: an instance of C{util.Point}
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -51,8 +51,8 @@ class Pose:
         Does the rotation by theta of the pose but does not add the
         x,y offset. This is useful in transforming the difference(delta)
         between two points.
-        @param point: an instance of C{util.Point}
-        @returns: a C{util.Point}.
+        :param point: an instance of C{util.Point}
+        :returns: a C{util.Point}.
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -62,21 +62,21 @@ class Pose:
     def transformPose(self, pose):
         """
         Make self into a transformation matrix and apply it to pose.
-        @returns: Af new C{util.pose}.
+        :returns: Af new C{util.pose}.
         """
         return self.transform().applyToPose(pose)
 
     def isNear(self, pose, distEps, angleEps):
         """
-        @returns: True if pose is within distEps and angleEps of self
+        :returns: True if pose is within distEps and angleEps of self
         """
         return self.point().isNear(pose.point(), distEps) and \
                nearAngle(self.theta, pose.theta, angleEps)
 
     def diff(self, pose):
         """
-        @param pose: an instance of C{util.Pose}
-        @returns: a pose that is the difference between self and pose (in
+        :param pose: an instance of C{util.Pose}
+        :returns: a pose that is the difference between self and pose (in
         x, y, and theta)
         """
         return Pose(self.x-pose.x,
@@ -85,8 +85,8 @@ class Pose:
 
     def distance(self, pose):
         """
-        @param pose: an instance of C{util.Pose}
-        @returns: the distance between the x,y part of self and the x,y
+        :param pose: an instance of C{util.Pose}
+        :returns: the distance between the x,y part of self and the x,y
         part of pose.
         """
         return self.point().distance(pose.point())
@@ -102,7 +102,7 @@ class Pose:
 
     def xytTuple(self):
         """
-        @returns: a representation of this pose as a tuple of x, y,
+        :returns: a representation of this pose as a tuple of x, y,
         theta values  
         """
         return (self.x, self.y, self.theta)
@@ -112,8 +112,8 @@ class Pose:
 
 def valueListToPose(values):
     """
-    @param values: a list or tuple of three values: x, y, theta
-    @returns: a corresponding C{util.Pose}
+    :param values: a list or tuple of three values: x, y, theta
+    :returns: a corresponding C{util.Pose}
     """
     return apply(Pose, values)
 
@@ -131,9 +131,9 @@ class Point:
 
     def near(self, point, distEps):
         """
-        @param point: instance of C{util.Point}
-        @param distEps: positive real number
-        @returns: true if the distance between C{self} and C{util.Point} is less
+        :param point: instance of C{util.Point}
+        :param distEps: positive real number
+        :returns: true if the distance between C{self} and C{util.Point} is less
         than distEps
         """
         return self.distance(point) < distEps
@@ -143,21 +143,21 @@ class Point:
 
     def distance(self, point):
         """
-        @param point: instance of C{util.Point}
-        @returns: Euclidean distance between C{self} and C{util.Point}
+        :param point: instance of C{util.Point}
+        :returns: Euclidean distance between C{self} and C{util.Point}
         """
         return math.sqrt((self.x - point.x)**2 + (self.y - point.y)**2)
 
     def magnitude(self):
         """
-        @returns: Magnitude of this point, interpreted as a vector in
+        :returns: Magnitude of this point, interpreted as a vector in
         2-space 
         """
         return math.sqrt(self.x**2 + self.y**2)
 
     def xyTuple(self):
         """
-        @returns: pair of x, y values
+        :returns: pair of x, y values
         """
         return (self.x, self.y)
 
@@ -166,8 +166,8 @@ class Point:
 
     def angleTo(self, p):
         """
-        @param p: instance of C{util.Point} or C{util.Pose}
-        @returns: angle in radians of vector from self to p
+        :param p: instance of C{util.Point} or C{util.Pose}
+        :returns: angle in radians of vector from self to p
         """
         dx = p.x - self.x
         dy = p.y - self.y
@@ -315,7 +315,7 @@ class LineSeg:
         """
         Return a C{Point} where C{self} intersects C{other}.  Returns C{False}
         if there is no intersection.
-        @param other: a C{LineSeg}
+        :param other: a C{LineSeg}
         """
         def helper(l1, l2):
             (a, b, c, d) = (l1.p1, l1.p2, l2.p1, l2.p2)
@@ -348,22 +348,22 @@ class LineSeg:
 def localToGlobal(pose, point):
     """
     Same as pose.transformPoint(point)
-    @param point: instance of C{util.Point}
+    :param point: instance of C{util.Point}
     """
     return pose.transformPoint(point)
 
 def localPoseToGlobalPose(pose1, pose2):
     """
     Applies the transform from pose1 to pose2
-    @param pose1: instance of C{util.Pose}
-    @param pose2: instance of C{util.Pose}
+    :param pose1: instance of C{util.Pose}
+    :param pose2: instance of C{util.Pose}
     """
     return pose1.transform().applyToPose(pose2)
 
 def inversePose(pose):
     """
     Same as pose.inverse()
-    @param pose: instance of C{util.Pose}
+    :param pose: instance of C{util.Pose}
     """
     return pose.transform().inverse().pose()
 
@@ -372,16 +372,16 @@ def inversePose(pose):
 def globalToLocal(pose, point):
     """
     Applies inverse of pose to point.
-    @param pose: instance of C{util.Pose}
-    @param point: instance of C{util.Point}
+    :param pose: instance of C{util.Pose}
+    :param point: instance of C{util.Point}
     """
     return inversePose(pose).transformPoint(point)
 
 def globalPoseToLocalPose(pose1, pose2):
     """
     Applies inverse of pose1 to pose2.
-    @param pose1: instance of C{util.Pose}
-    @param pose2: instance of C{util.Pose}
+    :param pose1: instance of C{util.Pose}
+    :param pose2: instance of C{util.Pose}
     """
     return inversePose(pose1).transform().applyToPose(pose2)
 
@@ -390,8 +390,8 @@ def globalPoseToLocalPose(pose1, pose2):
 def globalDeltaToLocal(pose, deltaPoint):
     """
     Applies inverse of pose to delta using transformDelta.
-    @param pose: instance of C{util.Pose}
-    @param deltaPoint: instance of C{util.Point}
+    :param pose: instance of C{util.Pose}
+    :param deltaPoint: instance of C{util.Point}
     """
     return inversePose(pose).transformDelta(deltaPoint)
 
@@ -410,19 +410,19 @@ def sum(items):
 
 def within(v1, v2, eps):
     """
-    @param v1: number
-    @param v2: number
-    @param eps: positive number
-    @returns: C{True} if C{v1} is with C{eps} of C{v2} 
+    :param v1: number
+    :param v2: number
+    :param eps: positive number
+    :returns: C{True} if C{v1} is with C{eps} of C{v2} 
     """
     return abs(v1 - v2) < eps
 
 def nearAngle(a1, a2, eps):
     """
-    @param a1: number representing angle; no restriction on range
-    @param a2: number representing angle; no restriction on range
-    @param eps: positive number
-    @returns: C{True} if C{a1} is within C{eps} of C{a2}.  Don't use
+    :param a1: number representing angle; no restriction on range
+    :param a2: number representing angle; no restriction on range
+    :param eps: positive number
+    :returns: C{True} if C{a1} is within C{eps} of C{a2}.  Don't use
     within for this, because angles wrap around!
     """
     return abs(fixAnglePlusMinusPi(a1-a2)) < eps
@@ -453,8 +453,8 @@ def fixAnglePlusMinusPi(a):
 
 def fixAngle02Pi(a):
     """
-    @param a: angle in radians
-    @returns: return an equivalent angle between 0 and 2 pi
+    :param a: angle in radians
+    :returns: return an equivalent angle between 0 and 2 pi
     """
     return a%(2*math.pi)
 
@@ -475,18 +475,18 @@ def dotProd(a, b):
 
 def argmax(l, f):
     """
-    @param l: C{List} of items
-    @param f: C{Procedure} that maps an item into a numeric score
-    @returns: the element of C{l} that has the highest score
+    :param l: C{List} of items
+    :param f: C{Procedure} that maps an item into a numeric score
+    :returns: the element of C{l} that has the highest score
     """
     vals = [f(x) for x in l]
     return l[vals.index(max(vals))]
 
 def argmaxWithVal(l, f):
     """
-    @param l: C{List} of items
-    @param f: C{Procedure} that maps an item into a numeric score
-    @returns: the element of C{l} that has the highest score and the score
+    :param l: C{List} of items
+    :param f: C{Procedure} that maps an item into a numeric score
+    :returns: the element of C{l} that has the highest score and the score
     """
     best = l[0]; bestScore = f(best)
     for x in l:
@@ -497,9 +497,9 @@ def argmaxWithVal(l, f):
 
 def argmaxIndex(l, f = lambda x: x):
     """
-    @param l: C{List} of items
-    @param f: C{Procedure} that maps an item into a numeric score
-    @returns: the index of C{l} that has the highest score
+    :param l: C{List} of items
+    :param f: C{Procedure} that maps an item into a numeric score
+    :returns: the index of C{l} that has the highest score
     """
     best = 0; bestScore = f(l[best])
     for i in range(len(l)):
@@ -520,9 +520,9 @@ def argmaxIndices3D(l, f = lambda x: x):
 
 def randomMultinomial(dist):
     """
-    @param dist: List of positive numbers summing to 1 representing a
+    :param dist: List of positive numbers summing to 1 representing a
     multinomial distribution over integers from 0 to C{len(dist)-1}.
-    @returns: random draw from that distribution
+    :returns: random draw from that distribution
     """
     r = random.random()
     for i in range(len(dist)):
@@ -533,10 +533,10 @@ def randomMultinomial(dist):
 
 def clip(v, vMin, vMax):
     """
-    @param v: number
-    @param vMin: number (may be None, if no limit)
-    @param vMax: number greater than C{vMin} (may be None, if no limit)
-    @returns: If C{vMin <= v <= vMax}, then return C{v}; if C{v <
+    :param v: number
+    :param vMin: number (may be None, if no limit)
+    :param vMax: number greater than C{vMin} (may be None, if no limit)
+    :returns: If C{vMin <= v <= vMax}, then return C{v}; if C{v <
     vMin} return C{vMin}; else return C{vMax}
     """
     if vMin == None:

@@ -18,11 +18,11 @@ class BasicGridMap(gridMap.GridMap):
         Reads in a world file.  Gets boundary dimensions and aspect
         ratio from there.  Grid cells are square, with size gridSquareSize
 
-        @param worldPath: String representing path to a soar world
+        :param worldPath: String representing path to a soar world
         definition file  
-        @param gridSquareSize: size, in world coordinates, of a grid
+        :param gridSquareSize: size, in world coordinates, of a grid
         square
-        @param windowWidth: size, in pixels, to make the window for
+        :param windowWidth: size, in pixels, to make the window for
         drawing this map  
         """
         self.world = soarWorld.SoarWorld(worldPath)
@@ -57,8 +57,8 @@ class BasicGridMap(gridMap.GridMap):
 
     def indicesToBoxSegs(self, indices):
         """
-        @param indices: pair of C{(ix, iy)} indices of a grid cell
-        @returns: list of four line segments that constitute the
+        :param indices: pair of C{(ix, iy)} indices of a grid cell
+        :returns: list of four line segments that constitute the
         boundary of the cell, grown by the radius of the robot, which
         is found in C{gridMap.robotRadius}.
         """

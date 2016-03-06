@@ -16,7 +16,7 @@ class GridDynamics(sm.SM):
 
     def __init__(self, theMap, rotationCost = None):
         """
-        @param theMap: instance of {\tt gridMap.GridMap}
+        :param theMap: instance of {\tt gridMap.GridMap}
         """
         self.theMap = theMap
         """instance of C{gridMap.GridMap} representing locations of
@@ -34,10 +34,10 @@ class GridDynamics(sm.SM):
 
     def getNextValues(self, state, inp):
         """
-        @param state: tuple of indices C{(ix, iy)} representing
+        :param state: tuple of indices C{(ix, iy)} representing
         robot's location in grid map
-        @param inp: an action, which is one of the legal inputs
-        @returns: C{(nextState, cost)}
+        :param inp: an action, which is one of the legal inputs
+        :returns: C{(nextState, cost)}
         """
         (ix, iy, angle) = state
         (dx, dy) = inp

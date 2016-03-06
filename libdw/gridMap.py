@@ -20,13 +20,13 @@ class GridMap:
         provide, to get the initial values.  Makes a window and draws
         the initial world state in it.
         
-        @param xMin: least real x coordinate
-        @param xMax: greatest real x coordinate
-        @param yMin: least real y coordinate
-        @param yMax: greatest real y coordinate
-        @param gridSquareSize: size, in world coordinates, of a grid
+        :param xMin: least real x coordinate
+        :param xMax: greatest real x coordinate
+        :param yMin: least real y coordinate
+        :param yMax: greatest real y coordinate
+        :param gridSquareSize: size, in world coordinates, of a grid
         square
-        @param windowWidth: size, in pixels, to make the window for
+        :param windowWidth: size, in pixels, to make the window for
         drawing this map  
         """
         self.xMin = xMin
@@ -78,8 +78,8 @@ class GridMap:
 
     def xToIndex(self, x):
         """
-        @param x: real world x coordinate
-        @return: x grid index it maps into
+        :param x: real world x coordinate
+        :return: x grid index it maps into
         """
         shiftedX = x - self.xStep/2.0
         return util.clip(int(round((shiftedX-self.xMin)/self.xStep)),
@@ -87,8 +87,8 @@ class GridMap:
     
     def yToIndex(self, y):
         """
-        @param y: real world y coordinate
-        @return: y grid index it maps into
+        :param y: real world y coordinate
+        :return: y grid index it maps into
         """
         shiftedY = y - self.yStep/2.0
         return util.clip(int(round((shiftedY-self.yMin)/self.yStep)),
@@ -96,37 +96,37 @@ class GridMap:
 
     def indexToX(self, ix):
         """
-        @param ix: grid index in the x dimension
-        @return: the real x coordinate of the center of that grid cell
+        :param ix: grid index in the x dimension
+        :return: the real x coordinate of the center of that grid cell
         """
         return self.xMin + float(ix)*self.xStep + self.xStep/2.0
 
     def indexToY(self, iy):
         """
-        @param iy: grid index in the y dimension
-        @return: the real y coordinate of the center of that grid cell
+        :param iy: grid index in the y dimension
+        :return: the real y coordinate of the center of that grid cell
         """
         return self.yMin + float(iy)*self.yStep + self.yStep/2.0
 
     def pointToIndices(self, point):
         """
-        @param point: real world point coordinates (instance of C{Point})
-        @return: pair of (x, y) grid indices it maps into
+        :param point: real world point coordinates (instance of C{Point})
+        :return: pair of (x, y) grid indices it maps into
         """
         return (self.xToIndex(point.x),self.yToIndex(point.y))
 
     def indicesToPoint(self, (ix,iy)):
         """
-        @param ix: x index of grid cell
-        @param iy: y index of grid cell
-        @return: c{Point} in real world coordinates of center of cell
+        :param ix: x index of grid cell
+        :param iy: y index of grid cell
+        :return: c{Point} in real world coordinates of center of cell
         """
         return util.Point(self.indexToX(ix), self.indexToY(iy))
 
 
     def boxDim(self):
         """
-        @returns: size of a grid cell in the drawing window in pixels
+        :returns: size of a grid cell in the drawing window in pixels
         """
         pixelMargin = 10
         return int((self.window.windowWidth / float(self.xN)) - pixelMargin)
@@ -144,8 +144,8 @@ class GridMap:
 
     def drawNewSquare(self, indices, color = None):
         """
-        @param indices: C{(ix, iy)} indices of grid cell
-        @param color: Python color to draw the square;  if C{None}
+        :param indices: C{(ix, iy)} indices of grid cell
+        :param color: Python color to draw the square;  if ``None``
         uses the C{self.squareColor} method to determine a color.
         Draws a box at the specified point, on top of whatever is there
         """
@@ -159,8 +159,8 @@ class GridMap:
     def drawSquare(self, indices, color = None):
         """
         Recolors the existing square
-        @param indices: C{(ix, iy)} indices of grid cell
-        @param color: Python color to draw the square;  if C{None}
+        :param indices: C{(ix, iy)} indices of grid cell
+        :param color: Python color to draw the square;  if ``None``
         uses the C{self.squareColor} method to determine a color.
         """
         if color == None:
@@ -173,7 +173,7 @@ class GridMap:
         """
         Draws list of cells;  first one is purple, last is yellow,
         rest are blue
-        @param path: list of pairs of C{(ix, iy)} grid indices
+        :param path: list of pairs of C{(ix, iy)} grid indices
         """
         self.drawSquare(path[0], 'purple')
         for p in path[1:-1]:
@@ -184,7 +184,7 @@ class GridMap:
         """
         Draws list of cells using the underlying grid color scheme,
         effectively 'undrawing' a path.
-        @param path: list of pairs of C{(ix, iy)} grid indices
+        :param path: list of pairs of C{(ix, iy)} grid indices
         """
         for p in path:
             self.drawSquare(p)

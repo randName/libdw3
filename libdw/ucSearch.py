@@ -24,14 +24,14 @@ class SearchNode:
             self.cost = actionCost
         
     def path(self):
-        """@returns: list of C{(action, state)} pairs from root to this node"""
+        """:returns: list of C{(action, state)} pairs from root to this node"""
         if self.parent == None:
             return [(self.action, self.state)]
         else:
             return self.parent.path() + [(self.action, self.state)]
 
     def inPath(self, s):
-        """@returns: C{True} if state C{s} is in the path from here to
+        """:returns: C{True} if state C{s} is in the path from here to
         the root"""
         if s == self.state:
             return True
@@ -76,14 +76,14 @@ class PQ:
 def search(initialState, goalTest, actions, successor,
            heuristic = lambda s: 0, maxNodes = 10000):
     """
-    @param initialState: root of the search
-    @param goalTest: function from state to Boolean
-    @param actions: a list of possible actions
-    @param successor: function from state and action to next state and cost
-    @param heuristic: function from state to estimated cost to reach a goal;
+    :param initialState: root of the search
+    :param goalTest: function from state to Boolean
+    :param actions: a list of possible actions
+    :param successor: function from state and action to next state and cost
+    :param heuristic: function from state to estimated cost to reach a goal;
         defaults to a heuristic of 0, making this uniform cost search
-    @param maxNodes: kill the search after it expands this many nodes
-    @returns: path from initial state to a goal state as a list of
+    :param maxNodes: kill the search after it expands this many nodes
+    :returns: path from initial state to a goal state as a list of
            (action, state) tuples
     """
     startNode = SearchNode(None, initialState, None, 0)
@@ -117,23 +117,23 @@ def search(initialState, goalTest, actions, successor,
 def smSearch(smToSearch, initialState = None, goalTest = None,
                heuristic = lambda x: 0, maxNodes = 10000):
    """
-   @param smToSearch: instance of C{sm.SM} defining a search domain;
+   :param smToSearch: instance of C{sm.SM} defining a search domain;
              C{getNextValues} is used to determine the successor of a
              state given an action; the output field of getNextValues is
              interpreted as a cost.
-   @param initialState: initial state for the search;  if not
+   :param initialState: initial state for the search;  if not
              provided, will use C{smToSearch.startState}
-   @param goalTest: function that takes a state as an argument and
+   :param goalTest: function that takes a state as an argument and
              returns C{True} if it is a goal state, and C{False} otherwise
-    @param heuristic: function from state to estimated cost to reach a goal;
+    :param heuristic: function from state to estimated cost to reach a goal;
         defaults to a heuristic of 0, making this uniform cost search
-   @param maxNodes: maximum number of nodes to be searched;  prevents
+   :param maxNodes: maximum number of nodes to be searched;  prevents
              runaway searches
-   @returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
+   :returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
     where the a's  are legal actions of c{smToSearch} and s's are
     states of that  machine.  C{s0} is the start state;  the last
     state is a state that satisfies the goal test.  If the
-    goal is unreachable (within the search limit), it returns C{None}. 
+    goal is unreachable (within the search limit), it returns ``None``. 
    """
    if initialState == None:
        initialState = smToSearch.getStartState()

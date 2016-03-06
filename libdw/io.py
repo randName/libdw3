@@ -8,7 +8,7 @@ class FakeSensorInput:
     """
     def __init__(self, sonars, odometry, analogInputs = [0.0]*8):
         """
-        @param cheat: If C{True}, then get odometry readings in
+        :param cheat: If C{True}, then get odometry readings in
         absolute coordinate frame of simulated world.  Otherwise,
         odometry frame is defined by robot's initial pose when powered on
         or simulated world is reset.  Should never be set to C{True} on
@@ -33,10 +33,10 @@ class Action:
     def __init__(self, fvel = 0.0, rvel = 0.0, 
                  voltage = referenceVoltage):
         """
-        @param fvel: signed number indicating forward velocity in m/s
-        @param rvel: signed number indicating rotational velocity in
+        :param fvel: signed number indicating forward velocity in m/s
+        :param rvel: signed number indicating rotational velocity in
         rad/sec;  positive is left, negative is right
-        @param voltage: voltage to send to analog input port of
+        :param voltage: voltage to send to analog input port of
         control board;  should be between 0 and 10v ??
         """
         self.fvel = fvel

@@ -17,8 +17,8 @@ class SystemFunction:
 #!
     def __init__(self, numeratorPoly, denominatorPoly):
         """
-        @param numeratorPoly: C{Polynomial}
-        @param denominatorPoly: C{Polynomial}
+        :param numeratorPoly: C{Polynomial}
+        :param denominatorPoly: C{Polynomial}
         """
         self.numerator = numeratorPoly
         """Polynomial in R representing the numerator"""
@@ -27,7 +27,7 @@ class SystemFunction:
 
     def poles(self):
         """
-        @returns: a list of the poles of the system
+        :returns: a list of the poles of the system
         """
         # The poles of a system are the roots of the denominator
         # polynomial in z, which is 1/R.  To get that polynomial,
@@ -50,19 +50,19 @@ class SystemFunction:
 
     def poleMagnitudes(self):
         """
-        @returns: a list of the magnitudes of the poles of the system
+        :returns: a list of the magnitudes of the poles of the system
         """
         return [abs(r) for r in self.poles()]
 
     def dominantPole(self):
         """
-        @returns: the pole with the largest magnitude
+        :returns: the pole with the largest magnitude
         """
         return util.argmax(self.poles(), abs)
 
     def differenceEquation(self):
         """
-        @returns: a C{DifferenceEquation} representation of this same system
+        :returns: a C{DifferenceEquation} representation of this same system
         """
         # Orders of the output and input parts
         k = self.denominator.order
@@ -103,9 +103,9 @@ class SystemFunction:
 def Cascade(sf1, sf2):
 #!    pass
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the cascade of C{sf1} and C{sf2}
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the cascade of C{sf1} and C{sf2}
     """
     return SystemFunction(sf1.numerator * sf2.numerator,
                           sf1.denominator * sf2.denominator)
@@ -113,9 +113,9 @@ def Cascade(sf1, sf2):
 #!
 def FeedforwardAdd(sf1, sf2):
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the sum of C{sf1} and
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the sum of C{sf1} and
     C{sf2}; this models the situation when the two component systems
     have the same input and the output of the whole system is the sum
     of the outputs of the components.
@@ -125,9 +125,9 @@ def FeedforwardAdd(sf1, sf2):
                           sf1.denominator * sf2.denominator)
 def FeedforwardSubtract(sf1, sf2):
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the difference of C{sf1} and
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the difference of C{sf1} and
     C{sf2}; this models the situation when the two component systems
     have the same input and the output of the whole system is the
     output of the first component minus the output of the second component.
@@ -162,9 +162,9 @@ def FeedforwardSubtract(sf1, sf2):
 def FeedbackSubtract(sf1, sf2=None):
 #!    pass
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the result of feeding the
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the result of feeding the
     output of C{sf1} back, with (optionally)
     C{sf2} on the feedback path, subtracting it from the input, and
     feeding the resulting signal into C{sf1}.  This situation can be
@@ -180,9 +180,9 @@ def FeedbackSubtract(sf1, sf2=None):
 #!
 def FeedbackAdd(sf1, sf2=None):
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the result of feeding the
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the result of feeding the
     output of C{sf1} back, with (optionally)
     C{sf2} on the feedback path, adding it to the input, and
     feeding the resulting signal into C{sf1}.
@@ -196,9 +196,9 @@ def FeedbackAdd(sf1, sf2=None):
 
 def Sum(sf1, sf2):
     """
-    @param sf1: C{SystemFunction}
-    @param sf2: C{SystemFunction}
-    @returns: C{SystemFunction} representing the system that sums the outputs of the two systems
+    :param sf1: C{SystemFunction}
+    :param sf2: C{SystemFunction}
+    :returns: C{SystemFunction} representing the system that sums the outputs of the two systems
     """
     (n1, d1) = (sf1.numerator, sf1.denominator)
     (n2, d2) = (sf2.numerator, sf2.denominator)
@@ -210,15 +210,15 @@ def Sum(sf1, sf2):
 
 def Gain(k):
     """
-    @param k: gain parameter
-    @returns: C{SystemFunction} representing a system that multiplies
+    :param k: gain parameter
+    :returns: C{SystemFunction} representing a system that multiplies
     the input signal by C{k}.
     """
     return SystemFunction(poly.Polynomial([k]),poly.Polynomial([1]))
 
 def R():
     """
-    @returns: C{SystemFunction} representing a system that delays
+    :returns: C{SystemFunction} representing a system that delays
     the input signal by one step.
     """
     return SystemFunction(poly.Polynomial([1, 0]),poly.Polynomial([1]))
@@ -245,7 +245,7 @@ class DifferenceEquation:
 
     def systemFunction(self):
         """
-        @returns: A C{SystemFunction} equivalent to this difference
+        :returns: A C{SystemFunction} equivalent to this difference
         equation
         """
         return SystemFunction(
@@ -255,15 +255,15 @@ class DifferenceEquation:
 
     def stateMachine(self, previousInputs = None, previousOutputs = None):
         """
-        @param previousInputs: list of historical inputs running from
+        :param previousInputs: list of historical inputs running from
         M{x[-1]} (at the beginning of the list) to M{x[-j]} at the end of
         the list, where M{j} is C{len(self.dCoeffs)-1}.  Defaults to
         the appropriate number of zeros.
-        @param previousOutputs: list of historical outputs running
+        :param previousOutputs: list of historical outputs running
         from M{y[-1]} (at the beginning of the list) to M{y[-k]} (at the end
         of the list), where M{k} is C{len(self.cCoeffs)}.  Defaults to
         the appropriate number of zeros.
-        @returns: A state machine that uses this difference equation
+        :returns: A state machine that uses this difference equation
         to transduce the sequence of
         inputs X to the sequences of outputs Y, starting from a state
         determined by C{previousInputs} and C{previousOutputs}
@@ -289,8 +289,8 @@ class DifferenceEquation:
 
 def periodOfPole(p):
     """
-    @param p: int, float, or complex number
-    @returns: period = 2 pi / phase of pole  or None (if phase is 0)
+    :param p: int, float, or complex number
+    :returns: period = 2 pi / phase of pole  or None (if phase is 0)
     """
     (r, phase) = complexPolar(p)
     if phase == 0:
@@ -301,8 +301,8 @@ def periodOfPole(p):
 
 def complexPolar(p):
     """
-    @param p: int, float, or complex number
-    @returns: polar representation as a pair of r, theta
+    :param p: int, float, or complex number
+    :returns: polar representation as a pair of r, theta
     """
     if isinstance(p, complex):
         return (abs(p), math.atan2(p.imag, p.real))

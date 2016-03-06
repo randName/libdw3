@@ -26,8 +26,8 @@ class DynamicMoveToPoint(sm.SM):
 
     def __init__(self, maxRVel = 0.5, maxFVel = 0.5):
         """
-        @param maxRVel: maximum rotational velocity
-        @param maxFVel: maximum forward velocity
+        :param maxRVel: maximum rotational velocity
+        :param maxFVel: maximum forward velocity
         """
         self.maxRVel = maxRVel
         self.maxFVel = maxFVel

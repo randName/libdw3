@@ -43,8 +43,8 @@ class PreProcess(sm.SM):
     def __init__(self, numObservations, stateWidth):
 #!        pass
         """
-	@param numObservations: number of discrete observations
-        @param stateWidth: width, in meters, of a discrete state
+	:param numObservations: number of discrete observations
+        :param stateWidth: width, in meters, of a discrete state
 	"""
         self.startState = (None, None)
         self.numObservations = numObservations
@@ -82,15 +82,15 @@ def makeRobotNavModel(ideal, xMin, xMax, numStates, numObservations):
     Create a model of a robot navigating in a 1 dimensional world with
     a single sonar.
 
-    @param ideal: list of ideal sonar readings
-    @param xMin: minimum x coordinate for center of robot
-    @param xMax: maximum x coordinate for center of robot
-    @param numStates: number of discrete states into which to divide
+    :param ideal: list of ideal sonar readings
+    :param xMin: minimum x coordinate for center of robot
+    :param xMax: maximum x coordinate for center of robot
+    :param numStates: number of discrete states into which to divide
     the range of x coordinates
-    @param numObservations: number of discrete observations into which to
+    :param numObservations: number of discrete observations into which to
     divide the range of good sonar observations, between 0 and C{goodSonarRange}
 
-    @returns: an instance of {\tt ssm.StochasticSM} that describes the
+    :returns: an instance of {\tt ssm.StochasticSM} that describes the
     dynamics of the world
     """
     # make initial distribution over states
@@ -167,16 +167,16 @@ def makeLineLocalizer(numObservations, numStates, ideal, xMin, xMax, robotY):
     Create behavior controlling robot to move in a line and to
                       localize itself in one dimension
 
-    @param numObservations: number of discrete observations into which to
+    :param numObservations: number of discrete observations into which to
     divide the range of good sonar observations, between 0 and C{goodSonarRange}
-    @param numStates: number of discrete states into which to divide
+    :param numStates: number of discrete states into which to divide
     the range of x coordinates
-    @param ideal: list of ideal sonar readings
-    @param xMin: minimum x coordinate for center of robot
-    @param xMax: maximum x coordinate for center of robot
-    @param robotY: constant y coordinate for center of robot
+    :param ideal: list of ideal sonar readings
+    :param xMin: minimum x coordinate for center of robot
+    :param xMax: maximum x coordinate for center of robot
+    :param robotY: constant y coordinate for center of robot
 
-    @returns: an instance of {\tt sm.SM} that implements the behavior
+    :returns: an instance of {\tt sm.SM} that implements the behavior
     """
 
     # Size of a state in meters
@@ -207,12 +207,12 @@ def makeLineLocalizer(numObservations, numStates, ideal, xMin, xMax, robotY):
 
 def makeMetricMachine(xMin, xMax, y, numStates):
     """
-    @param xMin: minimum x coordinate for center of robot
-    @param xMax: maximum x coordinate for center of robot
-    @param y: constant y coordinate for center of robot
-    @param numStates: number of discrete states into which to divide
+    :param xMin: minimum x coordinate for center of robot
+    :param xMax: maximum x coordinate for center of robot
+    :param y: constant y coordinate for center of robot
+    :param numStates: number of discrete states into which to divide
     the range of x coordinates
-    @returns: a state machine that takes two inputs: C{(sensorInput,
+    :returns: a state machine that takes two inputs: C{(sensorInput,
     belief)}, where C{sensorInput} is the true sensor input (we can
     trust the pose in simulation to be the actual truth) and C{belief}
     is a distribution over possible discrete robot locations,

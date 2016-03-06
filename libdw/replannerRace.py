@@ -21,7 +21,7 @@ class ReplannerWithDynamicMap(sm.SM):
     """
     def __init__(self, goalPoint):
         """
-        @param goalPoint: fixed goal that the planner keeps trying to
+        :param goalPoint: fixed goal that the planner keeps trying to
         reach
         """
         self.goalPoint = goalPoint
@@ -81,7 +81,7 @@ class ReplannerWithDynamicMap(sm.SM):
 
 def timeToReplan(plan, currentIndices, map, goalIndices):
     """
-    Replan if the current plan is C{None}, if the plan is invalid in
+    Replan if the current plan is ``None``, if the plan is invalid in
     the map (because it is blocked), or if the plan is empty and we
     are not at the goal (which implies that the last time we tried to
     plan, we failed).

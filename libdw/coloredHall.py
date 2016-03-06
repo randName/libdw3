@@ -21,11 +21,11 @@ Possible colors for rooms in our hallway
 
 def makeObservationModel(hallwayColors, obsNoise):
     """
-    @param hallwayColors: list of colors, one for each room in the
+    :param hallwayColors: list of colors, one for each room in the
     hallway, from left to right
-    @param obsNoise: conditional distribution specifying the
+    :param obsNoise: conditional distribution specifying the
     probability of observing a color given the actual color of the room
-    @returns: conditional distribution specifying probability of
+    :returns: conditional distribution specifying probability of
     observing a color given the robot's location
 
     Remember that a conditional distribution P(A | B) is represented
@@ -35,8 +35,8 @@ def makeObservationModel(hallwayColors, obsNoise):
 
 def perfectObsNoiseModel(actualColor):
     """
-    @param actualColor: actual color in a location
-    @returns: C{DDist} over observed colors when in a room that has
+    :param actualColor: actual color in a location
+    :returns: C{DDist} over observed colors when in a room that has
     C{actualColor}.  In this case, we observe the actual color with
     probability 1.  
     """
@@ -44,8 +44,8 @@ def perfectObsNoiseModel(actualColor):
 
 def noisyObsNoiseModel(actualColor):
     """
-    @param actualColor: actual color in a location
-    @returns: C{DDist} over observed colors when in a room that has
+    :param actualColor: actual color in a location
+    :returns: C{DDist} over observed colors when in a room that has
     C{actualColor}.  In this case, we observe the actual color with
     probability 0.8, and the remaining 0.2 probability is divided
     uniformly over the other possible colors in this world.
@@ -60,13 +60,13 @@ def noisyObsNoiseModel(actualColor):
 
 def makeTransitionModel(dynamics, noiseDist, hallwayLength):
     """
-    @param dynamics: function that takes the robot's current location,
+    :param dynamics: function that takes the robot's current location,
     action, and hallwaylength, and returns its nominal new location
-    @param noiseDist: P(actualResultingLocation | nominalResultingLoc)
+    :param noiseDist: P(actualResultingLocation | nominalResultingLoc)
     represented as a function from ideal location to the actual
     location the robot will end up in
-    @param hallwayLength: number of rooms in the hallway
-    @returns: P(actualResultingLoc | previousLoc, action) represented
+    :param hallwayLength: number of rooms in the hallway
+    :returns: P(actualResultingLoc | previousLoc, action) represented
     as a function that takes an action and returns a function that
     takes a previous location and returns a distribution over actual
     resulting locations.
@@ -76,21 +76,21 @@ def makeTransitionModel(dynamics, noiseDist, hallwayLength):
 
 def standardDynamics(loc, act, hallwayLength):
     """
-    @param loc: current loc (integer index) of the robot
-    @param act: a positive or negative integer (or 0) indicating the
+    :param loc: current loc (integer index) of the robot
+    :param act: a positive or negative integer (or 0) indicating the
     nominal number of squares moved
-    @param hallwayLength: number of cells in the hallway
-    @returns: new loc of the robot assuming perfect execution.  If the action
+    :param hallwayLength: number of cells in the hallway
+    :returns: new loc of the robot assuming perfect execution.  If the action
     would take it out of bounds, the robot stays where it is.
     """
     return util.clip(loc + act, 0, hallwayLength-1)
 
 def ringDynamics(loc, act, hallwayLength):
     """
-    @param loc: current loc (integer index) of the robot
-    @param act: positive or negative integer offset
-    @param hallwayLength: number of cells in the hallway
-    @returns: new loc of the robot, assuming perfect execution where
+    :param loc: current loc (integer index) of the robot
+    :param act: positive or negative integer offset
+    :param hallwayLength: number of cells in the hallway
+    :returns: new loc of the robot, assuming perfect execution where
     the hallway is actually a ring (so that location 0 is next to
     location C{hallwayLength -1}).
     """
@@ -98,10 +98,10 @@ def ringDynamics(loc, act, hallwayLength):
 
 def perfectTransNoiseModel(nominalLoc, hallwayLength):
     """
-    @param nominalLoc: location that the robot would have ended up
+    :param nominalLoc: location that the robot would have ended up
     given perfect dynamics
-    @param hallwayLength: length of the hallway
-    @returns: distribution over resulting locations, modeling noisy
+    :param hallwayLength: length of the hallway
+    :returns: distribution over resulting locations, modeling noisy
     execution of commands;  in this case, the robot goes to the
     nominal location with probability 1.0
     """
@@ -109,10 +109,10 @@ def perfectTransNoiseModel(nominalLoc, hallwayLength):
 
 def noisyTransNoiseModel(nominalLoc, hallwayLength):
     """
-    @param nominalLoc: location that the robot would have ended up
+    :param nominalLoc: location that the robot would have ended up
     given perfect dynamics
-    @param hallwayLength: length of the hallway
-    @returns: distribution over resulting locations, modeling noisy
+    :param hallwayLength: length of the hallway
+    :returns: distribution over resulting locations, modeling noisy
     execution of commands;  in this case, the robot goes to the
     nominal location with probability 0.8, goes one step too far left with
     probability 0.1, and goes one step too far right with probability 0.1.
@@ -129,10 +129,10 @@ def noisyTransNoiseModel(nominalLoc, hallwayLength):
 
 def leftSlipTransNoiseModel(nominalLoc, hallwayLength):
     """
-    @param nominalLoc: location that the robot would have ended up
+    :param nominalLoc: location that the robot would have ended up
     given perfect dynamics
-    @param hallwayLength: length of the hallway
-    @returns: distribution over resulting locations, modeling noisy
+    :param hallwayLength: length of the hallway
+    :returns: distribution over resulting locations, modeling noisy
     execution of commands;  in this case, the robot goes to the
     nominal location with probability 0.9, and goes one step too far
     left with probability 0.1.
@@ -178,8 +178,8 @@ class TextInputSM(sm.SM):
 
 def wrapTextUI(m):
     """
-    @param m: An instance of C{sm.SM}
-    @returns: A composite machine that prompts the user for input to, and
+    :param m: An instance of C{sm.SM}
+    :returns: A composite machine that prompts the user for input to, and
     prints the output of C{m} on each step.
     """
     return sm.Cascade(sm.Cascade(TextInputSM(),
@@ -189,15 +189,15 @@ def wrapTextUI(m):
 def wrapWindowUI(m, worldColors, legalInputs, windowName = 'Belief',
                  initBelief = None):
     """
-    @param m: A machine created by applying
+    :param m: A machine created by applying
     C{se.makeStateEstimationSimulation} to a hallway world, which
     take movement commands as input and generates as output structures
     of the form C{(b, (o, a))}, where C{b} is a belief state, C{a} is
     the action command, and C{o} is the observable output generated by
     the world.
-    @param worldColors: A list of the colors of the rooms in the
+    :param worldColors: A list of the colors of the rooms in the
     hallway, from left to right.
-    @returns: A composite machine that prompts the user for input to, and
+    :returns: A composite machine that prompts the user for input to, and
     graphically displays the output of C{m} on each step.
     """
     def drawWorld(size):
@@ -259,13 +259,13 @@ def makeSESwithGUI(worldSM, realColors, legalInputs, initBelief = None,
     """
     Makes a colored hallway simulator and state estimator.  Text input
     for actions and graphical display of world and belief state.
-    @param worldSM: instance of C{ssm.StochasticSM} representing the
+    :param worldSM: instance of C{ssm.StochasticSM} representing the
     world
-    @param realColors: A list of the colors of the rooms in the
+    :param realColors: A list of the colors of the rooms in the
     hallway, from left to right.
-    @param legalInputs: A list of the possible action commands
-    @param verbose: if C{True} then print out belief state after each update
-    @param title: title of window being created
+    :param legalInputs: A list of the possible action commands
+    :param verbose: if C{True} then print out belief state after each update
+    :param title: title of window being created
     """
     return wrapWindowUI(se.makeStateEstimationSimulation(worldSM, verbose),
                         realColors, legalInputs, title, initBelief = initBelief)
@@ -274,17 +274,17 @@ def makeSim(hallwayColors, legalInputs, obsNoise, dynamics, transNoise,
             title = 'sim', initialDist = None):
     """
     Make an instance of the simulator with noisy motion and sensing models.
-    @param hallwayColors: A list of the colors of the rooms in the
+    :param hallwayColors: A list of the colors of the rooms in the
     hallway, from left to right.
-    @param legalInputs: A list of the possible action commands
-    @param obsNoise: conditional distribution specifying the
+    :param legalInputs: A list of the possible action commands
+    :param obsNoise: conditional distribution specifying the
     probability of observing a color given the actual color of the room
-    @param dynamics: function that takes the robot's current location,
+    :param dynamics: function that takes the robot's current location,
     action, and hallwaylength, and returns its nominal new location
-    @param transNoise: P(actualResultingLocation | nominalResultingLoc)
+    :param transNoise: P(actualResultingLocation | nominalResultingLoc)
     represented as a function from ideal location to the actual
     location the robot will end up in
-    @param title: String specifying title for simulator window
+    :param title: String specifying title for simulator window
     """
     n = len(hallwayColors)
     if not initialDist:

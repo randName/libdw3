@@ -28,8 +28,8 @@ class DynamicGridMap(gridMap.GridMap):
 
     def squareColor(self, indices):
         """
-        @param indices: C{(ix, iy)} indices of a grid cell
-        @returns: a color string indicating what color that cell
+        :param indices: C{(ix, iy)} indices of a grid cell
+        :returns: a color string indicating what color that cell
         should be drawn in.
         """
         if self.occupied(indices):

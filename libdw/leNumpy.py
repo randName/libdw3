@@ -87,21 +87,21 @@ class EquationSet:
 
     def addEquation(self, eqn):
         """
-        @param eqn: instance of C{Equation}
+        :param eqn: instance of C{Equation}
         Adds it to the set
         """
         self.equations.append(eqn)
 
     def addEquations(self, eqns):
         """
-        @param eqns: list of instances of C{Equation}
+        :param eqns: list of instances of C{Equation}
         Adds them to the set
         """
         self.equations += eqns
 
     def solve(self):
         """
-        @returns: an instance of C{Solution}
+        :returns: an instance of C{Solution}
         """
         # Get a unique assignment of names to indices
         n2i = NameToIndex()
@@ -142,7 +142,7 @@ class Solution:
 
     def translate(self, name):
         """
-        @returns: the value of variable C{name} in the solution
+        :returns: the value of variable C{name} in the solution
         """
         return self.values[self.n2i.lookup(name)]
 

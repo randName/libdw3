@@ -21,9 +21,9 @@ class RotateTSM (sm.SM):
 
     def __init__(self, headingDelta, maxVel = 0.5):
         """
-        @param headingDelta: Desired change in heading to be made
+        :param headingDelta: Desired change in heading to be made
         by this machine. Positive turns left, negative turns right.
-        @param maxVel: maximum rotational velocity
+        :param maxVel: maximum rotational velocity
         """
         self.headingDelta = headingDelta
         self.maxVel = maxVel
@@ -72,8 +72,8 @@ class ForwardTSM (sm.SM):
     # Have to be able to look up the desired distance to travel
     def __init__(self, delta, maxVel = 0.5):
         """
-        @param delta: Distance to travel forward
-        @param maxVel: Magnitude of maximum allowable velocity
+        :param delta: Distance to travel forward
+        :param maxVel: Magnitude of maximum allowable velocity
         """
         self.deltaDesired = delta
         self.maxVel = maxVel

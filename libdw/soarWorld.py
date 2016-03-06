@@ -12,7 +12,7 @@ class SoarWorld:
     """
     def __init__(self, path):
         """
-        @param path: String representing location of world file
+        :param path: String representing location of world file
         """
         self.walls = []
         """

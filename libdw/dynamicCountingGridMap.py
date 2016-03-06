@@ -9,7 +9,7 @@ class DynamicCountingGridMap(gridMap.GridMap):
     """
     def __init__(self, xMin, xMax, yMin, yMax, gridSquareSize):
         """
-        @param fixMe
+        :param fixMe
         """
         self.xMin = xMin
         """X coordinate of left edge"""
@@ -43,7 +43,7 @@ class DynamicCountingGridMap(gridMap.GridMap):
 
     def squareColor(self, indices):
         """
-        @param documentme
+        :param documentme
         """
         (xIndex, yIndex) = indices
         maxValue = 10

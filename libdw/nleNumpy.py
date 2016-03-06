@@ -139,7 +139,7 @@ class Solution:
 
     def translate(self, name):
         """
-        @returns: the value of variable C{name} in the solution
+        :returns: the value of variable C{name} in the solution
         """
         return self.values[self.n2i(name)]
 

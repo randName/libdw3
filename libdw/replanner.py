@@ -19,14 +19,14 @@ class Replanner(sm.SM):
     
     def __init__(self, goalPoint, worldPath, gridSquareSize, mapClass):
         """
-        @param goalPoint: instance of util.Point, representing the
+        :param goalPoint: instance of util.Point, representing the
         desired robot location in odometry coordinates.
-        @param worldPath: pathname of a file containing a soar world
+        :param worldPath: pathname of a file containing a soar world
         description, which will be used to construct the gridmap for
         planning
-        @param gridSquareSize: size of the grid squares in the map to
+        :param gridSquareSize: size of the grid squares in the map to
         be constructed
-        @param mapClass: a subclass of C{gridMap.GridMap};  it needs
+        :param mapClass: a subclass of C{gridMap.GridMap};  it needs
         to take a path and a grid square size as input in its
         initializer.
         """
@@ -59,21 +59,21 @@ def newPathAndSubgoal(worldMap, sensorInput, goalPoint, dynamicsModel, path,
     Whenever a new plan is made, it is drawn into the map.  Whenever a
     subgoal is achieved, it is removed from the path drawn in the map.
 
-    @param worldMap: instance of a subclass of C{gridMap.GridMap}
-    @param sensorInput: instance of C{io.SensorInput}, containing current
+    :param worldMap: instance of a subclass of C{gridMap.GridMap}
+    :param sensorInput: instance of C{io.SensorInput}, containing current
                       robot pose
-    @param goalPoint: instance of C{util.Point}, specifying goal
-    @param dynamicsModel: a state machine that specifies the
+    :param goalPoint: instance of C{util.Point}, specifying goal
+    :param dynamicsModel: a state machine that specifies the
                       transition dynamics for the robot in the grid map
-    @param path: the path (represented as a list of pairs of indices
+    :param path: the path (represented as a list of pairs of indices
                       in the map) that the robot is currently
-                      following.  Can be C{None} or C{[]}.                      
-    @param timeToReplan: a procedure that takes C{path}, the robot's
+                      following.  Can be ``None`` or C{[]}.                      
+    :param timeToReplan: a procedure that takes C{path}, the robot's
                       current indices in the grid, the map, and the
                       indices of the goal, and returns C{True} or
                       C{False} indicating whether a new plan needs to
                       be constructed.
-    @returns: a tuple C{(path, subgoal)}, where C{path} is a list of
+    :returns: a tuple C{(path, subgoal)}, where C{path} is a list of
                       pairs of indices indicating a path through the
                       grid, and C{subgoal} is an instance of
                       C{util.Point} indicating the point in odometry
@@ -115,7 +115,7 @@ def newPathAndSubgoal(worldMap, sensorInput, goalPoint, dynamicsModel, path,
 def timeToReplanStaticMap(plan, currentIndices, worldMap, goalIndices):
     """
     When the map is static, we just test for kidnapping.  Replan if
-    the current plan is C{None} or if the robot is not in a grid cell
+    the current plan is ``None`` or if the robot is not in a grid cell
     that is adjacent to the first one in the plan.
     """
     return plan == None or not adjacent(currentIndices, plan[0])
@@ -136,9 +136,9 @@ class ReplannerWithDynamicMap(sm.SM):
     """
     def __init__(self, goalPoint, useCostDynamics = False):
         """
-        @param goalPoint: fixed goal that the planner keeps trying to
+        :param goalPoint: fixed goal that the planner keeps trying to
         reach
-        @param useCostDynamics: if C{True}, use
+        :param useCostDynamics: if C{True}, use
         C{gridDynamics.GridCostDynamicsSM} (which penalizes motion
         through cells according to the likelihood that they are
         occupied), otherwise, use C{gridDynamics.GridDynamics} which
@@ -167,7 +167,7 @@ class ReplannerWithDynamicMap(sm.SM):
 
 def timeToReplanDynamicMap(plan, currentIndices, map, goalIndices):
     """
-    Replan if the current plan is C{None}, if the plan is invalid in
+    Replan if the current plan is ``None``, if the plan is invalid in
     the map (because it is blocked), or if the plan is empty and we
     are not at the goal (which implies that the last time we tried to
     plan, we failed).
@@ -177,7 +177,7 @@ def timeToReplanDynamicMap(plan, currentIndices, map, goalIndices):
 
 def timeToReplanDynamicMapAndGoal(plan, currentIndices, map, goalIndices):
     """
-    Replan if the current plan is C{None}, if the plan is invalid in
+    Replan if the current plan is ``None``, if the plan is invalid in
     the map (because it is blocked), if the plan is empty and we
     are not at the goal (which implies that the last time we tried to
     plan, we failed), or if the end of the plan is not the same as the
@@ -203,7 +203,7 @@ def planInvalidInMap(map, state):
 
 def timeToReplanDynamicMapWithKidnap(state, currentIndices, map, goalIndices):
     """
-    Replan if the current plan is C{None}, if the plan is invalid in
+    Replan if the current plan is ``None``, if the plan is invalid in
     the map (because it is blocked), or if the robot is not in a grid cell
     that is adjacent to the first one in the plan.
     """
@@ -226,7 +226,7 @@ class ReplannerWithDynamicMapAndGoal(sm.SM):
     """
     def __init__(self, useCostDynamics = False):
         """
-        @param useCostDynamics: if C{True}, use
+        :param useCostDynamics: if C{True}, use
         C{gridDynamics.GridCostDynamicsSM} (which penalizes motion
         through cells according to the likelihood that they are
         occupied), otherwise, use C{gridDynamics.GridDynamics} which

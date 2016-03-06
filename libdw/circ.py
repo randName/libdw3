@@ -11,15 +11,15 @@ import util
 class Circuit:
     def __init__(self, components):
         """
-        @param components: list of instances of C{Component} that make
+        :param components: list of instances of C{Component} that make
            up this circuit
         """
         self.components = components
 
     def solve(self, gnd):
         """
-        @param gnd: Name of the node to set to ground (string)
-        @returns: instance of C{le.Solution}, mapping node names to values
+        :param gnd: Name of the node to set to ground (string)
+        :returns: instance of C{le.Solution}, mapping node names to values
         """
         es = le.EquationSet()
         n2c = NodeToCurrents()
@@ -86,9 +86,9 @@ class NodeToCurrents:
     def addCurrent(self, current, node, sign):
 #!!
         """
-        @param current: name of a current variable (string)
-        @param node: name of a node (string)
-        @param sign: +1 or -1, indicating whether the current is
+        :param current: name of a current variable (string)
+        :param node: name of a node (string)
+        :param sign: +1 or -1, indicating whether the current is
         flowing into or out of the node
 
         Adds the new current, with approrpiate sign to C{node}.  
@@ -102,7 +102,7 @@ class NodeToCurrents:
     def addCurrents(self, currents):
 #!!
         """
-        @param currents: list of tuples C{(currentName, nodeName,
+        :param currents: list of tuples C{(currentName, nodeName,
         sign)}, with the same meaning as for C{addCurrent}.
         Add several currents at once.
         """
@@ -112,9 +112,9 @@ class NodeToCurrents:
     def getKCLEquations(self, gnd):
 #!!
         """
-        @param gnd: name of a node that will have its voltage assigned
+        :param gnd: name of a node that will have its voltage assigned
         to 0 (string)
-        @returns: a list of equations, one for each node.  For
+        :returns: a list of equations, one for each node.  For
         the ground node, it just asserts that its voltage is 0.  For
         the other nodes, the equation asserts that the sum of the
         currents going into the node minus the sum of currents going
@@ -151,9 +151,9 @@ class Component:
 class VSrc(Component):
     def __init__(self, v, n1, n2):
         """
-        @param v: voltage in Volts (number);  equal to voltage at C{n1} minus voltage at C{n2} 
-        @param n1: name of node at one end of the voltage source (string)
-        @param n2: name of node at the other end of the voltage source (string)
+        :param v: voltage in Volts (number);  equal to voltage at C{n1} minus voltage at C{n2} 
+        :param n1: name of node at one end of the voltage source (string)
+        :param n2: name of node at the other end of the voltage source (string)
         """
         self.current = util.gensym('i_'+n1+'->'+n2)
         """
@@ -174,9 +174,9 @@ class VSrc(Component):
 class ISrc(Component):
     def __init__(self, i, n1, n2):
         """
-        @param i: current, in Amperes (number), flowing from C{n1} to C{n2}
-        @param n1: name of node at one end of the current source (string)
-        @param n2: name of node at the other end of the current source (string)
+        :param i: current, in Amperes (number), flowing from C{n1} to C{n2}
+        :param n1: name of node at one end of the current source (string)
+        :param n2: name of node at the other end of the current source (string)
         """
         self.current = util.gensym('i_'+n1+'->'+n2)
         """
@@ -216,9 +216,9 @@ class Wire(Component):
 class Resistor(Component):
     def __init__(self, r, n1, n2):
         """
-        @param r: resistance in Ohms (number)
-        @param n1: name of node at one end of the resistor (string)
-        @param n2: name of node at the other end of the resistor (string)
+        :param r: resistance in Ohms (number)
+        :param n1: name of node at one end of the resistor (string)
+        :param n2: name of node at the other end of the resistor (string)
         """
         self.current = util.gensym('i_'+n1+'->'+n2)
         """
@@ -245,10 +245,10 @@ class OpAmp(Component):
 #!
     def __init__(self, nPlus, nMinus, nOut, K=10000):
         """
-        @param nPlus: name of positive input node (string)
-        @param nMinus: name of negative input node (string)
-        @param nOut: name of positive output node (string)
-        @param K: constant in op-amp model (number)
+        :param nPlus: name of positive input node (string)
+        :param nMinus: name of negative input node (string)
+        :param nOut: name of positive output node (string)
+        :param K: constant in op-amp model (number)
         """
         self.K = K
         self.nPlus = nPlus
@@ -280,10 +280,10 @@ class Thevenin(Component):
     """
     def __init__(self, v, r, n1, n2):
         """
-        @param v: voltage in Volts (number)
-        @param r: resistance in Ohms (number)
-        @param n1: name of node at one end of the resistor (string)
-        @param n2: name of node at the other end of the resistor (string)
+        :param v: voltage in Volts (number)
+        :param r: resistance in Ohms (number)
+        :param n1: name of node at one end of the resistor (string)
+        :param n2: name of node at the other end of the resistor (string)
         Makes a component that is, effectively, a resistor and a
         voltage source in series.
         """
