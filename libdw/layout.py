@@ -1465,9 +1465,10 @@ menuCResCanvas.bind('<Button-1>',cresButton)
 menuCResCanvas.bind('<Enter>',cresEnter)
 menuCResCanvas.bind('<Leave>',cresLeave)
 
-root.bind('<KeyPress>',keyPress)
-root.bind('<KeyRelease>',keyRelease)
-componentList = []
-root.title('CMax') # set initial window title
-root.mainloop()
+if __name__ == '__main__':
+    root.bind('<KeyPress>',keyPress)
+    root.bind('<KeyRelease>',keyRelease)
+    componentList = []
+    root.title('CMax') # set initial window title
+    root.mainloop()
 
