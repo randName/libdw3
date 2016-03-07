@@ -14,5 +14,6 @@ Contents:
    gettingstarted
    ebot_api_common
    ebot_api_all
-
+   libdw-index
+   soar-index
 
