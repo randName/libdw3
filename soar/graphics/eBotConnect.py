@@ -37,4 +37,5 @@ def okCallBack():
 B = Tkinter.Button(top, width=20, text="Ok", command=okCallBack)
 B.pack(side="bottom", pady=15)
 
-top.mainloop()
+if __name__ == '__main__':
+    top.mainloop()
