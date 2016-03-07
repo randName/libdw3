@@ -1,7 +1,7 @@
 All eBot API
 ============
 
-.. autoclass:: eBot.eBot
+.. autoclass:: eBot.eBot.eBot
     :members:
     :undoc-members:
 
