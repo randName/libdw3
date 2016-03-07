@@ -13,12 +13,15 @@ class SM:
     """
     Generic superclass representing state machines.  Don't instantiate
     this:  make a subclass with definitions for the following methods:
-      - C{getNextValues: (state_t, inp_t) -> (state_t+1, output_t)} or
-        C{getNextState: (state_t, inpt_t) -> state_t+1}
-      - C{startState:  state} or C{startState() -> state}
+
+        - ``getNextValues: (state_t, inp_t) -> (state_t+1, output_t)`` or
+          ``getNextState: (state_t, inpt_t) -> state_t+1``
+        - ``startState:  state`` or ``startState() -> state``
+
     optional:
-      - C{done: (state) -> boolean}  (defaults to always false)
-      - C{legalInputs: list(inp)}
+
+        - ``done: (state) -> boolean``  (defaults to always false)
+        - ``legalInputs: list(inp)``
 
     See State Machines chapter in 6.01 Readings for detailed explanation.
     """
@@ -38,7 +41,7 @@ class SM:
     def getNextValues(self, state, inp):
         """
         Default version of this method.  If a subclass only defines
-        C{getNextState}, then we assume that the output of the machine
+        ``getNextState``, then we assume that the output of the machine
         is the same as its next state.
         """
         nextState = self.getNextState(state, inp)
@@ -68,18 +71,19 @@ class SM:
         """
         Call before providing inp to a machine, or to reset it.
         Sets self.state and arranges things for tracing and debugging.
+
         :param traceTasks: list of trace tasks.  See documentation for
-              C{doTraceTasks} for details
-        :param verbose: If C{True}, print a description of each step
-              of the machine
-        :param compact: If C{True}, then if C{verbose = True}, print a
-              one-line description of the step;  if C{False}, print
-              out the recursive substructure of the state update at
-              each step
-        :param printInput: If C{True}, then if C{verbose = True},
-              print the whole input in each step, otherwise don't.
-              Useful to set to C{False} when the input is large and
-              you don't want to see it all.
+         ``doTraceTasks`` for details
+        :param verbose: If ``True``, print a description of each step
+         of the machine
+        :param compact: If ``True``, then if ``verbose = True``, print a
+         one-line description of the step;  if ``False``, print
+         out the recursive substructure of the state update at
+         each step
+        :param printInput: If ``True``, then if ``verbose = True``,
+         print the whole input in each step, otherwise don't.
+         Useful to set to ``False`` when the input is large and
+         you don't want to see it all.
         """
         self.state = self.getStartState()
         """ Instance variable set by start, and updated by step;
@@ -89,9 +93,9 @@ class SM:
         
     def step(self, inp):
         """
-        Execute one 'step' of the machine, by propagating C{inp} through
-        to get a result, then updating C{self.state}.
-        Error to call C{step} if C{done} is true.
+        Execute one 'step' of the machine, by propagating ``inp`` through
+        to get a result, then updating ``self.state``.
+        Error to call ``step`` if ``done`` is true.
         :param inp: next input to the machine
         """
         (s, o) = self.getNextValues(self.state, inp)
@@ -119,10 +123,10 @@ class SM:
 
 	For debugging, set the optional parameter check = True to (partially) 
 	check the representation invariance of the state machine before running 
-	it.  See the documentation for the C{check} method for more information
+	it.  See the documentation for the ``check`` method for more information
 	about what is tested.
 
-        See documentation for the C{start} method for description of
+        See documentation for the ``start`` method for description of
         the rest of the parameters.
         
         :param inps: list of inputs appropriate for this state machine
@@ -150,9 +154,9 @@ class SM:
                    compact = True, printInput = True, check = False):
         """
         For a machine that doesn't consume input (e.g., one made with
-        C{feedback}, for C{n} steps or until it terminates. 
+        ``feedback``, for ``n`` steps or until it terminates. 
 
-        See documentation for the C{start} method for description of
+        See documentation for the ``start`` method for description of
         the rest of the parameters.
         
         :param n: number of steps to run
@@ -167,7 +171,7 @@ class SM:
                    traceTasks = [],
                    compact = True, printInput = True):
         """
-        Like C{transduce}, but rather than getting inputs from a list
+        Like ``transduce``, but rather than getting inputs from a list
         of values, get them by calling a function with the input index
         as the argument. 
         """
@@ -209,10 +213,12 @@ class SM:
         """
         Actually execute the trace tasks.  A trace task is a list
         consisting of three components:
-          - C{name}: is the name of the machine to be traced
-          - C{mode}: is one of C{'input'}, C{'output'}, or C{'state'}
-          - C{fun}: is a function
-        To B{do} a trace task, we call the function C{fun} on the
+
+            - ``name``: is the name of the machine to be traced
+            - ``mode``: is one of ``'input'``, ``'output'``, or ``'state'``
+            - ``fun``: is a function
+
+        To **do** a trace task, we call the function ``fun`` on the
         specified attribute of the specified mahine.  In particular,
         we execute it right now if its machine name equals the name of
         this machine.
@@ -319,13 +325,13 @@ class SM:
 
 class Cascade (SM):
     """
-    Cascade composition of two state machines.  The output of C{sm1}
-    is the input to C{sm2}
+    Cascade composition of two state machines.  The output of ``sm1``
+    is the input to ``sm2``
     """
     def __init__(self, m1, m2, name = None):
         """
-        :param m1: C{SM}
-        :param m2: C{SM}
+        :param m1: ``SM``
+        :param m2: ``SM``
         """
         self.m1 = m1
         self.m2 = m2
@@ -407,8 +413,8 @@ class Parallel (SM):
 
 class Feedback (SM):
     """
-    Take the output of C{m} and feed it back to its input.  Resulting
-    machine has no input.  The output of C{m} B{must not} depend on
+    Take the output of ``m`` and feed it back to its input.  Resulting
+    machine has no input.  The output of ``m`` **must not** depend on
     its input without a delay.
     """
     def __init__(self, m, name = None):
@@ -446,16 +452,16 @@ class Feedback (SM):
 def coupledMachine(m1, m2):
     """
     Couple two machines together.
-    :param m1: C{SM}
-    :param m2: C{SM}
-    :returns: New machine with no input, in which the output of C{m1}
-    is the input to C{m2} and vice versa.
+    :param m1: ``SM``
+    :param m2: ``SM``
+    :returns: New machine with no input, in which the output of ``m1``
+    is the input to ``m2`` and vice versa.
     """
     return Feedback(Cascade(m1, m2))
 
 class Feedback2 (Feedback):
     """
-    Like previous C{Feedback}, but takes a machine with two inps and 
+    Like previous ``Feedback``, but takes a machine with two inps and 
     one output at initialization time.  Feeds the output back to the
     second inp.  Result is a machine with a single inp and single
     output.  
@@ -588,7 +594,7 @@ class FeedbackSubtract(SM):
 
 class Parallel2 (Parallel):
     """
-    Like C{Parallel}, but takes two inps.
+    Like ``Parallel``, but takes two inps.
     Output of the composite machine is the pair of outputs of the two
     individual machines.
     """
@@ -622,7 +628,7 @@ class Parallel2 (Parallel):
 
 class ParallelAdd (Parallel):
     """
-    Like C{Parallel}, but output is the sum of the outputs of the two
+    Like ``Parallel``, but output is the sum of the outputs of the two
     machines. 
     """
     def getNextValues(self, state, inp):
@@ -643,9 +649,9 @@ class If (SM):
     
     def __init__(self, condition, sm1, sm2, name = None):
         """
-        :param condition: C{Procedure} mapping C{inp} -> C{Boolean}
-        :param sm1: C{SM}
-        :param sm2: C{SM}
+        :param condition: ``Procedure`` mapping ``inp`` -> ``Boolean``
+        :param sm1: ``SM``
+        :param sm2: ``SM``
         """
         self.sm1 = sm1
         self.sm2 = sm2
@@ -703,14 +709,14 @@ class Switch (SM):
     Given a condition (function from inps to boolean) and two state
     machines, make a new machine.  The condition is evaluated on every
     step, and the selected machine is used to generate output and has
-    its state updated.  If the condition is true, C{sm1} is used, and
-    if it is false, C{sm2} is used.
+    its state updated.  If the condition is true, ``sm1`` is used, and
+    if it is false, ``sm2`` is used.
     """
     def __init__(self, condition, sm1, sm2, name = None):
         """
-        :param condition: C{Procedure} mapping C{inp} -> C{Boolean}
-        :param sm1: C{SM}
-        :param sm2: C{SM}
+        :param condition: ``Procedure`` mapping ``inp`` -> ``Boolean``
+        :param sm1: ``SM``
+        :param sm2: ``SM``
         """
         self.m1 = sm1
         self.m2 = sm2
@@ -755,7 +761,7 @@ class Switch (SM):
 
 class Mux (Switch):
     """
-    Like C{Switch}, but updates both machines no matter whether the
+    Like ``Switch``, but updates both machines no matter whether the
     condition is true or false.  Condition is only used to decide
     which output to generate.  If the condition is true, it generates
     the output from the first machine, otherwise, from the second.
@@ -783,7 +789,7 @@ class Sequence (SM):
     """
     def __init__(self, smList, name = None):
         """
-        :param smList: C{List} of terminating C{SM}
+        :param smList: ``List`` of terminating ``SM``
         """
         self.smList = smList
         if not (name is None or isinstance(name, str)) or not isinstance(smList, (tuple, list)):
@@ -840,7 +846,7 @@ class Repeat (SM):
     """
     def __init__(self, sm, n = None, name = None):
         """
-        :param sm: terminating C{SM}
+        :param sm: terminating ``SM``
         :param n: positive integer
         """
         self.sm = sm
@@ -886,13 +892,13 @@ class RepeatUntil (SM):
     """
     Given a terminating state machine and a condition on the input,
     generate a new one that will run the machine until the condition
-    becomes true.  However, the condition is B{only} evaluated when
+    becomes true.  However, the condition is **only** evaluated when
     the sub-machine terminates.
     """
     def __init__(self, condition, sm, name = None):
         """
-        :param condition: C{Procedure} mappin C{input} to C{Boolean}
-        :param sm: terminating C{SM}
+        :param condition: ``Procedure`` mappin ``input`` to ``Boolean``
+        :param sm: terminating ``SM``
         """
         self.sm = sm
         self.condition = condition
@@ -940,8 +946,8 @@ class Until (SM):
     """
     def __init__(self, condition, sm, name = None):
         """
-        :param condition: C{Procedure} mappin C{input} to C{Boolean}
-        :param sm: terminating C{SM}
+        :param condition: ``Procedure`` mappin ``input`` to ``Boolean``
+        :param sm: terminating ``SM``
         """
         self.sm = sm
         self.condition = condition
@@ -980,8 +986,8 @@ class Until (SM):
 
 def splitValue(v, n = 2):
     """
-    If C{v} is a list of C{n} elements, return it; if it is
-    'undefined', return a list of C{n} 'undefined' values; else
+    If ``v`` is a list of ``n`` elements, return it; if it is
+    'undefined', return a list of ``n`` 'undefined' values; else
     generate an error
     """
     if v == 'undefined':
@@ -1065,7 +1071,7 @@ class Wire(SM):
 class Select (SM):
     """
     Machine whose input is a structure list and whose output is the
-    C{k}th element of that list.
+    ``k`` th element of that list.
     """
     def __init__(self, k):
         """

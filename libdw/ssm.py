@@ -22,7 +22,7 @@ class StochasticSM(sm.SM):
         procedure that takes a state and returns a distribution
         over observations.
         :param startDistribution: distribution on states, represented
-        as a C{dist.DDist}
+        as a ``dist.DDist``
         :param beliefDisplayFun: optional function that is not used
         here, but that state estimator, for example, might call to
         display a belief state. Takes a belief state {dist.DDist} as input.
@@ -31,7 +31,7 @@ class StochasticSM(sm.SM):
         display a sensor likelihoods. Takes an observation as input."""
 
         self.startDistribution = startDistribution
-        """C{dist.DDist} over states."""
+        """``dist.DDist`` over states."""
 
         self.transitionDistribution = transitionDistribution  
         """A procedure that takes an action and returns a procedure,

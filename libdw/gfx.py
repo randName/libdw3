@@ -93,7 +93,7 @@ class RobotGraphics():
         :param x: function to call for x-axis of static plot 
         :param y: function to call for y-axis of static plot 
         :param connectPoints: Boolean, whether or not to draw lines
-        between the points.  Default is False.
+         between the points.  Default is False.
         """
         (xname, xfunc)= x
         (yname, yfunc)= y
@@ -120,7 +120,7 @@ class RobotGraphics():
         :param x: probe for x-axis of static plot
         :param y: probe for y-axis of static plot
         :param connectPoints: Boolean; whether or not to draw lines
-        between the points.  Default is False.
+         between the points.  Default is False.
         """
         (yname, ymachine, ymode, yvaluefun) = y
         (xname, xmachine, xmode, xvaluefun) = x

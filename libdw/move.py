@@ -8,10 +8,10 @@ import util
 class MoveToDynamicPoint(sm.SM):
     """
     Drive to a goal point in the frame defined by the odometry.  Goal
-    points are part of the input, in contrast to C{MoveToFixedPoint},
+    points are part of the input, in contrast to ``MoveToFixedPoint``,
     which takes a single goal point at initialization time.
 
-    Assume inputs are C{(util.Point, io.SensorInput)} pairs
+    Assume inputs are ``(util.Point, io.SensorInput)`` pairs
 
     This is really a pure function machine;  defining its own class,
     though, so we can easily modify the parameters.
@@ -70,8 +70,8 @@ def actionToPoint(goalPoint, robotPose, forwardGain, rotationGain,
 class MoveToFixedPose(sm.SM):
     """
     State machine representing robot behavior that drives to a
-    specified pose.  Inputs are instances of C{io.SensorInput};
-    outputs are instances of C{io.Action}.   Robot first rotates
+    specified pose.  Inputs are instances of ``io.SensorInput``;
+    outputs are instances of ``io.Action``.   Robot first rotates
     toward goal, then moves straight, then rotates to desired final
     angle. 
     """
@@ -90,7 +90,7 @@ class MoveToFixedPose(sm.SM):
   
     def __init__(self, goalPose, maxVel = maxVel):
         """
-        :param goalPose: instance of C{util.Pose} specifying goal for
+        :param goalPose: instance of ``util.Pose`` specifying goal for
         robot in odometry coordinates
         """
         self.goalPose = goalPose
@@ -109,8 +109,8 @@ class MoveToFixedPose(sm.SM):
 class MoveToFixedPoint(sm.SM):
     """
     State machine representing robot behavior that drives to a
-    specified point.  Inputs are instances of C{io.SensorInput};
-    outputs are instances of C{io.Action}.   Robot first rotates
+    specified point.  Inputs are instances of ``io.SensorInput``;
+    outputs are instances of ``io.Action``.   Robot first rotates
     toward goal, then moves straight.  It will correct its rotation if
     necessary.  
     """

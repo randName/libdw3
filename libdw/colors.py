@@ -79,7 +79,7 @@ def probToMapColor(p, hue = yellowHue):
     """
     :param p: probability value
     :returns: a  Python color that's good for mapmaking.  It's yellow
-    when p = 0.5, black when p = 1, white when p = 1.
+     when p = 0.5, black when p = 1, white when p = 1.
     """
     m = 0.51
     x = p - 0.5
@@ -105,7 +105,7 @@ def rootToPyColor(p, minV, maxV):
 def RGBToPyColor(colorVals):
     """
     :param colorVals: tuple (r, g, b) of values in (0, 1) representing
-    a color in rgb space
+     a color in rgb space
     :returns: a python color string
     """
     (r, g, b) = [floor(c*255.99) for c in colorVals]

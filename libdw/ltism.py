@@ -25,18 +25,18 @@ class LTISM (sm.SM):
 
         :param previousInputs: list of historical inputs running from
         M{x[-1]} (at the beginning of the list) to M{x[-j]} at the end of
-        the list, where M{j} is C{len(self.dCoeffs)-1}.  If omitted,
+        the list, where M{j} is ``len(self.dCoeffs)-1``.  If omitted,
         will default to a list of the appropriate number of zeroes,
         corresponding to the system being 'at rest'.
         :param previousOutputs: list of historical outputs running
         from M{y[-1]} (at the beginning of the list) to M{y[-k]} (at the end
-        of the list), where M{k} is C{len(self.cCoeffs)}.  If omitted,
+        of the list), where M{k} is ``len(self.cCoeffs)``.  If omitted,
         will default to a list of the appropriate number of zeroes,
         corresponding to the system being 'at rest'.
         :returns: A state machine that uses this difference equation
         to transduce the sequence of
         inputs X to the sequences of outputs Y, starting from a state
-        determined by C{previousInputs} and C{previousOutputs}
+        determined by ``previousInputs`` and ``previousOutputs``
         """
 
         j = len(dCoeffs) - 1

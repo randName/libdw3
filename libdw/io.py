@@ -8,10 +8,10 @@ class FakeSensorInput:
     """
     def __init__(self, sonars, odometry, analogInputs = [0.0]*8):
         """
-        :param cheat: If C{True}, then get odometry readings in
+        :param cheat: If ``True``, then get odometry readings in
         absolute coordinate frame of simulated world.  Otherwise,
         odometry frame is defined by robot's initial pose when powered on
-        or simulated world is reset.  Should never be set to C{True} on
+        or simulated world is reset.  Should never be set to ``True`` on
         the real robot.
         """
         self.sonars = sonars

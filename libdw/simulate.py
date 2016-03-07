@@ -475,7 +475,7 @@ class Feedback (sm.SM):
 
 class Feedback2 (Feedback):
     """
-    Like previous C{Feedback}, but takes a machine with two inps and 
+    Like previous ``Feedback``, but takes a machine with two inps and 
     one output at initialization time.  Feeds the output back to the
     second inp.  Result is a machine with a single inp and single
     output.  

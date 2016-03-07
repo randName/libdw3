@@ -9,10 +9,10 @@ class DynamicMoveToPoint(sm.SM):
     """
     Drive to a goal point in the frame defined by the odometry.  Goal
     points are part of the input, in contrast to
-    C{moveToPoint.MoveToPoint}, which takes a single goal pose at
+    ``moveToPoint.MoveToPoint``, which takes a single goal pose at
     initialization time. 
 
-    Assume inputs are C{(util.Point, io.SensorInput)} pairs
+    Assume inputs are ``(util.Point, io.SensorInput)`` pairs
     """
 
 #!    pass
@@ -22,7 +22,7 @@ class DynamicMoveToPoint(sm.SM):
     distEps = 0.05
     
     startState = False
-    """State is C{True} if we have reached the goal and C{False} otherwise"""
+    """State is ``True`` if we have reached the goal and ``False`` otherwise"""
 
     def __init__(self, maxRVel = 0.5, maxFVel = 0.5):
         """

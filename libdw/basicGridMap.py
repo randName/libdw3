@@ -1,5 +1,5 @@
 """
-Simple grid map with values equal to C{True} and C{False}.
+Simple grid map with values equal to ``True`` and ``False``.
 Initialized by reading in a soar world file.
 """
 
@@ -11,7 +11,7 @@ import util
 
 class BasicGridMap(gridMap.GridMap):
     """
-    Implements the C{GridMap} interface.
+    Implements the ``GridMap`` interface.
     """
     def __init__(self, worldPath, gridSquareSize, windowWidth = 400):
         """
@@ -32,8 +32,8 @@ class BasicGridMap(gridMap.GridMap):
 
     def makeStartingGrid(self):
         """
-        Called by C{gridMap.GridMap.__init__}.  Returns the initial
-        value for the grid, which will be stored in C{self.Grid}.
+        Called by ``gridMap.GridMap.__init__``.  Returns the initial
+        value for the grid, which will be stored in ``self.Grid``.
         """
         g = util.make2DArray(self.xN, self.yN, False)
 
@@ -50,17 +50,17 @@ class BasicGridMap(gridMap.GridMap):
 
     def robotCanOccupy(self, (xIndex, yIndex)):
         """
-        Returns C{True} if the robot's center can be at any location
+        Returns ``True`` if the robot's center can be at any location
         within this cell and not cause a collision.
         """
         return not self.grid[xIndex][yIndex]
 
     def indicesToBoxSegs(self, indices):
         """
-        :param indices: pair of C{(ix, iy)} indices of a grid cell
+        :param indices: pair of ``(ix, iy)`` indices of a grid cell
         :returns: list of four line segments that constitute the
-        boundary of the cell, grown by the radius of the robot, which
-        is found in C{gridMap.robotRadius}.
+         boundary of the cell, grown by the radius of the robot, which
+         is found in ``gridMap.robotRadius``.
         """
         center = self.indicesToPoint(indices)
         xs = self.xStep/2 + gridMap.robotRadius

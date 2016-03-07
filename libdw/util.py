@@ -21,7 +21,7 @@ class Pose:
 
     def point(self):
         """
-        Return just the x, y parts represented as a C{util.Point}
+        Return just the x, y parts represented as a ``util.Point``
         """
         return Point(self.x, self.y)
 
@@ -39,7 +39,7 @@ class Pose:
     def transformPoint(self, point):
         """
         Applies the pose.transform to point and returns new point.
-        :param point: an instance of C{util.Point}
+        :param point: an instance of ``util.Point``
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -51,8 +51,8 @@ class Pose:
         Does the rotation by theta of the pose but does not add the
         x,y offset. This is useful in transforming the difference(delta)
         between two points.
-        :param point: an instance of C{util.Point}
-        :returns: a C{util.Point}.
+        :param point: an instance of ``util.Point``
+        :returns: a ``util.Point``.
         """
         cosTh = math.cos(self.theta)
         sinTh = math.sin(self.theta)
@@ -62,7 +62,7 @@ class Pose:
     def transformPose(self, pose):
         """
         Make self into a transformation matrix and apply it to pose.
-        :returns: Af new C{util.pose}.
+        :returns: Af new ``util.pose``.
         """
         return self.transform().applyToPose(pose)
 
@@ -75,9 +75,9 @@ class Pose:
 
     def diff(self, pose):
         """
-        :param pose: an instance of C{util.Pose}
+        :param pose: an instance of ``util.Pose``
         :returns: a pose that is the difference between self and pose (in
-        x, y, and theta)
+         x, y, and theta)
         """
         return Pose(self.x-pose.x,
                     self.y-pose.y,
@@ -85,9 +85,9 @@ class Pose:
 
     def distance(self, pose):
         """
-        :param pose: an instance of C{util.Pose}
+        :param pose: an instance of ``util.Pose``
         :returns: the distance between the x,y part of self and the x,y
-        part of pose.
+         part of pose.
         """
         return self.point().distance(pose.point())
 
@@ -103,7 +103,7 @@ class Pose:
     def xytTuple(self):
         """
         :returns: a representation of this pose as a tuple of x, y,
-        theta values  
+         theta values  
         """
         return (self.x, self.y, self.theta)
     
@@ -113,7 +113,7 @@ class Pose:
 def valueListToPose(values):
     """
     :param values: a list or tuple of three values: x, y, theta
-    :returns: a corresponding C{util.Pose}
+    :returns: a corresponding ``util.Pose``
     """
     return apply(Pose, values)
 
@@ -131,10 +131,10 @@ class Point:
 
     def near(self, point, distEps):
         """
-        :param point: instance of C{util.Point}
+        :param point: instance of ``util.Point``
         :param distEps: positive real number
-        :returns: true if the distance between C{self} and C{util.Point} is less
-        than distEps
+        :returns: true if the distance between ``self`` and ``util.Point`` is less
+         than distEps
         """
         return self.distance(point) < distEps
 
@@ -143,15 +143,15 @@ class Point:
 
     def distance(self, point):
         """
-        :param point: instance of C{util.Point}
-        :returns: Euclidean distance between C{self} and C{util.Point}
+        :param point: instance of ``util.Point``
+        :returns: Euclidean distance between ``self`` and ``util.Point``
         """
         return math.sqrt((self.x - point.x)**2 + (self.y - point.y)**2)
 
     def magnitude(self):
         """
         :returns: Magnitude of this point, interpreted as a vector in
-        2-space 
+         2-space 
         """
         return math.sqrt(self.x**2 + self.y**2)
 
@@ -166,7 +166,7 @@ class Point:
 
     def angleTo(self, p):
         """
-        :param p: instance of C{util.Point} or C{util.Pose}
+        :param p: instance of ``util.Point`` or ``util.Pose``
         :returns: angle in radians of vector from self to p
         """
         dx = p.x - self.x
@@ -313,9 +313,9 @@ class LineSeg:
 
     def intersection(self, other):
         """
-        Return a C{Point} where C{self} intersects C{other}.  Returns C{False}
+        Return a ``Point`` where ``self`` intersects ``other``.  Returns ``False``
         if there is no intersection.
-        :param other: a C{LineSeg}
+        :param other: a ``LineSeg``
         """
         def helper(l1, l2):
             (a, b, c, d) = (l1.p1, l1.p2, l2.p1, l2.p2)
@@ -348,22 +348,22 @@ class LineSeg:
 def localToGlobal(pose, point):
     """
     Same as pose.transformPoint(point)
-    :param point: instance of C{util.Point}
+    :param point: instance of ``util.Point``
     """
     return pose.transformPoint(point)
 
 def localPoseToGlobalPose(pose1, pose2):
     """
     Applies the transform from pose1 to pose2
-    :param pose1: instance of C{util.Pose}
-    :param pose2: instance of C{util.Pose}
+    :param pose1: instance of ``util.Pose``
+    :param pose2: instance of ``util.Pose``
     """
     return pose1.transform().applyToPose(pose2)
 
 def inversePose(pose):
     """
     Same as pose.inverse()
-    :param pose: instance of C{util.Pose}
+    :param pose: instance of ``util.Pose``
     """
     return pose.transform().inverse().pose()
 
@@ -372,16 +372,16 @@ def inversePose(pose):
 def globalToLocal(pose, point):
     """
     Applies inverse of pose to point.
-    :param pose: instance of C{util.Pose}
-    :param point: instance of C{util.Point}
+    :param pose: instance of ``util.Pose``
+    :param point: instance of ``util.Point``
     """
     return inversePose(pose).transformPoint(point)
 
 def globalPoseToLocalPose(pose1, pose2):
     """
     Applies inverse of pose1 to pose2.
-    :param pose1: instance of C{util.Pose}
-    :param pose2: instance of C{util.Pose}
+    :param pose1: instance of ``util.Pose``
+    :param pose2: instance of ``util.Pose``
     """
     return inversePose(pose1).transform().applyToPose(pose2)
 
@@ -390,8 +390,8 @@ def globalPoseToLocalPose(pose1, pose2):
 def globalDeltaToLocal(pose, deltaPoint):
     """
     Applies inverse of pose to delta using transformDelta.
-    :param pose: instance of C{util.Pose}
-    :param deltaPoint: instance of C{util.Point}
+    :param pose: instance of ``util.Pose``
+    :param deltaPoint: instance of ``util.Point``
     """
     return inversePose(pose).transformDelta(deltaPoint)
 
@@ -413,7 +413,7 @@ def within(v1, v2, eps):
     :param v1: number
     :param v2: number
     :param eps: positive number
-    :returns: C{True} if C{v1} is with C{eps} of C{v2} 
+    :returns: ``True`` if ``v1`` is with ``eps`` of ``v2`` 
     """
     return abs(v1 - v2) < eps
 
@@ -422,8 +422,8 @@ def nearAngle(a1, a2, eps):
     :param a1: number representing angle; no restriction on range
     :param a2: number representing angle; no restriction on range
     :param eps: positive number
-    :returns: C{True} if C{a1} is within C{eps} of C{a2}.  Don't use
-    within for this, because angles wrap around!
+    :returns: ``True`` if ``a1`` is within ``eps`` of ``a2``.  Don't use
+     within for this, because angles wrap around!
     """
     return abs(fixAnglePlusMinusPi(a1-a2)) < eps
 
@@ -475,18 +475,18 @@ def dotProd(a, b):
 
 def argmax(l, f):
     """
-    :param l: C{List} of items
-    :param f: C{Procedure} that maps an item into a numeric score
-    :returns: the element of C{l} that has the highest score
+    :param l: ``List`` of items
+    :param f: ``Procedure`` that maps an item into a numeric score
+    :returns: the element of ``l`` that has the highest score
     """
     vals = [f(x) for x in l]
     return l[vals.index(max(vals))]
 
 def argmaxWithVal(l, f):
     """
-    :param l: C{List} of items
-    :param f: C{Procedure} that maps an item into a numeric score
-    :returns: the element of C{l} that has the highest score and the score
+    :param l: ``List`` of items
+    :param f: ``Procedure`` that maps an item into a numeric score
+    :returns: the element of ``l`` that has the highest score and the score
     """
     best = l[0]; bestScore = f(best)
     for x in l:
@@ -497,9 +497,9 @@ def argmaxWithVal(l, f):
 
 def argmaxIndex(l, f = lambda x: x):
     """
-    :param l: C{List} of items
-    :param f: C{Procedure} that maps an item into a numeric score
-    :returns: the index of C{l} that has the highest score
+    :param l: ``List`` of items
+    :param f: ``Procedure`` that maps an item into a numeric score
+    :returns: the index of ``l`` that has the highest score
     """
     best = 0; bestScore = f(l[best])
     for i in range(len(l)):
@@ -521,7 +521,7 @@ def argmaxIndices3D(l, f = lambda x: x):
 def randomMultinomial(dist):
     """
     :param dist: List of positive numbers summing to 1 representing a
-    multinomial distribution over integers from 0 to C{len(dist)-1}.
+     multinomial distribution over integers from 0 to ``len(dist)-1``.
     :returns: random draw from that distribution
     """
     r = random.random()
@@ -535,9 +535,9 @@ def clip(v, vMin, vMax):
     """
     :param v: number
     :param vMin: number (may be None, if no limit)
-    :param vMax: number greater than C{vMin} (may be None, if no limit)
-    :returns: If C{vMin <= v <= vMax}, then return C{v}; if C{v <
-    vMin} return C{vMin}; else return C{vMax}
+    :param vMax: number greater than ``vMin`` (may be None, if no limit)
+    :returns: If ``vMin <= v <= vMax``, then return ``v``; if ``v <
+     vMin`` return ``vMin``; else return ``vMax``
     """
     if vMin == None:
         if vMax == None:
@@ -574,9 +574,9 @@ def make2DArray(dim1, dim2, initValue):
 def make2DArrayFill(dim1, dim2, initFun):
     """
     Return a list of lists representing a 2D array with dimensions
-    C{dim1} and C{dim2}, filled by calling C{initFun(ix, iy)} with
-    C{ix} ranging from 0 to C{dim1 - 1} and C{iy} ranging from 0 to
-    C{dim2-1}. 
+    ``dim1`` and ``dim2``, filled by calling ``initFun(ix, iy)`` with
+    ``ix`` ranging from 0 to ``dim1 - 1`` and ``iy`` ranging from 0 to
+    ``dim2-1``. 
     """
     result = []
     for i in range(dim1):

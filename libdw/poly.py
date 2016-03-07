@@ -31,7 +31,7 @@ class Polynomial:
         """
         :param p1, p2: polynomials
         :return: a new polynomial, which is their sum.
-        Does not affect either input.
+         Does not affect either input.
         """
         def extend(coeffs, length):
             """:return: list of coeffs, extended to length by adding zeros

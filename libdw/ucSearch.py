@@ -6,33 +6,35 @@ dynamic programming.  Becomes A* if a heuristic is specified.
 import util
 
 somewhatVerbose = False
-"""If C{True}, prints a trace of the search"""
+"""If ``True``, prints a trace of the search"""
 verbose = False
-"""If C{True}, prints a verbose trace of the search"""
+"""If ``True``, prints a verbose trace of the search"""
 
 class SearchNode:
     """A node in a search tree"""
     def __init__(self, action, state, parent, actionCost):
         self.state = state
         self.action = action
-        """Action that moves from C{parent} to C{state}"""
+        """Action that moves from ``parent`` to ``state``"""
         self.parent = parent
         if self.parent:
             self.cost = self.parent.cost + actionCost
-            """The cost of the path from the root to C{self.state}"""
+            """The cost of the path from the root to ``self.state``"""
         else:
             self.cost = actionCost
         
     def path(self):
-        """:returns: list of C{(action, state)} pairs from root to this node"""
+        """:returns: list of ``(action, state)`` pairs from root to this node"""
         if self.parent == None:
             return [(self.action, self.state)]
         else:
             return self.parent.path() + [(self.action, self.state)]
 
     def inPath(self, s):
-        """:returns: C{True} if state C{s} is in the path from here to
-        the root"""
+        """
+        :returns: ``True`` if state ``s`` is in the path from here to
+         the root
+        """
         if s == self.state:
             return True
         elif self.parent == None:
@@ -59,15 +61,15 @@ class PQ:
         self.data = []
     def push(self, item, cost):
         """Push an item onto the priority queue.
-           Assumes items are instances with an attribute C{cost}."""
+           Assumes items are instances with an attribute ``cost``."""
         self.data.append((cost, item))
     def pop(self):
         """Returns and removes the least cost item.
-           Assumes items are instances with an attribute C{cost}."""
+           Assumes items are instances with an attribute ``cost``."""
         (index, cost) = util.argmaxIndex(self.data, lambda (c, x): -c)
         return self.data.pop(index)[1] # just the data item
     def isEmpty(self):
-        """Returns C{True} if the PQ is empty and C{False} otherwise."""
+        """Returns ``True`` if the PQ is empty and ``False`` otherwise."""
         return len(self.data) == 0
     def __str__(self):
         return 'PQ('+str(self.data)+')'
@@ -117,21 +119,21 @@ def search(initialState, goalTest, actions, successor,
 def smSearch(smToSearch, initialState = None, goalTest = None,
                heuristic = lambda x: 0, maxNodes = 10000):
    """
-   :param smToSearch: instance of C{sm.SM} defining a search domain;
-             C{getNextValues} is used to determine the successor of a
+   :param smToSearch: instance of ``sm.SM`` defining a search domain;
+             ``getNextValues`` is used to determine the successor of a
              state given an action; the output field of getNextValues is
              interpreted as a cost.
    :param initialState: initial state for the search;  if not
-             provided, will use C{smToSearch.startState}
+             provided, will use ``smToSearch.startState``
    :param goalTest: function that takes a state as an argument and
-             returns C{True} if it is a goal state, and C{False} otherwise
-    :param heuristic: function from state to estimated cost to reach a goal;
+             returns ``True`` if it is a goal state, and ``False`` otherwise
+   :param heuristic: function from state to estimated cost to reach a goal;
         defaults to a heuristic of 0, making this uniform cost search
    :param maxNodes: maximum number of nodes to be searched;  prevents
              runaway searches
-   :returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
+   :returns: a list of the form ``[(a0, s0), (a1, s1), (a2, s2), ...]``
     where the a's  are legal actions of c{smToSearch} and s's are
-    states of that  machine.  C{s0} is the start state;  the last
+    states of that  machine.  ``s0`` is the start state;  the last
     state is a state that satisfies the goal test.  If the
     goal is unreachable (within the search limit), it returns ``None``. 
    """

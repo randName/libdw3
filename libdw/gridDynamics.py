@@ -18,7 +18,7 @@ class GridDynamics(sm.SM):
         :param theMap: instance of {\tt gridMap.GridMap}
         """
         self.theMap = theMap
-        """instance of C{gridMap.GridMap} representing locations of
+        """instance of ``gridMap.GridMap`` representing locations of
         obstacles, with discretized poses"""
         self.startState = None
         self.legalInputs = [(dx, dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)\
@@ -29,10 +29,10 @@ class GridDynamics(sm.SM):
 
     def getNextValues(self, state, inp):
         """
-        :param state: tuple of indices C{(ix, iy)} representing
-        robot's location in grid map
+        :param state: tuple of indices ``(ix, iy)`` representing
+         robot's location in grid map
         :param inp: an action, which is one of the legal inputs
-        :returns: C{(nextState, cost)}
+        :returns: ``(nextState, cost)``
         """
         (ix, iy) = state
         (dx, dy) = inp
@@ -69,10 +69,10 @@ class GridCostDynamicsSM(sm.SM):
     def __init__(self, theMap):
         """
         :param theMap: instance of {\tt gridMap.GridMap}, with a
-        C{cost} method on squares
+        ``cost`` method on squares
         """
         self.theMap = theMap
-        """instance of C{gridMap.GridMap} representing locations of
+        """instance of ``gridMap.GridMap`` representing locations of
         obstacles, with discretized poses"""
         self.startState = None
         self.legalInputs = [(dx, dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)\
@@ -83,10 +83,10 @@ class GridCostDynamicsSM(sm.SM):
 
     def getNextValues(self, state, inp):
         """
-        :param state: tuple of indices C{(ix, iy)} representing
-        robot's location in grid map
+        :param state: tuple of indices ``(ix, iy)`` representing
+         robot's location in grid map
         :param inp: an action, which is one of the legal inputs
-        :returns: C{(nextState, cost)}
+        :returns: ``(nextState, cost)``
         """
         multiplier = 3
         (ix, iy) = state

@@ -7,6 +7,7 @@ class NameToIndex:
     name is inserted, it is assigned a new index.  Indices start at 0
     and increment by 1.
     For example::
+
         >>> n2n = nameToIndex()
         >>> n2n.insert('n1')
         >>> n2n.insert('n2')
@@ -24,7 +25,7 @@ class NameToIndex:
         
     def insert(self, name):
         """
-        If C{name} has been inserted before, do nothing.  Otherwise,
+        If ``name`` has been inserted before, do nothing.  Otherwise,
         assign it the next index.
         """
         if not self.namesToNums.has_key(name):
@@ -33,8 +34,8 @@ class NameToIndex:
             
     def lookup(self, name):
         """
-        Returns the index associated with C{name}.  Generates an error
-        if it C{name} has not previously been inserted.
+        Returns the index associated with ``name``.  Generates an error
+        if it ``name`` has not previously been inserted.
         """
         return self.namesToNums[name]
     
@@ -83,25 +84,27 @@ class EquationSet:
     """
     def __init__(self):
         self.equations = []
-        """List of instances of C{Equation}."""
+        """List of instances of ``Equation``."""
 
     def addEquation(self, eqn):
         """
-        :param eqn: instance of C{Equation}
+        :param eqn: instance of ``Equation``
+
         Adds it to the set
         """
         self.equations.append(eqn)
 
     def addEquations(self, eqns):
         """
-        :param eqns: list of instances of C{Equation}
+        :param eqns: list of instances of ``Equation``
+
         Adds them to the set
         """
         self.equations += eqns
 
     def solve(self):
         """
-        :returns: an instance of C{Solution}
+        :returns: an instance of ``Solution``
         """
         # Get a unique assignment of names to indices
         n2i = NameToIndex()
@@ -142,7 +145,7 @@ class Solution:
 
     def translate(self, name):
         """
-        :returns: the value of variable C{name} in the solution
+        :returns: the value of variable ``name`` in the solution
         """
         return self.values[self.n2i.lookup(name)]
 

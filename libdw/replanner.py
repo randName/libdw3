@@ -11,7 +11,7 @@ class Replanner(sm.SM):
     """
     This replanner state machine has a fixed map, which it constructs
     at initialization time.  Input to the machine is an instance of
-    C{io.SensorInput};  output is an instance of C{util.Point},
+    ``io.SensorInput``;  output is an instance of ``util.Point``,
     representing the desired next subgoal.  The planner should
     guarantee that a straight-line path from the current pose to the
     output pose is collision-free.
@@ -26,7 +26,7 @@ class Replanner(sm.SM):
         planning
         :param gridSquareSize: size of the grid squares in the map to
         be constructed
-        :param mapClass: a subclass of C{gridMap.GridMap};  it needs
+        :param mapClass: a subclass of ``gridMap.GridMap``;  it needs
         to take a path and a grid square size as input in its
         initializer.
         """
@@ -59,24 +59,24 @@ def newPathAndSubgoal(worldMap, sensorInput, goalPoint, dynamicsModel, path,
     Whenever a new plan is made, it is drawn into the map.  Whenever a
     subgoal is achieved, it is removed from the path drawn in the map.
 
-    :param worldMap: instance of a subclass of C{gridMap.GridMap}
-    :param sensorInput: instance of C{io.SensorInput}, containing current
+    :param worldMap: instance of a subclass of ``gridMap.GridMap``
+    :param sensorInput: instance of ``io.SensorInput``, containing current
                       robot pose
-    :param goalPoint: instance of C{util.Point}, specifying goal
+    :param goalPoint: instance of ``util.Point``, specifying goal
     :param dynamicsModel: a state machine that specifies the
                       transition dynamics for the robot in the grid map
     :param path: the path (represented as a list of pairs of indices
                       in the map) that the robot is currently
-                      following.  Can be ``None`` or C{[]}.                      
-    :param timeToReplan: a procedure that takes C{path}, the robot's
+                      following.  Can be ``None`` or ``[]``.                      
+    :param timeToReplan: a procedure that takes ``path``, the robot's
                       current indices in the grid, the map, and the
-                      indices of the goal, and returns C{True} or
-                      C{False} indicating whether a new plan needs to
+                      indices of the goal, and returns ``True`` or
+                      ``False`` indicating whether a new plan needs to
                       be constructed.
-    :returns: a tuple C{(path, subgoal)}, where C{path} is a list of
+    :returns: a tuple ``(path, subgoal)``, where ``path`` is a list of
                       pairs of indices indicating a path through the
-                      grid, and C{subgoal} is an instance of
-                      C{util.Point} indicating the point in odometry
+                      grid, and ``subgoal`` is an instance of
+                      ``util.Point`` indicating the point in odometry
                       coordinates that the robot should drive to.
     """
     currentIndices = worldMap.pointToIndices(sensorInput.odometry.point())
@@ -126,10 +126,10 @@ def adjacent((x1, y1), (x2, y2)):
 class ReplannerWithDynamicMap(sm.SM):
     """
     This replanner state machine has a dynamic map, which is an input
-    to the state machine.  Input to the machine is a pair C{(map,
-    sensors)}, where C{map} is an instance of a subclass of
-    C{gridMap.GridMap} and C{sensors} is an instance of
-    C{io.SensorInput};  output is an instance of C{util.Point},
+    to the state machine.  Input to the machine is a pair ``(map,
+    sensors)``, where ``map`` is an instance of a subclass of
+    ``gridMap.GridMap`` and ``sensors`` is an instance of
+    ``io.SensorInput``;  output is an instance of ``util.Point``,
     representing the desired next subgoal.  The planner should
     guarantee that a straight-line path from the current pose to the
     output pose is collision-free in the current map.
@@ -138,10 +138,10 @@ class ReplannerWithDynamicMap(sm.SM):
         """
         :param goalPoint: fixed goal that the planner keeps trying to
         reach
-        :param useCostDynamics: if C{True}, use
-        C{gridDynamics.GridCostDynamicsSM} (which penalizes motion
+        :param useCostDynamics: if ``True``, use
+        ``gridDynamics.GridCostDynamicsSM`` (which penalizes motion
         through cells according to the likelihood that they are
-        occupied), otherwise, use C{gridDynamics.GridDynamics} which
+        occupied), otherwise, use ``gridDynamics.GridDynamics`` which
         only allows motion through cells that are marked occupiable,
         and uses step length as a cost.
         """
@@ -216,20 +216,20 @@ class ReplannerWithDynamicMapAndGoal(sm.SM):
     """
     This replanner state machine has a dynamic map and a dynamic goal,
     both of which are inputs to the state machine.  Input to the
-    machine is a structure C{(goal, (map, sensors))}, where C{map} is
-    an instance of a subclass of C{gridMap.GridMap}, C{goal} is an
-    instance of C{util.Point}, and C{sensors} is
-    an instance of C{io.SensorInput}; output is an instance of
-    C{util.Point}, representing the desired next subgoal.  The planner
+    machine is a structure ``(goal, (map, sensors))``, where ``map`` is
+    an instance of a subclass of ``gridMap.GridMap``, ``goal`` is an
+    instance of ``util.Point``, and ``sensors`` is
+    an instance of ``io.SensorInput``; output is an instance of
+    ``util.Point``, representing the desired next subgoal.  The planner
     should guarantee that a straight-line path from the current pose
     to the output pose is collision-free in the current map.
     """
     def __init__(self, useCostDynamics = False):
         """
-        :param useCostDynamics: if C{True}, use
-        C{gridDynamics.GridCostDynamicsSM} (which penalizes motion
+        :param useCostDynamics: if ``True``, use
+        ``gridDynamics.GridCostDynamicsSM`` (which penalizes motion
         through cells according to the likelihood that they are
-        occupied), otherwise, use C{gridDynamics.GridDynamics} which
+        occupied), otherwise, use ``gridDynamics.GridDynamics`` which
         only allows motion through cells that are marked occupiable,
         and uses step length as a cost.
         """

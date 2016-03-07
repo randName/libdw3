@@ -3,20 +3,20 @@ Procedures and classes for doing basic breadth-first and depth-first
 search, with and without dynamic programming. 
 """
 somewhatVerbose = False
-"""If C{True}, prints a trace of the search"""
+"""If ``True``, prints a trace of the search"""
 verbose = False
-"""If C{True}, prints a verbose trace of the search"""
+"""If ``True``, prints a verbose trace of the search"""
 
 class SearchNode:
     """A node in a search tree"""
     def __init__(self, action, state, parent):
         self.state = state
         self.action = action
-        """Action that moves from C{parent} to C{state}"""
+        """Action that moves from ``parent`` to ``state``"""
         self.parent = parent
         
     def path(self):
-        """:returns: list of C{(action, state)} pairs from root to this node"""
+        """:returns: list of ``(action, state)`` pairs from root to this node"""
         if self.parent == None:
             return [(self.action, self.state)]
         else:
@@ -24,7 +24,7 @@ class SearchNode:
 
     def inPath(self, s):
         """
-        :returns: C{True} if state C{s} is in the path from here to the root
+        :returns: ``True`` if state ``s`` is in the path from here to the root
         """
         if s == self.state:
             return True
@@ -50,14 +50,14 @@ class Stack:
         """Create a new empty stack"""
         self.data = []
     def push(self, item):
-        """Push C{item} onto the stack."""
+        """Push ``item`` onto the stack."""
         self.data.append(item)
     def pop(self):
         """Return the most recently pushed item that has not yet been popped,
            and removes it from the stack."""
         return self.data.pop()
     def isEmpty(self):
-        """Returns C{True} if the stack is empty and C{False} otherwise."""
+        """Returns ``True`` if the stack is empty and ``False`` otherwise."""
         return self.data == []
     def __str__(self):
         return 'Stack('+str(self.data)+')'
@@ -70,14 +70,14 @@ class Queue:
         """Create a new empty queue"""
         self.data = []
     def push(self, item):
-        """Push C{item} onto the queue."""
+        """Push ``item`` onto the queue."""
         self.data.append(item)
     def pop(self):
         """Return the oldest item that has not yet been popped,
            and removes it from the queue."""
         return self.data.pop(0)
     def isEmpty(self):
-        """Returns C{True} if the queue is empty and C{False} otherwise."""
+        """Returns ``True`` if the queue is empty and ``False`` otherwise."""
         return self.data == []
     def __str__(self):
         return 'Queue('+str(self.data)+')'
@@ -89,9 +89,9 @@ def search(initialState, goalTest, actions, successor,
     :param goalTest: function from state to Boolean
     :param actions: a list of possible actions
     :param successor: function from state and action to next state
-    :param depthFirst: do depth-first search if C{True}, otherwise do
+    :param depthFirst: do depth-first search if ``True``, otherwise do
            breadth-first
-    :param DP: do dynamic programming if C{True}, otherwise not
+    :param DP: do dynamic programming if ``True``, otherwise not
     :param maxNodes: kill the search after it expands this many nodes
     :returns: path from initial state to a goal state as a list of
            (action, state) tuples
@@ -139,43 +139,43 @@ def search(initialState, goalTest, actions, successor,
     return None
 
 def depthFirst (initialState, goalTest, actions, successor):
-    """See C{search} documentation"""
+    """See ``search`` documentation"""
     return search(initialState, goalTest, actions, successor,
                    depthFirst=True, DP = False)
 
 def breadthFirst (initialState, goalTest, actions, successor):
-    """See C{search} documentation"""
+    """See ``search`` documentation"""
     return search(initialState, goalTest, actions, successor,
                    depthFirst=False, DP = False)
 
 def depthFirstDP (initialState, goalTest, actions, successor):
-    """See C{search} documentation"""
+    """See ``search`` documentation"""
     return search(initialState, goalTest, actions, successor,
                    depthFirst=True, DP = True)
 
 def breadthFirstDP (initialState, goalTest, actions, successor):
-    """See C{search} documentation"""
+    """See ``search`` documentation"""
     return search(initialState, goalTest, actions, successor,
                    depthFirst=False, DP = True)
 
 def smSearch(smToSearch, initialState = None, goalTest = None, maxNodes = 10000,
              depthFirst = False, DP = True):
    """
-   :param smToSearch: instance of C{sm.SM} defining a search domain;
-             C{getNextValues} is used to determine the successor of a
+   :param smToSearch: instance of ``sm.SM`` defining a search domain;
+             ``getNextValues`` is used to determine the successor of a
              state given an action
    :param initialState: initial state for the search;  if not
-             provided, will use C{smToSearch.startState}
+             provided, will use ``smToSearch.startState``
    :param goalTest: function that takes a state as an argument and
-             returns C{True} if it is a goal state, and C{False} otherwise
+             returns ``True`` if it is a goal state, and ``False`` otherwise
    :param maxNodes: maximum number of nodes to be searched;  prevents
              runaway searches
-   :param depthFirst: if C{True}, use depth first search;  usually not
+   :param depthFirst: if ``True``, use depth first search;  usually not
              a good idea
-   :param DP: if C{True}, use dynamic programming; usually a good idea
-   :returns: a list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
+   :param DP: if ``True``, use dynamic programming; usually a good idea
+   :returns: a list of the form ``[(a0, s0), (a1, s1), (a2, s2), ...]``
     where the a's  are legal actions of c{smToSearch} and s's are
-    states of that  machine.  C{s0} is the start state;  the last
+    states of that  machine.  ``s0`` is the start state;  the last
     state is a state that satisfies the goal test.  If the
     goal is unreachable (within the search limit), it returns ``None``. 
    """
@@ -191,14 +191,14 @@ def smSearch(smToSearch, initialState = None, goalTest = None, maxNodes = 10000,
 
 def pathValid(smToSearch, path):
     """
-    :param smToSearch: instance of C{sm.SM} defining a search domain
-    :param path: list of the form C{[(a0, s0), (a1, s1), (a2, s2), ...]}
-    where the C{a}'s  are legal actions of c{smToSearch} and C{s}'s are
-    states of that  machine.
-    :returns: C{True} if taking action a1 in state s0 results in state
-    s1, taking action a2 in state s1 results in state s2, etc.  That
-    is, if this path through the state space is executable in this
-    state machine.
+    :param smToSearch: instance of ``sm.SM`` defining a search domain
+    :param path: list of the form ``[(a0, s0), (a1, s1), (a2, s2), ...]``
+     where the ``a``'s  are legal actions of c{smToSearch} and ``s``'s are
+     states of that  machine.
+    :returns: ``True`` if taking action a1 in state s0 results in state
+     s1, taking action a2 in state s1 results in state s2, etc.  That
+     is, if this path through the state space is executable in this
+     state machine.
     """
     if len(path) <= 1:
         return True

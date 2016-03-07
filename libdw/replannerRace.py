@@ -11,10 +11,10 @@ reload(gridDynamics)
 class ReplannerWithDynamicMap(sm.SM):
     """
     This replanner state machine has a dynamic map, which is an input
-    to the state machine.  Input to the machine is a pair C{(map,
-    sensors)}, where C{map} is an instance of a subclass of
-    C{gridMap.GridMap} and C{sensors} is an instance of
-    C{io.SensorInput};  output is an instance of C{util.Point},
+    to the state machine.  Input to the machine is a pair ``(map,
+    sensors)``, where ``map`` is an instance of a subclass of
+    ``gridMap.GridMap`` and ``sensors`` is an instance of
+    ``io.SensorInput``;  output is an instance of ``util.Point``,
     representing the desired next subgoal.  The planner should
     guarantee that a straight-line path from the current pose to the
     output pose is collision-free in the current map.

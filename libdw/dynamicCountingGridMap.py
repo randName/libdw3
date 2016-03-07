@@ -5,7 +5,7 @@ import colors
 
 class DynamicCountingGridMap(gridMap.GridMap):
     """
-    Implements the C{GridMap} interface.
+    Implements the ``GridMap`` interface.
     """
     def __init__(self, xMin, xMax, yMin, yMax, gridSquareSize):
         """

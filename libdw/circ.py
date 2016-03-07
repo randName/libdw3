@@ -11,7 +11,7 @@ import util
 class Circuit:
     def __init__(self, components):
         """
-        :param components: list of instances of C{Component} that make
+        :param components: list of instances of ``Component`` that make
            up this circuit
         """
         self.components = components
@@ -19,7 +19,7 @@ class Circuit:
     def solve(self, gnd):
         """
         :param gnd: Name of the node to set to ground (string)
-        :returns: instance of C{le.Solution}, mapping node names to values
+        :returns: instance of ``le.Solution``, mapping node names to values
         """
         es = le.EquationSet()
         n2c = NodeToCurrents()
@@ -89,10 +89,10 @@ class NodeToCurrents:
         :param current: name of a current variable (string)
         :param node: name of a node (string)
         :param sign: +1 or -1, indicating whether the current is
-        flowing into or out of the node
+         flowing into or out of the node
 
-        Adds the new current, with approrpiate sign to C{node}.  
-        Adds an entry for C{node}, if doesn't already exist in the
+        Adds the new current, with approrpiate sign to ``node``.  
+        Adds an entry for ``node``, if doesn't already exist in the
         dictionary.
         """
         if not self.d.has_key(node):
@@ -102,9 +102,9 @@ class NodeToCurrents:
     def addCurrents(self, currents):
 #!!
         """
-        :param currents: list of tuples C{(currentName, nodeName,
-        sign)}, with the same meaning as for C{addCurrent}.
-        Add several currents at once.
+        :param currents: list of tuples ``(currentName, nodeName,
+         sign)``, with the same meaning as for ``addCurrent``.
+         Add several currents at once.
         """
         for (c, n, s) in currents:
             self.addCurrent(c, n, s)
@@ -113,12 +113,12 @@ class NodeToCurrents:
 #!!
         """
         :param gnd: name of a node that will have its voltage assigned
-        to 0 (string)
+         to 0 (string)
         :returns: a list of equations, one for each node.  For
-        the ground node, it just asserts that its voltage is 0.  For
-        the other nodes, the equation asserts that the sum of the
-        currents going into the node minus the sum of currents going
-        out of the node is equal to zero.
+         the ground node, it just asserts that its voltage is 0.  For
+         the other nodes, the equation asserts that the sum of the
+         currents going into the node minus the sum of currents going
+         out of the node is equal to zero.
         """
         result = []
         for node in self.d.keys():
@@ -132,18 +132,18 @@ class NodeToCurrents:
 class Component:
     """
     Generic superclass.  Every component type has to provide
-      - C{getCurrents(self)}: Returns a list of tuples C{(i, node, sign)},
-        where C{i} is the name of a current variable, C{node} is the name
-        of a node,  and C{sign} is the sign of that current at that node.
-      - C{getEquation(self)}: Returns an instance of
-        C{le.Equation}, representing the constituent equation for this
+      - ``getCurrents(self)``: Returns a list of tuples ``(i, node, sign)``,
+        where ``i`` is the name of a current variable, ``node`` is the name
+        of a node,  and ``sign`` is the sign of that current at that node.
+      - ``getEquation(self)``: Returns an instance of
+        ``le.Equation``, representing the constituent equation for this
         component.  
     """
     
     def getCurrents(self):
         """
         Default method that works for components with two leads,
-        assuming they define attributes C{current}, C{n1}, and C{n2}. 
+        assuming they define attributes ``current``, ``n1``, and ``n2``. 
         """
         return [[self.current, self.n1, +1],
                 [self.current, self.n2, -1]]
@@ -151,7 +151,7 @@ class Component:
 class VSrc(Component):
     def __init__(self, v, n1, n2):
         """
-        :param v: voltage in Volts (number);  equal to voltage at C{n1} minus voltage at C{n2} 
+        :param v: voltage in Volts (number);  equal to voltage at ``n1`` minus voltage at ``n2`` 
         :param n1: name of node at one end of the voltage source (string)
         :param n2: name of node at the other end of the voltage source (string)
         """
@@ -174,7 +174,7 @@ class VSrc(Component):
 class ISrc(Component):
     def __init__(self, i, n1, n2):
         """
-        :param i: current, in Amperes (number), flowing from C{n1} to C{n2}
+        :param i: current, in Amperes (number), flowing from ``n1`` to ``n2``
         :param n1: name of node at one end of the current source (string)
         :param n2: name of node at the other end of the current source (string)
         """
@@ -195,7 +195,7 @@ class ISrc(Component):
 
 class Wire(Component):
     """
-    Just describes a wire between nodes C{n1} and C{n2}; nodes are
+    Just describes a wire between nodes ``n1`` and ``n2``; nodes are
     specified by their names (strings)
     """
     def __init__(self, n1, n2):

@@ -10,13 +10,13 @@ class StateEstimator(sm.SM):
     """
     A state machine that performs state estimation, based on an input
     stream of (input, output pairs) and a stochastic state-machine
-    model.  The output at time t is a C{dist.DDist} object, representing
+    model.  The output at time t is a ``dist.DDist`` object, representing
     the 'belief' distribution P(s | i_0, ... i_t, o_0, ..., o_t)
     """
 
     def __init__(self, model):
         """
-        :param model: a C{ssm.StochasticStateMachine} object,
+        :param model: a ``ssm.StochasticStateMachine`` object,
         specifying the transition and observation models
         """
         self.model = model
@@ -31,11 +31,11 @@ class StateEstimator(sm.SM):
     def getNextValues(self, state, inp):
         """
         :param state: Distribution over states of the subject machine,
-        represented as a C{dist.Dist} object
-        :param inp: A pair C{(o, a)} of the input and output of the
-        subject machine on this time step.  If this parameter is
-        ``None``, then no update occurs and the state is returned,
-        unchanged. 
+         represented as a ``dist.Dist`` object
+        :param inp: A pair ``(o, a)`` of the input and output of the
+         subject machine on this time step.  If this parameter is
+         ``None``, then no update occurs and the state is returned,
+         unchanged. 
         """
         if inp == None:
             return (state, state)

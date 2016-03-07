@@ -9,7 +9,7 @@ reload(gridMap)
 
 class DynamicGridMap(gridMap.GridMap):
     """
-    Implements the C{GridMap} interface.
+    Implements the ``GridMap`` interface.
     """
     def __init__(self, xMin, xMax, yMin, yMax, gridSquareSize):
         self.growRadiusInCells = int(math.ceil(gridMap.robotRadius \
@@ -18,19 +18,19 @@ class DynamicGridMap(gridMap.GridMap):
 
     def makeStartingGrid(self):
         """
-        Returns the initial value for C{self.grid}.  Can depend on
-        C{self.xN} and C{self.yN} being set.
+        Returns the initial value for ``self.grid``.  Can depend on
+        ``self.xN`` and ``self.yN`` being set.
 
         In this case, the grid is an array filled with the value
-        C{False}, meaning that the cells are not occupied.
+        ``False``, meaning that the cells are not occupied.
         """
         return util.make2DArray(self.xN, self.yN, False)
 
     def squareColor(self, indices):
         """
-        :param indices: C{(ix, iy)} indices of a grid cell
+        :param indices: ``(ix, iy)`` indices of a grid cell
         :returns: a color string indicating what color that cell
-        should be drawn in.
+         should be drawn in.
         """
         if self.occupied(indices):
             return 'black'
@@ -43,7 +43,7 @@ class DynamicGridMap(gridMap.GridMap):
         """
         Takes indices for a grid cell, and updates it, given
         information that it contains an obstacle.  In this case, it
-        sets the cell to C{True}, and redraws it if its color has changed.
+        sets the cell to ``True``, and redraws it if its color has changed.
         """
         changed = self.grid[xIndex][yIndex] == False
         self.grid[xIndex][yIndex] = True
@@ -54,7 +54,7 @@ class DynamicGridMap(gridMap.GridMap):
         """
         Takes indices for a grid cell, and updates it, given
         information that it does not contain an obstacle.  In this case, it
-        sets the cell to C{True}, and redraws it if its color has changed.
+        sets the cell to ``True``, and redraws it if its color has changed.
         """
         changed = self.grid[xIndex][yIndex] == True
         self.grid[xIndex][yIndex] = False
@@ -63,11 +63,11 @@ class DynamicGridMap(gridMap.GridMap):
 
     def robotCanOccupy(self, (xIndex, yIndex)):
         """
-        Returns C{True} if the robot's center can be at any location
-        within the cell specified by C{(xIndex, yIndex)} and not cause
+        Returns ``True`` if the robot's center can be at any location
+        within the cell specified by ``(xIndex, yIndex)`` and not cause
         a collision.  This implementation is very slow:  it considers
         a range of boxes around the spcified box, and ensures that
-        none of them is C{self.occupied}.
+        none of them is ``self.occupied``.
         """
         for dx in range(0, self.growRadiusInCells + 1):
             for dy in range(0, self.growRadiusInCells + 1):
@@ -84,7 +84,7 @@ class DynamicGridMap(gridMap.GridMap):
 
     def occupied(self, (xIndex, yIndex)):
         """
-        Returns C{True} if there is an obstacle in any part of this
+        Returns ``True`` if there is an obstacle in any part of this
         cell.  Note that it can be the case that a cell is not
         occupied, but the robot cannot occupy it (because if the
         robot's center were in that cell, some part of the robot would

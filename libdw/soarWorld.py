@@ -20,7 +20,7 @@ class SoarWorld:
         """
         self.wallSegs = []
         """
-        Walls represented as list of C{util.lineSeg}
+        Walls represented as list of ``util.lineSeg``
         """
         # set the global world
         global world

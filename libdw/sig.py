@@ -25,9 +25,9 @@ class Signal:
     """
     Represent infinite signals.  This is a generic superclass that
     provides some basic operations.  Every subclass must provide a
-    C{sample} method.
+    ``sample`` method.
 
-    Be sure to start idle with the C{-n} flag, if you want to make
+    Be sure to start idle with the ``-n`` flag, if you want to make
     plots of signals from inside idle.
     """
     
@@ -40,18 +40,19 @@ class Signal:
              yOrigin = None): # bkph
         """
         Make a plot of this signal.
+
         :param start: first value to plot; defaults to 0
         :param end: last value to plot; defaults to 100; must be > start
         :param newWindow: makes a new window with this value as title,
-        unless the value is False, in which case it plots the signal
-        in the currently active plotting window
+         unless the value is False, in which case it plots the signal
+         in the currently active plotting window
         :param color: string specifying color of plot; all simple
-        color names work
-        :param parent: An instance of C{tk.tk}.  You probably should
-        just leave this at the default unless you're making plots
-        from another application.
+         color names work
+        :param parent: An instance of ``tk.tk``.  You probably should
+         just leave this at the default unless you're making plots
+         from another application.
         :param ps: If not ``None``, then it should be a pathname;
-             we'll write a postscript version of this graph to that path.
+         we'll write a postscript version of this graph to that path.
         """
         samples = [self.sample(i) for i in range(start, end)]
         if len(samples) == 0:
@@ -99,8 +100,8 @@ class Signal:
 
     def __add__(self, other):
         """
-        :param other: C{Signal}
-        :return: New signal that is the sum of C{self} and C{other}.
+        :param other: ``Signal``
+        :return: New signal that is the sum of ``self`` and ``other``.
         
         Does not modify either argument.
         """
@@ -109,29 +110,29 @@ class Signal:
     def __rmul__(self, scalar):
         """
         :param scalar: number
-        :return: New signal that is C{self} scaled by a constant.
+        :return: New signal that is ``self`` scaled by a constant.
         
-        Does not modify C{self}
+        Does not modify ``self``
         """
         return ScaledSignal(self, scalar)
 
     def __mul__(self, scalar):
         """
         :param scalar: number
-        :return: New signal that is C{self} scaled by a constant.
+        :return: New signal that is ``self`` scaled by a constant.
         
-        Does not modify C{self}
+        Does not modify ``self``
         """
         return ScaledSignal(self, scalar)
 
     def period(self, n = None, z = None):
         """
         :param n: number of samples to use to estimate the period;  if
-        not provided, it will look for a C{length} attribute of C{self}
+         not provided, it will look for a ``length`` attribute of ``self``
         :param z: zero value to use when looking for zero-crossings of
-        the signal;  will use the mean by default.
+         the signal;  will use the mean by default.
         :return: an estimate of the period of the signal, or
-        'aperiodic' if it can't get a good estimate
+         'aperiodic' if it can't get a good estimate
         """
         if n == None:
             n = self.length
@@ -144,11 +145,11 @@ class Signal:
     def crossings(self, n = None, z = None):
         """
         :param n: number of samples to use;  if
-        not provided, it will look for a C{length} attribute of C{self}
+         not provided, it will look for a ``length`` attribute of ``self``
         :param z: zero value to use when looking for zero-crossings of
-        the signal;  will use the mean by default.
+         the signal;  will use the mean by default.
         :return: a list of indices into the data where the signal crosses the
-        z value, up through time n
+         z value, up through time n
         """
         if n == None: n = self.length
         if z == None: z = self.mean(n)
@@ -160,7 +161,7 @@ class Signal:
     def mean(self, n = None):
         """
         :param n: number of samples to use to estimate the mean;  if
-        not provided, it will look for a C{length} attribute of C{self}
+         not provided, it will look for a ``length`` attribute of ``self``
         :return: sample mean of the values of the signal from 0 to n
         """
         if n == None: n = self.length
@@ -168,7 +169,7 @@ class Signal:
 
     def samplesInRange(self, lo, hi):
         """
-        :return: list of samples of this signal, from C{lo} to C{hi-1}
+        :return: list of samples of this signal, from ``lo`` to ``hi-1``
         """
         return [self.sample(i) for i in range(lo, hi)]    
     
@@ -186,10 +187,10 @@ def gaps(data):
 
 def polyR(s, p):
     """
-    :param s: C{Signal}
-    :param p: C{poly.Polynomial}
-    :return: New signal that is C{s} transformed by C{p} interpreted
-    as a polynomial in I{R}.
+    :param s: ``Signal``
+    :param p: ``poly.Polynomial``
+    :return: New signal that is ``s`` transformed by ``p`` interpreted
+     as a polynomial in *R*.
     """
     # range(10, -1, -1) counts down from 10 to 0, inclusive
     return util.sum([c * Rn(s, k) \
@@ -197,10 +198,10 @@ def polyR(s, p):
 
 def polyR(s, p):
     """
-    :param s: C{Signal}
-    :param p: C{poly.Polynomial}
-    :return: New signal that is C{s} transformed by C{p} interpreted
-    as a polynomial in I{R}.
+    :param s: ``Signal``
+    :param p: ``poly.Polynomial``
+    :return: New signal that is ``s`` transformed by ``p`` interpreted
+     as a polynomial in *R*.
     """
     # This implementation uses Horner's rule
     v = p.coeffs[0] * s
@@ -260,8 +261,8 @@ class SummedSignal(Signal):
     """
     def __init__(self, s1, s2):
         """
-        :param s1: C{Signal}
-        :param s2: C{Signal}
+        :param s1: ``Signal``
+        :param s2: ``Signal``
         """
         self.s1 = s1
         self.s2 = s2
@@ -274,7 +275,7 @@ class ScaledSignal(Signal):
     """
     def __init__(self, s, c):
         """
-        :param s: C{Signal}
+        :param s: ``Signal``
         :param c: number
         """
         self.s = s
@@ -284,11 +285,11 @@ class ScaledSignal(Signal):
 
 class R(Signal):
     """
-    Signal delayed by one time step, so that C{R(S).sample(n+1) = S.sample(n)}
+    Signal delayed by one time step, so that ``R(S).sample(n+1) = S.sample(n)``
     """
     def __init__(self, s):
         """
-        :param s: C{Signal}
+        :param s: ``Signal``
         """
         self.s = s
     def sample(self, n):
@@ -300,8 +301,8 @@ class Rn(Signal):
     """
     def __init__(self, s, n):
         """
-        :param s: C{Signal}
-        :param n: integer specifying number of time steps to delay C{s}
+        :param s: ``Signal``
+        :param n: integer specifying number of time steps to delay ``s``
         """
         self.s = s
         self.n = n
@@ -315,8 +316,8 @@ class FilteredSignal(Signal):
     """
     def __init__(self, s, f, w):
         """
-        :param s: C{Signal}
-        :param f: C{Procedure} maping C{w} numbers into a number
+        :param s: ``Signal``
+        :param f: ``Procedure`` maping ``w`` numbers into a number
         :param w: positive integer
         """
         self.s = s
@@ -337,24 +338,24 @@ class StepSignal(Signal):
 
 def meanFiltered(s, k):
     """
-    :param s: C{Signal}
+    :param s: ``Signal``
     :param k: positive integer filter size
-    :return: C{s} filtered with a mean filter of size C{k}
+    :return: ``s`` filtered with a mean filter of size ``k``
     """
     return FilteredSignal(s, listMean, k)
 
 def listMean(vals):
     """
     :param vals: list of numbers
-    :return: mean of C{vals}
+    :return: mean of ``vals``
     """
     return sum(vals)/float(len(vals))
 
 def makeSignalFromPickle(pathName):
     """
     :param pathName: string specifying directory and file name
-    :return: C{ListSignal} with data read in from C{pathname}.  That
-    path must contain a pickled list of numbers.
+    :return: ``ListSignal`` with data read in from ``pathname``.  That
+     path must contain a pickled list of numbers.
     """
     f = open(pathName, 'r')
     data = pickle.load(f)

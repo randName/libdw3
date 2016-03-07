@@ -28,10 +28,10 @@ class DDist:
     def prob(self, elt):
         """
         :param elt: an element of the domain of this distribution
-        (does not need to be explicitly represented in the dictionary;
-        in fact, for any element not in the dictionary, we return
-        probability 0 without error.)
-        :returns: the probability associated with C{elt}
+         (does not need to be explicitly represented in the dictionary;
+         in fact, for any element not in the dictionary, we return
+         probability 0 without error.)
+        :returns: the probability associated with ``elt``
         """
         if self.d.has_key(elt):
             return self.d[elt]
@@ -41,7 +41,7 @@ class DDist:
     def support(self):
         """
         :returns: A list (in arbitrary order) of the elements of this
-        distribution with non-zero probabability.
+         distribution with non-zero probabability.
         """
         return [k for k in self.d.keys() if self.prob(k) > 0]
 
@@ -76,7 +76,7 @@ class DDist:
     def marginalizeOut(self, index):
         """
         :param index: index of a random variable to sum out of the
-        distribution
+         distribution
         :returns: DDist on all the rest of the variables
         """
         result = {}
@@ -89,9 +89,9 @@ class DDist:
         :param index: index of a variable in the joint distribution
         :param value: value of that variable
 
-        :returns: new distribution, conditioned on variable C{i}
-        having value C{value}, and with variable C{i} removed from all
-        of the elements (it's redundant at this point).
+        :returns: new distribution, conditioned on variable ``i``
+         having value ``value``, and with variable ``i`` removed from all
+         of the elements (it's redundant at this point).
         """
         newElements = [e for e in self.support() if e[index] == value]
         z = sum([self.prob(e) for e in newElements])
@@ -102,12 +102,12 @@ class DDist:
 def JDist(PA, PBgA):
     """
     Create a joint distribution on P(A, B) (in that order),
-    represented as a C{DDist}
+    represented as a ``DDist``
         
-    :param PA: a C{DDist} on some random var A
+    :param PA: a ``DDist`` on some random var A
     :param PBgA: a conditional probability distribution specifying
-    P(B | A) (that is, a function from elements of A to C{DDist}
-    on B)
+     P(B | A) (that is, a function from elements of A to ``DDist``
+     on B)
     """
     d = {}
     for a in PA.support():
@@ -118,7 +118,7 @@ def JDist(PA, PBgA):
 def bayesEvidence(PA, PBgA, b):
     """
     :param PBgA: conditional distribution over B given A (function
-    from values of a to C{DDist} over B)
+     from values of a to ``DDist`` over B)
     :param PA: prior on A
     :param b: evidence value for B = b 
     :returns: P(A | b)
@@ -129,11 +129,11 @@ def bayesEvidence(PA, PBgA, b):
 def totalProbability(PA, PBgA):
     """
     :param PBgA: conditional distribution over B given A (function
-    from values of a to C{DDist} over B)
-    :param PA: distribution over A (object of type C{DiscreteDist})
+     from values of a to ``DDist`` over B)
+    :param PA: distribution over A (object of type ``DiscreteDist``)
     :returns: P(B) using the law of total probability.
-    C{self} represents P(B | A);  P(A) is the argument to the
-    method; we compute and return P(B) as sum_a P(B | a) P(a)
+     ``self`` represents P(B | A);  P(A) is the argument to the
+     method; we compute and return P(B) as sum_a P(B | a) P(a)
     """
     # Order of variables in the jdist is A,B;  we want to marginalize out A
     return JDist(PA, PBgA).marginalizeOut(0)
@@ -143,13 +143,13 @@ def totalProbability(PA, PBgA):
 
 def DeltaDist(v):
     """
-    Distribution with all of its probability mass on value C{v}
+    Distribution with all of its probability mass on value ``v``
     """
     return DDist({v:1.0})
 
 def UniformDist(elts):
     """
-    Uniform distribution over a given finite set of C{elts}
+    Uniform distribution over a given finite set of ``elts``
     :param elts: list of any kind of item
     """
     p = 1.0 / len(elts)
@@ -199,10 +199,10 @@ class MixtureDist:
 def triangleDist(peak, halfWidth, lo = None, hi = None):
     """
     Construct and return a DDist over integers. The
-    distribution will have its peak at index C{peak} and fall off
-    linearly from there, reaching 0 at an index C{halfWidth} on
-    either side of C{peak}.  Any probability mass that would be below
-    C{lo} or above C{hi} is assigned to C{lo} or C{hi}
+    distribution will have its peak at index ``peak`` and fall off
+    linearly from there, reaching 0 at an index ``halfWidth`` on
+    either side of ``peak``.  Any probability mass that would be below
+    ``lo`` or above ``hi`` is assigned to ``lo`` or ``hi``
     """
     d = {}
     d[util.clip(peak, lo, hi)] = 1
@@ -223,7 +223,7 @@ def squareDist(lo, hi, loLimit = None, hiLimit = None):
     distribution will have a uniform distribution on integers from
     lo to hi-1 (inclusive).
     Any probability mass that would be below
-    C{lo} or above C{hi} is assigned to C{lo} or C{hi}.
+    ``lo`` or above ``hi`` is assigned to ``lo`` or ``hi``.
     """
     d = {}
     p = 1.0 / (hi - lo)
@@ -260,11 +260,11 @@ def removeElt(items, i):
 
 def incrDictEntry(d, k, v):
     """
-    If dictionary C{d} has key C{k}, then increment C{d[k]} by C{v}.
-    Else set C{d[k] = v}.
+    If dictionary ``d`` has key ``k``, then increment ``d[k]`` by ``v``.
+    Else set ``d[k] = v``.
     
     :param d: dictionary
-    :param k: legal dictionary key (doesn't have to be in C{d})
+    :param k: legal dictionary key (doesn't have to be in ``d``)
     :param v: numeric value
     """
     if d.has_key(k):

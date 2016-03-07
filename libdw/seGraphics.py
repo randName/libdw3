@@ -13,10 +13,10 @@ beliefHook = None
 does some useful display.  If ``None``, then no display is done.""" 
 
 class StateEstimator(seFast.StateEstimator):
-    """By default, this is the same as C{seFast.StateEstimator}.  If
-    the attributes C{observationHook} or C{beliefHook} are defined,
-    then as well as doing C{getNextValues} from
-    C{seFast.StateEstimator}, it calls the hooks.
+    """By default, this is the same as ``seFast.StateEstimator``.  If
+    the attributes ``observationHook`` or ``beliefHook`` are defined,
+    then as well as doing ``getNextValues`` from
+    ``seFast.StateEstimator``, it calls the hooks.
     """
     def getNextValues(self, state, inp):
         if observationHook and inp:

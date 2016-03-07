@@ -86,12 +86,12 @@ def makeRobotNavModel(ideal, xMin, xMax, numStates, numObservations):
     :param xMin: minimum x coordinate for center of robot
     :param xMax: maximum x coordinate for center of robot
     :param numStates: number of discrete states into which to divide
-    the range of x coordinates
+     the range of x coordinates
     :param numObservations: number of discrete observations into which to
-    divide the range of good sonar observations, between 0 and C{goodSonarRange}
+     divide the range of good sonar observations, between 0 and ``goodSonarRange``
 
     :returns: an instance of {\tt ssm.StochasticSM} that describes the
-    dynamics of the world
+     dynamics of the world
     """
     # make initial distribution over states
     startDistribution = dist.UniformDist(range(numStates))
@@ -168,9 +168,9 @@ def makeLineLocalizer(numObservations, numStates, ideal, xMin, xMax, robotY):
                       localize itself in one dimension
 
     :param numObservations: number of discrete observations into which to
-    divide the range of good sonar observations, between 0 and C{goodSonarRange}
+     divide the range of good sonar observations, between 0 and ``goodSonarRange``
     :param numStates: number of discrete states into which to divide
-    the range of x coordinates
+     the range of x coordinates
     :param ideal: list of ideal sonar readings
     :param xMin: minimum x coordinate for center of robot
     :param xMax: maximum x coordinate for center of robot
@@ -211,14 +211,14 @@ def makeMetricMachine(xMin, xMax, y, numStates):
     :param xMax: maximum x coordinate for center of robot
     :param y: constant y coordinate for center of robot
     :param numStates: number of discrete states into which to divide
-    the range of x coordinates
-    :returns: a state machine that takes two inputs: C{(sensorInput,
-    belief)}, where C{sensorInput} is the true sensor input (we can
-    trust the pose in simulation to be the actual truth) and C{belief}
-    is a distribution over possible discrete robot locations,
-    delivered by the state estimator.  The state machine can deliver a
-    metric (averaged over time) as output;  it should also print the
-    metric value on each step.
+     the range of x coordinates
+    :returns: a state machine that takes two inputs: ``(sensorInput,
+     belief)``, where ``sensorInput`` is the true sensor input (we can
+     trust the pose in simulation to be the actual truth) and ``belief``
+     is a distribution over possible discrete robot locations,
+     delivered by the state estimator.  The state machine can deliver a
+     metric (averaged over time) as output;  it should also print the
+     metric value on each step.
     """
 
     probRange = 0.1

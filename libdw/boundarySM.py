@@ -75,8 +75,8 @@ def pickAction(state):
         return go
 
 class BoundaryFollowerSM4(sm.SM):
-    """State machine with instances of C{io.SensorInput} as input and
-    C{io.Action} as output.  Follows a boundary with the robot's
+    """State machine with instances of ``io.SensorInput`` as input and
+    ``io.Action`` as output.  Follows a boundary with the robot's
     'right hand' on the wall.  Has four internal states:
     'turningLeft', 'turningRight', 'movingForward', and 'following'
     """
@@ -112,8 +112,8 @@ class BoundaryFollowerSM4(sm.SM):
 
 
 class BoundaryFollowerSM2(sm.SM):
-    """State machine with instances of C{io.SensorInput} as input and
-    C{io.Action} as output.  Follows a boundary with the robot's
+    """State machine with instances of ``io.SensorInput`` as input and
+    ``io.Action`` as output.  Follows a boundary with the robot's
     'right hand' on the wall.  Has two internal states:  'seek' and
     'following'. 
     """

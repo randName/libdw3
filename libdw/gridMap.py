@@ -16,7 +16,7 @@ class GridMap:
                  windowWidth = defaultWindowWidth):
         """
         Basic initializer that determines the number of cells, and
-        calls the C{makeStartingGrid} method that any subclass must
+        calls the ``makeStartingGrid`` method that any subclass must
         provide, to get the initial values.  Makes a window and draws
         the initial world state in it.
         
@@ -62,7 +62,7 @@ class GridMap:
     def makeWindow(self, windowWidth = defaultWindowWidth, title = 'Grid Map'):
         """
         Create a window of the right dimensions representing the grid map.
-        Store in C{self.window}.
+        Store in ``self.window``.
         """
         dx = self.xMax - self.xMin
         dy = self.yMax - self.yMin
@@ -110,7 +110,7 @@ class GridMap:
 
     def pointToIndices(self, point):
         """
-        :param point: real world point coordinates (instance of C{Point})
+        :param point: real world point coordinates (instance of ``Point``)
         :return: pair of (x, y) grid indices it maps into
         """
         return (self.xToIndex(point.x),self.yToIndex(point.y))
@@ -144,9 +144,10 @@ class GridMap:
 
     def drawNewSquare(self, indices, color = None):
         """
-        :param indices: C{(ix, iy)} indices of grid cell
+        :param indices: ``(ix, iy)`` indices of grid cell
         :param color: Python color to draw the square;  if ``None``
-        uses the C{self.squareColor} method to determine a color.
+         uses the ``self.squareColor`` method to determine a color.
+
         Draws a box at the specified point, on top of whatever is there
         """
         if color == None:
@@ -159,9 +160,9 @@ class GridMap:
     def drawSquare(self, indices, color = None):
         """
         Recolors the existing square
-        :param indices: C{(ix, iy)} indices of grid cell
+        :param indices: ``(ix, iy)`` indices of grid cell
         :param color: Python color to draw the square;  if ``None``
-        uses the C{self.squareColor} method to determine a color.
+        uses the ``self.squareColor`` method to determine a color.
         """
         if color == None:
             color = self.squareColor(indices)
@@ -173,7 +174,7 @@ class GridMap:
         """
         Draws list of cells;  first one is purple, last is yellow,
         rest are blue
-        :param path: list of pairs of C{(ix, iy)} grid indices
+        :param path: list of pairs of ``(ix, iy)`` grid indices
         """
         self.drawSquare(path[0], 'purple')
         for p in path[1:-1]:
@@ -184,7 +185,7 @@ class GridMap:
         """
         Draws list of cells using the underlying grid color scheme,
         effectively 'undrawing' a path.
-        :param path: list of pairs of C{(ix, iy)} grid indices
+        :param path: list of pairs of ``(ix, iy)`` grid indices
         """
         for p in path:
             self.drawSquare(p)

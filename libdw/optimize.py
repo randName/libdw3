@@ -6,10 +6,10 @@ import operator
 
 def floatRange(lo, hi, stepsize):
     """
-    :returns: a list of numbers, starting with C{lo}, and increasing
-    by C{stepsize} each time, until C{hi} is equaled or exceeded.
+    :returns: a list of numbers, starting with ``lo``, and increasing
+     by ``stepsize`` each time, until ``hi`` is equaled or exceeded.
 
-    C{lo} must be less than C{hi}; C{stepsize} must be greater than 0.
+    ``lo`` must be less than ``hi``; ``stepsize`` must be greater than 0.
     """
     result = []
     if stepsize == 0:
@@ -24,26 +24,26 @@ def floatRange(lo, hi, stepsize):
 def argopt(f, stuff, comp):
     """
     :param f: a function that takes a single argument of some type
-    C{x} and returns a value of some type C{y}
-    :param stuff: a list of elements of type C{x}
-    :param comp: a function that takes two arguments of type C{y} and
-    returns a Boolean;  it is intended to return C{True} if the first
-    argument is 'better' than the second.
-    :returns: a pair C{(bestVal, bestArg)}, where C{bestArg} is the
-    element of C{stuff} such that C{f(bestArg)} is better, according
-    to C{comp} than C{f} applied to any other element of C{stuff}, and
-    C{bestVal} is C{f(bestArg)}.
+     ``x`` and returns a value of some type ``y``
+    :param stuff: a list of elements of type ``x``
+    :param comp: a function that takes two arguments of type ``y`` and
+     returns a Boolean;  it is intended to return ``True`` if the first
+     argument is 'better' than the second.
+    :returns: a pair ``(bestVal, bestArg)``, where ``bestArg`` is the
+     element of ``stuff`` such that ``f(bestArg)`` is better, according
+     to ``comp`` than ``f`` applied to any other element of ``stuff``, and
+     ``bestVal`` is ``f(bestArg)``.
     
-    The types C{x} and C{y} are not actual types;  they're just
+    The types ``x`` and ``y`` are not actual types;  they're just
     intended to show that the types of the functions have to match up
     in the right way.
     
     For example, get the team with the highest score, you might do
     something like
 
-    C{argopt(seasonScore, ['ravens', 'crows', 'buzzards'], operator.gt)}
+    ``argopt(seasonScore, ['ravens', 'crows', 'buzzards'], operator.gt)``
 
-    where C{seasonScore} is a function that takes the name of a team
+    where ``seasonScore`` is a function that takes the name of a team
     and returns a numerical score.
     """
     bestValSoFar = None
@@ -61,13 +61,13 @@ def optOverLine(objective, xmin, xmax, numXsteps,
     :param objective: a function that takes a single number as an
                argument and returns a value
     :param compare: a function from two values (of the type returned
-               by C{objective}) to a Boolean;  should return C{True}
+               by ``objective``) to a Boolean;  should return ``True``
                if we like the first argument better.
-    :returns: a pair, C{(objective(x), x)}.  C{x} one of the numeric
-               values achieved by starting at C{xmin} and taking
-               C{numXsteps} equal-sized steps up to C{xmax};  the
-               particular value of C{x} returned is the one for which
-               C{objective(x)} is best, according to the C{compare}
+    :returns: a pair, ``(objective(x), x)``.  ``x`` one of the numeric
+               values achieved by starting at ``xmin`` and taking
+               ``numXsteps`` equal-sized steps up to ``xmax``;  the
+               particular value of ``x`` returned is the one for which
+               ``objective(x)`` is best, according to the ``compare``
                operator. 
     """
     if type(numXsteps) != int:
@@ -81,10 +81,10 @@ def optOverGrid(objective,
                ymin, ymax, numYsteps, 
                compare = operator.lt):
     """
-    Like C{optOverLine}, but C{objective} is now a function from two
-    numerical values, one chosen from the C{x} range and one chosen
-    from the C{y} range.  It returns C{(objective(x, y), (x, y))} for
-    the optimizing pair C{(x,y)}.
+    Like ``optOverLine``, but ``objective`` is now a function from two
+    numerical values, one chosen from the ``x`` range and one chosen
+    from the ``y`` range.  It returns ``(objective(x, y), (x, y))`` for
+    the optimizing pair ``(x,y)``.
     """
     ((score, y), x) = \
              optOverLine(lambda x: optOverLine(lambda y: objective(x, y),
