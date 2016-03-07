@@ -21,10 +21,10 @@ class SensorInput:
     """
     def __init__(self, cheat = False):
         """
-        :param cheat: If C{True}, then get odometry readings in
+        :param cheat: If ``True``, then get odometry readings in
         absolute coordinate frame of simulated world.  Otherwise,
         odometry frame is defined by robot's initial pose when powered on
-        or simulated world is reset.  Should never be set to C{True} on
+        or simulated world is reset.  Should never be set to ``True`` on
         the real robot.
         """
         self.sonars = app.soar.output.storedsonars.get()[:]
@@ -32,7 +32,7 @@ class SensorInput:
         if cheat == True:
             self.odometry = \
                 util.valueListToPose(app.soar.output.abspose.get())
-            """Instance of util.Pose, representing robot's pose in the global frame if C{cheat = True} and the odometry frame if C{cheat = False}."""
+            """Instance of util.Pose, representing robot's pose in the global frame if ``cheat = True`` and the odometry frame if ``cheat = False``."""
         else:
             self.odometry = \
                 util.valueListToPose(app.soar.output.odpose.get())

@@ -30,7 +30,7 @@ class Locator_EKF:
             velocity from Gyro, and right and left motor speeds from encoder
         :param Ts: the sampling time
         :return: it returns updated x which is a vector of updated
-        position and heading (x,y,theta) and the covariance matrix
+            position and heading (x,y,theta) and the covariance matrix
         """
         t1 = time()
         z = np.matrix([ [data[0]] , [data[1]] , [data[2]] ])

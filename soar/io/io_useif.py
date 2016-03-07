@@ -57,7 +57,7 @@ class Action:
         continues driving at the last commanded velocity until a new
         action command is received;  if set to a positive value, the
         robot will drive at the last commanded velocity until
-        C{discreteStepLength} seconds have passed, and then stop.
+        ``discreteStepLength`` seconds have passed, and then stop.
         Setting the step length to, e.g., 0.1, is useful when the
         brain is doing so much computation that the robot drives too
         far between steps.

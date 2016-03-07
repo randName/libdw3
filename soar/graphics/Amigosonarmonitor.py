@@ -142,9 +142,9 @@ class AmigoSonarMonitor():
     def sonarHit(self, distance, sonarPose, robotPose):
         """
         :param distance: distance along ray that the sonar hit something
-        :param sonarPose: C{util.Pose} of the sonar on the robot
-        :param robotPose: C{util.Pose} of the robot in the global frame
-        :return: C{util.Point} representing position of the sonar hit in the
+        :param sonarPose: ``util.Pose`` of the sonar on the robot
+        :param robotPose: ``util.Pose`` of the robot in the global frame
+        :return: ``util.Point`` representing position of the sonar hit in the
         global frame.  
         """
         return robotPose.transformPoint(sonarPose.transformPoint(\

@@ -54,8 +54,10 @@ class FileLike(object):
     def write(self, s): raise NotImplementedError
 
     def readline(self, size=None, eol='\n'):
-        """read a line which is terminated with end-of-line (eol) character
-        ('\n' by default) or until timeout"""
+        """
+        read a line which is terminated with end-of-line (eol) character
+        ('\\n' by default) or until timeout
+        """
         line = ''
         while 1:
             c = self.read(1)
