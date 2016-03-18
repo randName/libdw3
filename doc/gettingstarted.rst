@@ -255,7 +255,7 @@ you can download the API from
 
 **Sensors**
 
-* robot\_uS(): Returns a tuple containing all 6 ultraSonic readings in meters
+* sonars(): Returns a tuple containing all 6 ultraSonic sonar readings in meters
 * light(): Returns a tupple containing 2 LDR readings from as 0 to 1, 1 being
   brightest
 * obstacle(): Reads the obstacle in front of the front sonar sensor Returns 
