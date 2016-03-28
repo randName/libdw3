@@ -5,7 +5,7 @@ DESTDIR=makedist
 #clean up destination directory
 echo ">> rm -fr $DESTDIR/dist/*" 
 rm -fr $DESTDIR/libdw/* $DESTDIR/soar/* $DESTDIR/form/* $DESTDIR/eBot/serial/* $DESTDIR/eBot/* $DESTDIR/firebase/* #DESTDIR/dist/* 
-mkdir $DESTDIR/soar/io $DESTDIR/soar/graphics/ $DESTDIR/soar/serial $DESTDIR/soar/controls $DESTDIR/soar/outputs $DESTDIR/eBot $DESTDIR/eBot/serial
+mkdir $DESTDIR/soar/io $DESTDIR/soar/graphics/ $DESTDIR/soar/serial $DESTDIR/soar/controls $DESTDIR/soar/outputs $DESTDIR/eBot/serial
 
 #create all the .pyc files, and move them to the appropriate dirs
 #*code/ contains .py files. libdw/ soar/ & form/ are used to hold .pyc files
