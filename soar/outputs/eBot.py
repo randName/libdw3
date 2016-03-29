@@ -532,10 +532,10 @@ class eBot:
                 self.Gx = float(self.Gx)
                 self.Gy = float(self.Gy)
                 self.Gz = float(self.Gz)
-                #self.Ultrasonic_rear_right = float(self.Ultrasonic_rear_right)
-                self.Ultrasonic_rear_right = float(self.Ultrasonic_right)
-                #self.Ultrasonic_right = float(self.Ultrasonic_right)
-                self.Ultrasonic_right = float(self.Ultrasonic_rear_right)
+                self.Ultrasonic_rear_right = float(self.Ultrasonic_rear_right)
+                #self.Ultrasonic_rear_right = float(self.Ultrasonic_right)
+                self.Ultrasonic_right = float(self.Ultrasonic_right)
+                #self.Ultrasonic_right = float(self.Ultrasonic_rear_right)
                 self.Ultrasonic_front = float(self.Ultrasonic_front)
                 self.Ultrasonic_left = float(self.Ultrasonic_left)
                 self.Ultrasonic_rear_left = float(self.Ultrasonic_rear_left)
@@ -738,7 +738,7 @@ class eBot:
 
         #Right Sonar
 
-        sonars[4] = float(self.Ultrasonic_rear_right)
+        sonars[3] = float(self.Ultrasonic_rear_right)
         #if -0.5<self.prev_sonar[4]- sonars[4]<0.5:
         #    sonars[4] = self.prev_sonar4
         #else:
@@ -746,7 +746,7 @@ class eBot:
         #print 'Sonar 1: ', sonars[0]
 
         #Right Front Sonar
-        sonars[3] = float(self.Ultrasonic_right)
+        sonars[4] = float(self.Ultrasonic_right)
         #print 'Sonar 2: ', sonars[1]
 
         #Front Sonar
