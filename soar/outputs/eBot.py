@@ -93,6 +93,7 @@ CMD = Enum(
     SEND=0x53,
     RECV=0x52,
     CLOSE=0x58,
+    CALI=0x43,
     #CLOSE="PORT CLOSE",
 )
 
@@ -188,9 +189,6 @@ class eBot:
         self.Ultrasonic_left = 0
         self.Ultrasonic_rear_left = 0
         self.Ultrasonic_back = 0
-        self.tempreture_sensor = 0
-        self.LDR_top = 0
-        self.LDR_front = 0
         self.portName = -1
         self.sonarsChanged = [0, 0, 0, 0, 0, 0, 0, 0]  #Change to 6 after
         self.from_update = 0
@@ -200,8 +198,6 @@ class eBot:
         self.storedsonars = SharedVar([0, 0, 0, 0, 0, 0, 0, 0])  #Change to 6 after
         self.trans, self.rot = SharedVar(0), SharedVar(0)
         self.odpose = SharedVar((0, 0, 0))
-        self.temperature = SharedVar(0)
-        self.ldr = SharedVar([0, 0])
         self.stalled = SharedVar(False)
         self.analogInputs = SharedVar([0, 0, 0, 0])
         self.analogOut = SharedVar(0)
@@ -303,7 +299,7 @@ class eBot:
         if os.name == "posix":
             if sys.platform == "linux2":
                 #usbSerial = glob.glob('/dev/ttyUSB*')
-                ports = glob.glob('/dev/rfcomm*')
+                print "Support for this OS is under development."
             elif sys.platform == "darwin":
                 ports = glob.glob('/dev/tty.eBot*')
                 #usbSerial = glob.glob('/dev/tty.usbserial*')
@@ -474,6 +470,9 @@ class eBot:
             self.motorOutput(0, 0)
 
     def sendOutputs(self):
+
+
+
         data = [CMD.RECV]
 
         v = int(self.trans.get() * 1000.0)
@@ -533,9 +532,7 @@ class eBot:
                 self.Gy = float(self.Gy)
                 self.Gz = float(self.Gz)
                 self.Ultrasonic_rear_right = float(self.Ultrasonic_rear_right)
-                #self.Ultrasonic_rear_right = float(self.Ultrasonic_right)
                 self.Ultrasonic_right = float(self.Ultrasonic_right)
-                #self.Ultrasonic_right = float(self.Ultrasonic_rear_right)
                 self.Ultrasonic_front = float(self.Ultrasonic_front)
                 self.Ultrasonic_left = float(self.Ultrasonic_left)
                 self.Ultrasonic_rear_left = float(self.Ultrasonic_rear_left)
@@ -548,9 +545,8 @@ class eBot:
                 self.voltage = float(self.voltage)
                 self.current = float(self.current)
             except:
-                #print "eBot.read(): bad formatted data received"
-                #print self.incoming
-                pass
+                print "eBot.read(): bad formatted data received"
+                print self.incoming
             if self.offset_counter == 2:
                 self.Ax_offset = self.Ax
                 self.Ay_offset = self.Ay
@@ -734,7 +730,7 @@ class eBot:
         # parse all data
         stall = 0
         bump = 0
-        sonars = [-1, -1, -1, -1, -1, -1, -1, -1]
+        sonars = [-1, -1, -1, -1, -1, -1]
 
         #Right Sonar
 
@@ -784,9 +780,6 @@ class eBot:
             else:
                 self.sonarsChanged[i] = 0
                 self.storedsonars.set(storedsonars)
-
-        self.temperature.set(self.tempreture_sensor)
-        self.ldr.set([self.LDR_front, self.LDR_top])
 
     # Send a packet and receive a SIP response from the robot
     def sipSendReceive(self, data):
