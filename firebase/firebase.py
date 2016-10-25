@@ -34,7 +34,9 @@ class FirebaseApplication():
 			return "ERROR"
 
 	def get(self, node):
-		json_url=self.url+node+'.json'
-		response = urllib2.urlopen(json_url)
-		status = json.loads(response.read())
-		return status 
+		json_url=self.url+node
+		opener = urllib2.build_opener(urllib2.HTTPHandler)
+		request = urllib2.Request(json_url+'.json?auth='+self.firebaseToken)
+		request.get_method = lambda: 'GET'
+		result = opener.open(request)
+		return json.loads(result.read())
