@@ -23,7 +23,7 @@ mv soar/controls/*.pyc  $DESTDIR/soar/controls/
 mv soar/outputs/*.pyc   $DESTDIR/soar/outputs/
 mv eBot/*.pyc           $DESTDIR/eBot/
 mv eBot/serial/*.pyc    $DESTDIR/eBot/serial/
-mv firebase/*.py*       $DESTDIR/
+mv firebase/*.pyc       $DESTDIR/
 cp    soar/soar         $DESTDIR/soar/
 cp -r soar/worlds       $DESTDIR/soar/
 cp -r soar/media        $DESTDIR/soar/
