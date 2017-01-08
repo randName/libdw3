@@ -11,13 +11,14 @@
 ################################################################################
 
 ####################################Imports#####################################
-from Tkinter import *
-from tkMessageBox import showerror, askyesno, askquestion
-from tkFileDialog import askopenfilename
-from tkFileDialog import asksaveasfilename
+from tkinter import *
+from tkinter.messagebox import showerror, askyesno, askquestion
+from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import asksaveasfilename
 import os
 import platform
-from types import StringType
+#from types import StringType
+StringType = (str,bytes)
 
 import form.parallel as parallel
 import form.spicy as spicy
@@ -160,7 +161,7 @@ class OutputBufferFrame(Frame):
       str = self.box_.get(1.0, END)[:-1]
       return str
     except TclError:
-      print formerror()
+      print(formerror())
 
   def write(self, s):
     def writer():
@@ -182,9 +183,9 @@ class ToolbarFrame(Frame):
   def formulaWasAdded(self, formula):
     try:
       buttonframe = Frame(self)
-      button = Button(buttonframe, command = lambda: apply(formula[1], formula[4]()))
+      button = Button(buttonframe, command = lambda: formula[1](*formula[4]()))
       button.stored_images = dict([(iname, PhotoImage(file = fname))
-                                   for iname,fname in formula[3].iteritems()])
+                                   for iname,fname in formula[3].items()])
       button.config(image = button.stored_images['normal'])
       button.pack(side = TOP)
       self.buttons[formula[0]] = button
@@ -229,7 +230,7 @@ class FileBufferFrame(Frame):
         self.quotes = ['"""', "'''", '"', "'"] 
         self.string_literals = [] 
         self.needs_recompute = True
-	self.syntax_color(None)
+        self.syntax_color(None)
 
   def onKeyRelease(self, e):
     self.needs_recompute = ((e.char == '"' or e.char == "'"))# or 
@@ -267,7 +268,7 @@ class FileBufferFrame(Frame):
           if (not self.indexInRanges(kwindex, ignore) and
               (float(kwindex)-int(float(kwindex)) == 0 or 
                self.box.get(kwindex+"-1c") == " ")): 
-            newindex = kwindex+"+"+`len(kw)`+"c"
+            newindex = kwindex+"+"+repr(len(kw))+"c"
             self.box.tag_add("kw", kwindex, newindex)
             index = newindex
           else:
@@ -340,8 +341,8 @@ class FileBufferFrame(Frame):
     if len(last) > 0 and last[-1] == ':':
       num+=settings.TAB_WIDTH
     index = float(int(float(self.box.index(INSERT)))+1)
-    self.box.insert(`index`, '\n'+' '*num)
-    self.box.delete(`index+num/10.0`, END)
+    self.box.insert(repr(index), '\n'+' '*num)
+    self.box.delete(repr(index+num/10.0), END)
 
   def esc(self, e):
     common.do(self.box.get(SEL_FIRST, SEL_LAST), self.namespace)

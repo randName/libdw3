@@ -12,8 +12,6 @@
 ################################################################################
 
 ####################################Imports#####################################
-BIG_VERSION = 3
-REVISION = 500
-#CHANGED
-#def format_version():  return "%d-%s" % (BIG_VERSION, REVISION)
-def format_version():  return ""
+from libdw.version import version
+
+def format_version():  return version

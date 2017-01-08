@@ -68,21 +68,21 @@ class CancelGUIAction(Exception): pass
 # Default thing to spit out for any errors that occured and more information
 # isn't available.
 def formerror():
-   if sys.exc_type == CancelGUIAction:
-     widgets.error_dialog(sys.exc_value)
+   if sys.exc_info()[0] == CancelGUIAction:
+     widgets.error_dialog(sys.exc_info()[1])
    else: 
-     error = "".join(format_exception(sys.exc_type, 
-                                      sys.exc_value, 
-                                      sys.exc_traceback))
+     error = "".join(format_exception(sys.exc_info()[0],
+                                      sys.exc_info()[1],
+                                      sys.exc_info()[2]))
      sys.stderr.write(error)
 
 # Replace all instances of "File "<string>"" with a real filename
 # and then print the error
 def formerrorfile(file):
   shortfile = file.split('/')[-1]
-  error = "".join(format_exception(sys.exc_type, 
-                                   sys.exc_value, 
-                                   sys.exc_traceback))
+  error = "".join(format_exception(sys.exc_info()[0],
+                                   sys.exc_info()[1],
+                                   sys.exc_info()[2]))
   error = error.replace("File \"<string>\"", shortfile)
   sys.stderr.write(error)
 
@@ -94,23 +94,20 @@ def do(str, env):
   try:
     val = eval(str, env)
     if val:
-      print "=>", repr(val)
+      print("=>", repr(val))
       return val
   except:
     try:
-      exec str in env
+      exec(str, env)
     except:
       formerror()
     return None
 
 def parseFile(filename, envin):
-  # Allow files to have a more sensible import path.
-  # don't do this, or it's hard to switch working directories withou
-  # quitting soar
-  #exec "from sys import path" in envin
-  #exec "path.append(\"" + os.path.dirname(filename) + "\")" in envin
-  #envin.pop("path")
-  
+  exec("import os", envin)
+  exec("import sys", envin)
+  exec("if not os.getcwd() in sys.path: sys.path.append(os.getcwd())", envin)
+
   # Deal with windows-style line-endings.
   lines = open(filename, 'r').readlines()
   if len(lines) > 0 and '\r' in lines[0]:
@@ -120,7 +117,7 @@ def parseFile(filename, envin):
   # slowly, but it is necessary to remove the windows line-endings.
   linestr = "".join(lines)
   try:
-    exec linestr in envin
-  except Exception, e:
+    exec(linestr, envin)
+  except Exception as e:
     formerrorfile(filename)
     raise e
