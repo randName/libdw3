@@ -1,42 +1,29 @@
-import json, urllib2
+from json import loads, dumps
+from urllib.request import urlopen, Request
+
 
 class FirebaseApplication():
-	def __init__(self, url, token):
-		self.url=url
-		self.firebaseToken=token
 
-	def put(self, root,node, data):
-		json_url=self.url+root+node
-		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		request = urllib2.Request(json_url+'.json?auth='+self.firebaseToken, 
-			data=json.dumps(data))
+    def __init__(self, url, token):
+        self.url = "%s{}.json?auth=%s" % (url, token)
 
-		request.add_header('Content-Type', 'your/contenttype')
-		request.get_method = lambda: 'PUT'
-		result = opener.open(request)
-		if result.getcode()==200:
-			return "OK"
-		else:
-			return "ERROR"
+    def request(self, method, node, data=None):
+        request = Request(self.url.format(node), method=method)
+        if data:
+            request.data = dumps(data).encode()
+            request.add_header('Content-Type', 'application/json')
+        result = urlopen(request)
 
-	def post(self, newnode, data):
-		json_url=self.url+newnode		
-		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		request = urllib2.Request(json_url+'.json?auth='+self.firebaseToken, 
-			data=json.dumps(data))
+        if data:
+            return "OK" if result.getcode() == 200 else "ERROR"
+        else:
+            return loads(result.read().decode())
 
-		request.add_header('Content-Type', 'your/contenttype')
-		request.get_method = lambda: 'POST'
-		result = opener.open(request)
-		if result.getcode()==200:
-			return "OK"
-		else:
-			return "ERROR"
+    def put(self, root, node, data):
+        return self.request('PUT', root+node, data)
 
-	def get(self, node):
-		json_url=self.url+node
-		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		request = urllib2.Request(json_url+'.json?auth='+self.firebaseToken)
-		request.get_method = lambda: 'GET'
-		result = opener.open(request)
-		return json.loads(result.read())
+    def post(self, newnode, data):
+        return self.request('POST', newnode, data)
+
+    def get(self, node):
+        return self.request('GET', node)
